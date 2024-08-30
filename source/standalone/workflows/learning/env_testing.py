@@ -101,6 +101,9 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg, agent_cfg: dict):
 
   print(f'Env: {env}\n{dir(env)}')
   print(f'metadata: {env.metadata}')
+  print(f'ep len: {env.env.max_episode_length_s}')
+  print(f'ep len: {env.max_episode_len}')
+
   # out = env.reset()
   # print(f'out: {out}')
   # print(f'out 0: {out[0]["policy"]}')
