@@ -100,17 +100,18 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg, agent_cfg: dict):
     env = gym.wrappers.RecordVideo(env, **video_kwargs)
 
   print(f'Env: {env}\n{dir(env)}')
-  out = env.reset()
-  print(f'out: {out}')
-  print(f'out 0: {out[0]["policy"]}')
-  print(f'\n{type(out[0]["policy"])} // {out[0]["policy"].shape}')
-
-  for _ in range(10):
-    action = env.action_space.sample()
-    next_states, rewards, terminated, truncated, infos = env.step(torch.Tensor(action))
-    print(f'rewards: {rewards}')
-    print(f'infos: {infos}')
-    print(f'----')
+  print(f'metadata: {env.metadata}')
+  # out = env.reset()
+  # print(f'out: {out}')
+  # print(f'out 0: {out[0]["policy"]}')
+  # print(f'\n{type(out[0]["policy"])} // {out[0]["policy"].shape}')
+  #
+  # for _ in range(10):
+  #   action = env.action_space.sample()
+  #   next_states, rewards, terminated, truncated, infos = env.step(torch.Tensor(action))
+  #   print(f'rewards: {rewards}')
+  #   print(f'infos: {infos}')
+  #   print(f'----')
 
   #
   # from tqdm import tqdm
