@@ -205,8 +205,6 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg, agent_cfg: dict):
     trainer = SequentialTrainer(cfg=trainer_cfg, env=env, agents=agent)
 
     # train the agent
-    print(f'just made the env!')
-    qqq
     trainer.eval()
     qqq
     for _ in range(1000):
