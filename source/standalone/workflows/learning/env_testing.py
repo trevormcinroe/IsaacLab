@@ -105,10 +105,12 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg, agent_cfg: dict):
   print(f'out 0: {out[0]["policy"]}')
   print(f'\n{type(out[0]["policy"])} // {out[0]["policy"].shape}')
 
-  action = env.action_space.sample()
-  next_states, rewards, terminated, truncated, infos = env.step(torch.Tensor(action))
-  print(f'rewards: {rewards}')
-  print(f'infos: {infos}')
+  for _ in range(10):
+    action = env.action_space.sample()
+    next_states, rewards, terminated, truncated, infos = env.step(torch.Tensor(action))
+    print(f'rewards: {rewards}')
+    print(f'infos: {infos}')
+    print(f'----')
 
   #
   # from tqdm import tqdm
