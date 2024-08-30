@@ -96,4 +96,12 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg, agent_cfg: dict):
   print(f'Env: {env}\n{dir(env)}')
   out = env.reset()
   print(f'out: {out}')
-  qqq
+
+  env.close()
+
+
+if __name__ == "__main__":
+    # run the main function
+    main()
+    # close sim app
+    simulation_app.close()
