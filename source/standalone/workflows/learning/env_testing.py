@@ -105,10 +105,11 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg, agent_cfg: dict):
   print(f'out 0: {out[0]["policy"]}')
   print(f'\n{type(out[0]["policy"])} // {out[0]["policy"].shape}')
 
-
-  action = env.action_space.sample()
-  print(f'action: {action.dtype} // {action.shape}')
-  next_ts = env.step(torch.Tensor(action))
+  from tqdm import tqdm
+  for _ in tqdm(range(100)):
+    action = env.action_space.sample()
+    # print(f'action: {action.dtype} // {action.shape}')
+    next_ts = env.step(torch.Tensor(action))
 
   print(f'next_ts: {next_ts}')
 
