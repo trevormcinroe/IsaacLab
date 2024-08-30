@@ -49,6 +49,8 @@ from datetime import datetime
 import skrl
 from skrl.utils import set_seed
 
+import torch
+
 from omni.isaac.lab.envs import DirectRLEnvCfg, ManagerBasedRLEnvCfg
 from omni.isaac.lab.utils.dict import print_dict
 from omni.isaac.lab.utils.io import dump_pickle, dump_yaml
@@ -106,7 +108,7 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg, agent_cfg: dict):
 
   action = env.action_space.sample()
   print(f'action: {action.dtype} // {action.shape}')
-  next_ts = env.step(action)
+  next_ts = env.step(torch.Tensor(action))
 
   print(f'next_ts: {next_ts}')
 
