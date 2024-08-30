@@ -110,7 +110,7 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg, agent_cfg: dict):
 
   print(f'next_ts: {next_ts}')
 
-  out = env.render(mode='rgb_array')
+  out = env.render()
   print(f'out: {out} // {out.sum()} // {out.shape}')
 
   env.close()
