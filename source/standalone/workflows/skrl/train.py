@@ -205,7 +205,8 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg, agent_cfg: dict):
     trainer = SequentialTrainer(cfg=trainer_cfg, env=env, agents=agent)
 
     # train the agent
-    trainer.train()
+    for _ in range(1000):
+        trainer.train()
 
     # close the simulator
     env.close()
