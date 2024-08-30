@@ -45,6 +45,10 @@ import gymnasium as gym
 import os
 from datetime import datetime
 
+# TODO: remove this nonsense
+import skrl
+from skrl.utils import set_seed
+
 from omni.isaac.lab.envs import DirectRLEnvCfg, ManagerBasedRLEnvCfg
 from omni.isaac.lab.utils.dict import print_dict
 from omni.isaac.lab.utils.io import dump_pickle, dump_yaml
