@@ -109,13 +109,17 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg, agent_cfg: dict):
   # print(f'out 0: {out[0]["policy"]}')
   # print(f'\n{type(out[0]["policy"])} // {out[0]["policy"].shape}')
   #
-  for _ in range(25):
+  for _ in range(400):
     action = env.action_space.sample()
     next_states, rewards, terminated, truncated, infos = env.step(torch.Tensor(action))
     print(f'-- {_} --')
-    print(f'rewards: {rewards}')
-    print(f'terminated: {terminated}')
-    print(f'truncated: {truncated}')
+    # print(f'rewards: {rewards}')
+    # print(f'terminated: {terminated}')
+    # print(f'truncated: {truncated}')
+    if terminated.sum() > 0:
+      print(f'Num terminated: {terminated.sum()}')
+    if truncated.sum() > 0:
+      print(f'Num truncated: {truncated.sum()}')
     print(f'----')
 
   #
