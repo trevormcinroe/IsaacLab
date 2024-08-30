@@ -102,19 +102,21 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg, agent_cfg: dict):
   print(f'Env: {env}\n{dir(env)}')
   print(f'metadata: {env.metadata}')
   print(f'ep len: {env.env.max_episode_length_s}')
-  print(f'ep len: {env.max_episode_len}')
+  # print(f'ep len: {env.max_episode_len}')
 
-  # out = env.reset()
+  out = env.reset()
   # print(f'out: {out}')
   # print(f'out 0: {out[0]["policy"]}')
   # print(f'\n{type(out[0]["policy"])} // {out[0]["policy"].shape}')
   #
-  # for _ in range(10):
-  #   action = env.action_space.sample()
-  #   next_states, rewards, terminated, truncated, infos = env.step(torch.Tensor(action))
-  #   print(f'rewards: {rewards}')
-  #   print(f'infos: {infos}')
-  #   print(f'----')
+  for _ in range(25):
+    action = env.action_space.sample()
+    next_states, rewards, terminated, truncated, infos = env.step(torch.Tensor(action))
+    print(f'-- {_} --')
+    print(f'rewards: {rewards}')
+    print(f'terminated: {terminated}')
+    print(f'truncated: {truncated}')
+    print(f'----')
 
   #
   # from tqdm import tqdm
