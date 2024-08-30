@@ -210,7 +210,7 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg, agent_cfg: dict):
     for i in range(1000):
         trainer.train()
         returns = trainer.eval()
-        print(f'Eval returns {i * trainer_cfg["trainer"]["timesteps"]}: {returns.mean()}')
+        print(f'Eval returns {i * trainer_cfg["timesteps"]}: {returns.mean()}')
 
     # close the simulator
     env.close()
