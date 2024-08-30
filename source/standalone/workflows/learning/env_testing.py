@@ -100,6 +100,8 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg, agent_cfg: dict):
   print(f'Env: {env}\n{dir(env)}')
   out = env.reset()
   print(f'out: {out}')
+  print(f'out 0: {out[0]["policy"]}')
+  print(f'\n{type(out[0]["policy"])}')
 
   env.close()
 
