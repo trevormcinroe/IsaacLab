@@ -104,7 +104,7 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg, agent_cfg: dict):
   print(f'\n{type(out[0]["policy"])} // {out[0]["policy"].shape}')
 
   out = env.render()
-  print(f'out: {out}')
+  print(f'out: {out} // {out.sum()} // {out.shape}')
 
   env.close()
 
