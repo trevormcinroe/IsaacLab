@@ -103,6 +103,9 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg, agent_cfg: dict):
   print(f'out 0: {out[0]["policy"]}')
   print(f'\n{type(out[0]["policy"])} // {out[0]["policy"].shape}')
 
+  out = env.render()
+  print(f'out: {out}')
+
   env.close()
 
 
