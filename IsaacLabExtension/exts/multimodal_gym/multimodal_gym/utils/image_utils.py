@@ -17,20 +17,22 @@ def save_images_to_file(images: torch.Tensor, file_path: str):
 
     # make (N, C, H, W)
     # print(images.dtype)
-    # if images.dtype == torch.float32:
-    #     images = images * 255
-    #     images = images.to(torch.uint8)
+    if images.dtype == torch.float32:
+        images = images * 255
+        images = images.to(torch.uint8)
     # print(images.dtype)
 
-    # images = images[0,:,:,:]
-    # images = images.cpu()
+    images = images[0,:,:,:]
+    images = images.cpu()
+    print(f'\n\n\n{images.shape}')
+    qqq
+    to_pil = transforms.ToPILImage()
 
-    # to_pil = transforms.ToPILImage()
+    image = to_pil(images)
 
-    # image = to_pil(images)
+    # Save the image
+    image.save(file_path)
 
-    # # Save the image
-    # image.save(file_path)
 
 
     grid = torch.swapaxes(images.unsqueeze(1), 1, -1).squeeze(-1)
