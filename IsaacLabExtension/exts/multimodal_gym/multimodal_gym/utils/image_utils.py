@@ -39,7 +39,7 @@ def save_images_to_file(images: torch.Tensor, file_path: str):
     grid = torch.swapaxes(images.unsqueeze(1), 1, -1).squeeze(-1)
     print(f'IMAGE NEW: {grid.shape}')
     save_image(make_grid(grid,
-                         # nrow=round(images.shape[0] ** 0.5)
+                         nrow=round(images.shape[0] ** 0.5)
                          ), file_path)
 
 
