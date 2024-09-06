@@ -160,10 +160,10 @@ def main(env_cfg, agent_cfg: dict):
 
     print(env, env.observation_space)
 
-    out = env.reset()
-
-    print(f'out: {out}')
-    qqq
+    # out = env.reset()
+    #
+    # print(f'out: {out}')
+    # qqq
 
     # instantiate models using skrl model instantiator utility
     models = {}
