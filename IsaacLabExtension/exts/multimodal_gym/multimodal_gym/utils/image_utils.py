@@ -25,14 +25,14 @@ def save_images_to_file(images: torch.Tensor, file_path: str):
     images = images[0,:,:,:]
     images = images.cpu()
     print(f'\n\n\n{images.shape}')
-    qqq
+
     to_pil = transforms.ToPILImage()
 
     image = to_pil(images)
-
+    print(f'\n\n\n{images.shape}')
     # Save the image
     image.save(file_path)
-
+    qqq
 
 
     grid = torch.swapaxes(images.unsqueeze(1), 1, -1).squeeze(-1)
