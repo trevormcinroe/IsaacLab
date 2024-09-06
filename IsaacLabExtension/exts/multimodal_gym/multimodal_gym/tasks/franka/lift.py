@@ -414,6 +414,7 @@ class LiftEnv(DirectRLEnv):
             name = self.count
             name = "lift"
             # img_dir = "/workspace/isaaclab/IsaacLabExtension/images/franka"
+            print(f'CURRENT FILE: {__file__}')
             img_dir = "/home/elle/code/external/IsaacLab/IsaacLabExtension/images/franka" 
             file_path = os.path.join(img_dir, f"{name}.png")
             save_images_to_file(img_batch, file_path)
