@@ -339,7 +339,7 @@ class InteractiveScene:
 
         to_delete = []
         for key, rigid_object in self._rigid_objects.items():
-            # print(f'RIGID OBJECT: {rigid_object} // {self._rigid_objects}')
+            print(f'RIGID OBJECT: {rigid_object} // {self._rigid_objects}')
             try:
                 rigid_object.reset(env_ids)
             except:
