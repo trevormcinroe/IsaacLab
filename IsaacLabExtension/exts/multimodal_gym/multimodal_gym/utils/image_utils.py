@@ -23,20 +23,21 @@ def save_images_to_file(images: torch.Tensor, file_path: str):
         images = images.to(torch.uint8)
     print(f'{images.dtype} // [{images.min()}, {images.max()}]')
 
-    images = images[0,:,:,:]
-    images = images.cpu().reshape(images.shape[-1], images.shape[0], images.shape[1])
-    print(f'\n\n\n{images.shape}')
-
-    to_pil = transforms.ToPILImage()
-
-    image = to_pil(images)
-    print(f'\n\n\n{images.shape}')
-    # Save the image
-    image.save(file_path)
-    qqq
+    # images = images[0,:,:,:]
+    # images = images.cpu().reshape(images.shape[-1], images.shape[0], images.shape[1])
+    # print(f'\n\n\n{images.shape}')
+    #
+    # to_pil = transforms.ToPILImage()
+    #
+    # image = to_pil(images)
+    # print(f'\n\n\n{images.shape}')
+    # # Save the image
+    # image.save(file_path)
+    # qqq
 
 
     grid = torch.swapaxes(images.unsqueeze(1), 1, -1).squeeze(-1)
+    print(f'IMAGE NEW: {grid.shape}')
     save_image(make_grid(grid, nrow=round(images.shape[0] ** 0.5)), file_path)
 
 
