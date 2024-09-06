@@ -293,7 +293,9 @@ class LiftEnv(DirectRLEnv):
     def _setup_scene(self):
         self.robot = Articulation(self.cfg.robot_cfg)
         self.object = RigidObject(self.cfg.object_cfg)
-        self.table = RigidObject(self.cfg.table_cfg)
+
+        # Issues with this particular rigid object
+        # self.table = RigidObject(self.cfg.table_cfg)
 
         # self.box = RigidObject(self.cfg.box_cfg)
 
@@ -463,9 +465,9 @@ class LiftEnv(DirectRLEnv):
         # reset goals
         self._reset_target_pose(env_ids)
 
-        # reset table
-        table_state = self.table.data.default_root_state.clone()[env_ids]
-        self.table.write_root_state_to_sim(table_state, env_ids)
+        # reset table (ISSUES! SO REMOVING FOR NOW)
+        # table_state = self.table.data.default_root_state.clone()[env_ids]
+        # self.table.write_root_state_to_sim(table_state, env_ids)
 
 
         # reset object
