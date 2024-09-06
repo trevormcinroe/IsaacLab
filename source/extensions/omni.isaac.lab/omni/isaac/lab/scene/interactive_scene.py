@@ -336,12 +336,16 @@ class InteractiveScene:
             articulation.reset(env_ids)
         for deformable_object in self._deformable_objects.values():
             deformable_object.reset(env_ids)
+
+        to_delete = []
         for key, rigid_object in self._rigid_objects.items():
             # print(f'RIGID OBJECT: {rigid_object} // {self._rigid_objects}')
             try:
                 rigid_object.reset(env_ids)
             except:
-                del self._rigid_objects[key]
+                to_delete.append(key)
+        for key in to_delete:
+            del self._rigid_objects[key]
         # -- sensors
         for sensor in self._sensors.values():
             sensor.reset(env_ids)
