@@ -440,7 +440,7 @@ class ImageEncoder(nn.Module):
 
     nn.Conv2d(in_channels, out_channels, kernel_size)
     """
-    def __init__(self, obs_shape, img_dim, frame_stack, feature_dim=50, num_layers=2, num_filters=32):
+    def __init__(self, obs_shape, img_dim, frame_stack, feature_dim=50, num_layers=4, num_filters=32):
         super().__init__()
 
         assert len(obs_shape) == 3
