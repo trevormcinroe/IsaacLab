@@ -344,8 +344,8 @@ class InteractiveScene:
                 rigid_object.reset(env_ids)
             except:
                 to_delete.append(key)
-        for key in to_delete:
-            del self._rigid_objects[key]
+        # for key in to_delete:
+        #     del self._rigid_objects[key]
         # -- sensors
         for sensor in self._sensors.values():
             sensor.reset(env_ids)
