@@ -20,7 +20,7 @@ def save_images_to_file(images: torch.Tensor, file_path: str):
     if images.dtype == torch.float32:
         images = images * 255
         images = images.to(torch.uint8)
-    # print(images.dtype)
+    print(images.dtype)
 
     images = images[0,:,:,:]
     images = images.cpu().reshape(images.shape[-1], images.shape[0], images.shape[1])
