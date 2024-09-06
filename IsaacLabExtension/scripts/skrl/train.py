@@ -159,8 +159,12 @@ def main(env_cfg, agent_cfg: dict):
     env = SkrlVecEnvWrapper(env, ml_framework=args_cli.ml_framework)#, obs_type=experiment_cfg["models"]["policy"]["obs_type"])  # same as: `wrap_env(env, wrapper="isaaclab")`
 
     print(env, env.observation_space)
-    print(f'agent_cfg: {agent_cfg}')
+
+    out = env.reset()
+
+    print(f'out: {out}')
     qqq
+
     # instantiate models using skrl model instantiator utility
     models = {}
     # non-shared models
