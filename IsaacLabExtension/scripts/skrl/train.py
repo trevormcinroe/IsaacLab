@@ -162,7 +162,7 @@ def main(env_cfg, agent_cfg: dict):
 
     out, info = env.reset()
 
-    print(f'out: {out}')
+    print(f'out: {out.shape} [{out.min(), out.max()}]')
     print(f'info: {info}')
     qqq
 
