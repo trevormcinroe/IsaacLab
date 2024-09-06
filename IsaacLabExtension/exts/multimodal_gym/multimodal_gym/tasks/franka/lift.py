@@ -316,7 +316,7 @@ class LiftEnv(DirectRLEnv):
         # add articultion to scene - we must register to scene to randomize with EventManager
         self.scene.articulations["robot"] = self.robot
         self.scene.rigid_objects["object"] = self.object
-        self.scene.rigid_objects["table"] = self.table
+        # self.scene.rigid_objects["table"] = self.table
 
         self.scene.sensors["ee_frame"] = self.ee_frame
 
