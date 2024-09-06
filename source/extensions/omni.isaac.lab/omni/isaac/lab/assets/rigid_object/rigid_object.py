@@ -272,7 +272,7 @@ class RigidObject(AssetBase):
             raise RuntimeError(f"Failed to find prim for expression: '{self.cfg.prim_path}'.")
         template_prim_path = template_prim.GetPath().pathString
         print(
-            f'####################\n####################\n#################### template_prim_path: {template_prim_path} \n####################\n####################\n####################')
+            f'####################\n####################\n#################### template_prim_path: {self.cfg.prim_path} \n####################\n####################\n####################')
 
         # find rigid root prims
         print(f'####################\n####################\n#################### template_prim_path: {template_prim_path} \n####################\n####################\n####################')
