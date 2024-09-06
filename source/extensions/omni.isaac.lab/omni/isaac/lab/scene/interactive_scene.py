@@ -337,6 +337,7 @@ class InteractiveScene:
         for deformable_object in self._deformable_objects.values():
             deformable_object.reset(env_ids)
         for rigid_object in self._rigid_objects.values():
+            print(f'RIGID OBJECT: {rigid_object}')
             rigid_object.reset(env_ids)
         # -- sensors
         for sensor in self._sensors.values():
