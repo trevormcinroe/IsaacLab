@@ -273,6 +273,7 @@ class RigidObject(AssetBase):
         template_prim_path = template_prim.GetPath().pathString
 
         # find rigid root prims
+        print(f'template_prim_path: {template_prim_path}')
         root_prims = sim_utils.get_all_matching_child_prims(
             template_prim_path, predicate=lambda prim: prim.HasAPI(UsdPhysics.RigidBodyAPI)
         )
