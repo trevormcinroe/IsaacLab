@@ -23,7 +23,7 @@ def save_images_to_file(images: torch.Tensor, file_path: str):
     # print(images.dtype)
 
     images = images[0,:,:,:]
-    images = images.cpu()
+    images = images.cpu().reshape(images.shape[-1], images.shape[1], images.shape[2])
     print(f'\n\n\n{images.shape}')
 
     to_pil = transforms.ToPILImage()
