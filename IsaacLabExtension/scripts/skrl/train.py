@@ -159,6 +159,8 @@ def main(env_cfg, agent_cfg: dict):
     # wrap around environment for skrl
     env = SkrlVecEnvWrapper(env, ml_framework=args_cli.ml_framework)#, obs_type=experiment_cfg["models"]["policy"]["obs_type"])  # same as: `wrap_env(env, wrapper="isaaclab")`
 
+    print()
+
     print(env, env.observation_space)
 
     out, info = env.reset()
@@ -245,7 +247,11 @@ def main(env_cfg, agent_cfg: dict):
 
     action = [env.action_space.sample() for _ in range(args_cli.num_envs)]
     print(f'action: {action}')
+
+    out = env.step(action)
+
     print(f'right at the end.')
+    print(out)
     qqq
     # train the agent
     trainer.train()
