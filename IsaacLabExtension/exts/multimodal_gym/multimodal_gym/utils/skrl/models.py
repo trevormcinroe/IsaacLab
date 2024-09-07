@@ -500,7 +500,7 @@ class ImageEncoder(nn.Module):
         return h
 
     def forward(self, obs, detach_encoder_conv=False, detach_encoder_head=False):
-        
+        print(f'obs coming in: {obs.shape}')
         # input obs is[N, H, W, C], expected to be [N, C, H, W]
         if isinstance(obs, LazyFrames):
             raise ValueError("CNN input is LazyFrame. Convert to tensor")
