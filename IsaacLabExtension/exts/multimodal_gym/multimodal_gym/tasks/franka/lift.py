@@ -420,7 +420,7 @@ class LiftEnv(DirectRLEnv):
             # self._tiled_camera.reset()
             self._tiled_camera.set_world_poses_from_view(eyes=eyes, targets=targets)
             # self.scene.sensors["tiled_camera"].set_world_poses_from_view(eyes=eyes, targets=targets)
-            self._tiled_camera.update(0)
+            self._tiled_camera.update(0, True)
 
             print(f'cam: {self._tiled_camera._view}')
             self.init = True
