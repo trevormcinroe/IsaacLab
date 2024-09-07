@@ -437,7 +437,7 @@ class LiftEnv(DirectRLEnv):
             # self._tiled_camera.update(0, True)
 
             # print(f'cam: {self._tiled_camera._view}')
-            self.init = True
+            self.init = False
         data_type = "rgb" if "rgb" in self.cfg.tiled_camera.data_types else "depth"
         img_batch = self._tiled_camera.data.output[data_type].clone()
         # img_batch = self.scene.sensors["tiled_camera"].data.output[data_type].clone()
