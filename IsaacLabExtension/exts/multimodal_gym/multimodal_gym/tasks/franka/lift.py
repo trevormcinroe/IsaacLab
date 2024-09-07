@@ -198,7 +198,7 @@ class LiftEnvCfg(DirectRLEnvCfg):
         offset=TiledCameraCfg.OffsetCfg(pos=(0,0,0), rot=(1,0,0,0), convention="world"),
         data_types=["rgb"],
         spawn=sim_utils.PinholeCameraCfg(
-            focal_length=2.0, focus_distance=400.0, horizontal_aperture=20.955, clipping_range=(0.1, 20.0)
+            focal_length=2.0, focus_distance=2.0, horizontal_aperture=20.955, clipping_range=(0.1, 20.0)
         ),
         width=512,
         height=512,
