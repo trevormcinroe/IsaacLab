@@ -186,6 +186,8 @@ def custom_gaussian_model(observation_space: Optional[Union[int, Tuple[int], gym
     :return: Gaussian model instance
     :rtype: Model
     """
+    print(f'IMAGE DIM: {img_dim}')
+    qqq
     class GaussianModel(GaussianMixin, Model):
         def __init__(self, observation_space, action_space, device, clip_actions,
                      clip_log_std, min_log_std, max_log_std, frame_stack, num_gt_observations, reduction="sum"):
