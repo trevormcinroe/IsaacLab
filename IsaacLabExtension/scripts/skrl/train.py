@@ -46,8 +46,6 @@ AppLauncher.add_app_launcher_args(parser)
 args_cli, hydra_args = parser.parse_known_args()
 
 if args_cli.video:
-    print(f'ENABLING CAMERAS')
-    qqq
     args_cli.enable_cameras = True
 
 # clear out sys.argv for Hydra
