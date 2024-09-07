@@ -46,6 +46,8 @@ AppLauncher.add_app_launcher_args(parser)
 args_cli, hydra_args = parser.parse_known_args()
 
 if args_cli.video:
+    print(f'ENABLING CAMERAS')
+    qqq
     args_cli.enable_cameras = True
 
 # clear out sys.argv for Hydra
@@ -138,6 +140,8 @@ def main(env_cfg, agent_cfg: dict):
 
     # create isaac environment
     env = gym.make(args_cli.task, cfg=env_cfg, render_mode="rgb_array" if args_cli.video else None)
+    print(f'just created the env...')
+    qqq
     # wrap for video recording
     if args_cli.video:
         video_kwargs = {
