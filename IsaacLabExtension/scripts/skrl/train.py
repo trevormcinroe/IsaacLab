@@ -26,6 +26,7 @@ parser.add_argument("--video_interval", type=int, default=2000, help="Interval b
 parser.add_argument("--num_envs", type=int, default=None, help="Number of environments to simulate.")
 parser.add_argument("--task", type=str, default=None, help="Name of the task.")
 parser.add_argument("--seed", type=int, default=None, help="Seed used for the environment")
+parser.add_argument("--hw", type=int, default=None, help="hw of the env")
 parser.add_argument(
     "--distributed", action="store_true", default=False, help="Run training with multiple GPUs or nodes."
 )
@@ -180,7 +181,8 @@ def main(env_cfg, agent_cfg: dict):
             **process_skrl_cfg(agent_cfg["models"]["policy"], ml_framework=args_cli.ml_framework),
             obs_type=env_cfg.obs_type,
             frame_stack=env_cfg.frame_stack,
-            num_gt_observations=env_cfg.num_gt_observations
+            num_gt_observations=env_cfg.num_gt_observations,
+            img_dim=args_cli.hw
         )
         models["value"] = custom_deterministic_model(
             observation_space=env.observation_space,
@@ -189,7 +191,8 @@ def main(env_cfg, agent_cfg: dict):
             **process_skrl_cfg(agent_cfg["models"]["value"], ml_framework=args_cli.ml_framework),
             obs_type=env_cfg.obs_type,
             frame_stack=env_cfg.frame_stack,
-            num_gt_observations=env_cfg.num_gt_observations
+            num_gt_observations=env_cfg.num_gt_observations,
+            img_dim=args_cli.hw
         )
     # shared models
     else:
@@ -204,7 +207,8 @@ def main(env_cfg, agent_cfg: dict):
                 process_skrl_cfg(agent_cfg["models"]["value"], ml_framework=args_cli.ml_framework),
             ],
             frame_stack=env_cfg.frame_stack,
-            num_gt_observations=env_cfg.num_gt_observations
+            num_gt_observations=env_cfg.num_gt_observations,
+            img_dim=args_cli.hw
         )
         models["value"] = models["policy"]
 
