@@ -351,7 +351,7 @@ class Camera(SensorBase):
         # print(f'pos: {self._view.positions}')
         # print(f'tsl: {self._view.translations}')
         # print(f'ori: {self._view.orientations}')
-        self._view.set_world_poses(eyes, orientations, env_ids)
+        self._view.set_world_poses(eyes, orientations, env_ids, usd=False)
         print(f'pos: {self._view.positions}')
         print(f'tsl: {self._view.translations}')
         print(f'ori: {self._view.orientations}')
