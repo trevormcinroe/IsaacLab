@@ -243,7 +243,8 @@ def main(env_cfg, agent_cfg: dict):
     trainer_cfg["disable_progressbar"] = False
     trainer = SequentialTrainer(cfg=trainer_cfg, env=env, agents=agent)
 
-
+    action = env.action_space.sample()
+    print(f'action: {action}')
     print(f'right at the end.')
     qqq
     # train the agent
