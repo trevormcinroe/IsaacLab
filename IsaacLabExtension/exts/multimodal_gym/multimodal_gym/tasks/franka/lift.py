@@ -208,7 +208,7 @@ class LiftEnvCfg(DirectRLEnvCfg):
     write_image_to_file = True
     frame_stack = 1
     eye = [0, 1.5, 0.5] # orig: [0, 1.5, 0.5]
-    target = [999, 999, 999]  # orig: [0.3, 3.8, 0.5]
+    target = [0.3, 3.8, 0.5]  # orig: [0.3, 3.8, 0.5]
 
 
 class LiftEnv(DirectRLEnv):
@@ -419,8 +419,6 @@ class LiftEnv(DirectRLEnv):
             # self._tiled_camera.cfg.return_latest_camera_pose = True
             self._tiled_camera.set_world_poses_from_view(eyes=eyes, targets=targets)
             print(f'cam: {self._tiled_camera._view}')
-            import omni
-            print(f'{dir(omni)}')
             self.init = True
         data_type = "rgb" if "rgb" in self.cfg.tiled_camera.data_types else "depth"
         img_batch = self._tiled_camera.data.output[data_type].clone()
