@@ -31,8 +31,7 @@ from typing import Literal
 
 from omni.isaac.lab.envs import DirectRLEnv, ManagerBasedRLEnv
 
-print(omni.isaac.lab.envs.__file__)
-qqq
+
 """
 Configuration Parser.
 """
