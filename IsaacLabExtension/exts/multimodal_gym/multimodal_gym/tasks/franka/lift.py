@@ -195,7 +195,7 @@ class LiftEnvCfg(DirectRLEnvCfg):
     # perception
     tiled_camera: TiledCameraCfg = TiledCameraCfg(
         prim_path="/World/envs/env_.*/Camera",
-        offset=TiledCameraCfg.OffsetCfg(pos=(0.0, 1.2, 0.2), rot=(1,0,0,0), convention="world"),
+        offset=TiledCameraCfg.OffsetCfg(pos=(0.0, 1.2, 0.9), rot=(1,0,0,0), convention="world"),
         data_types=["rgb"],
         spawn=sim_utils.PinholeCameraCfg(
             focal_length=1.0, focus_distance=9000.0, horizontal_aperture=20.955, clipping_range=(0.01, 20.0)
@@ -420,7 +420,7 @@ class LiftEnv(DirectRLEnv):
             # self._tiled_camera.reset()
             self._tiled_camera.set_world_poses_from_view(eyes=eyes, targets=targets)
             # self.scene.sensors["tiled_camera"].set_world_poses_from_view(eyes=eyes, targets=targets)
-            self._tiled_camera.update(0, True)
+            # self._tiled_camera.update(0, True)
 
             print(f'cam: {self._tiled_camera._view}')
             self.init = True
