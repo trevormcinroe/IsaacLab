@@ -249,10 +249,13 @@ def main(env_cfg, agent_cfg: dict):
     action = torch.tensor([env.action_space.sample() for _ in range(args_cli.num_envs)])
     print(f'action: {action}')
 
-    out = env.step(action)
+    next_obs, reward, done, info = env.step(action)
 
     print(f'right at the end.')
-    print(out)
+    print(f'o: {next_obs.shape}')
+    print(f'r: {reward}')
+    print(f'd: {done}')
+    print(f'info: {info}')
     qqq
     # train the agent
     trainer.train()
