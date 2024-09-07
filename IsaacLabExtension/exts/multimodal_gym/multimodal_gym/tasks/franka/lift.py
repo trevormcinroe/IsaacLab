@@ -189,10 +189,11 @@ class LiftEnvCfg(DirectRLEnvCfg):
     )
 
     # perception
+    # pos=(x, y, z) -- z [down, 0, up]
     tiled_camera: TiledCameraCfg = TiledCameraCfg(
         prim_path="/World/envs/env_.*/Camera",
         # offset=TiledCameraCfg.OffsetCfg(pos=(1.0, 1.0, 0), rot=(1, 0, 0, 0), convention="world"),
-        offset=TiledCameraCfg.OffsetCfg(pos=(2.0, 0.0, 2.0), rot=(0.9945, 0.0, 0.1045, 0.0), convention="world"),
+        offset=TiledCameraCfg.OffsetCfg(pos=(3.0, 0.0, 2.0), rot=(0.9945, 0.0, 0.1045, 0.0), convention="world"),
         data_types=["rgb"],
         spawn=sim_utils.PinholeCameraCfg(
             focal_length=24.0, focus_distance=400.0, horizontal_aperture=20.955, clipping_range=(0.1, 20.0)
