@@ -414,8 +414,10 @@ class LiftEnv(DirectRLEnv):
             targets = torch.tensor(self.cfg.target, dtype=torch.float, device=self.device).repeat((self.num_envs, 1)) + self.scene.env_origins
 
             print(f'eyes: {eyes} // {eyes.shape}')
-            print(f'eyes: {targets} // {targets.shape}')
+            print(f'targets: {targets} // {targets.shape}')
+            print(f'cam: {self._tiled_camera}')
             self._tiled_camera.set_world_poses_from_view(eyes=eyes, targets=targets)
+            print(f'cam: {self._tiled_camera}')
             self.init = True
         data_type = "rgb" if "rgb" in self.cfg.tiled_camera.data_types else "depth"
         img_batch = self._tiled_camera.data.output[data_type].clone()
