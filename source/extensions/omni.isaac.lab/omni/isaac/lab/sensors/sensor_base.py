@@ -282,7 +282,9 @@ class SensorBase(ABC):
     def _update_outdated_buffers(self):
         """Fills the sensor data for the outdated sensors."""
         outdated_env_ids = self._is_outdated.nonzero().squeeze(-1)
+        print(f'-=-=-=-=-=-=-= IN _update_outdated_buffers(): {outdated_env_ids} -=-=-=-=-=-=-=')
         if len(outdated_env_ids) > 0:
+            print(f'-=-=-=-=-=-=-==- IN THE LOOP -=-=-=-=-=-=-=-=-=')
             # obtain new data
             self._update_buffers_impl(outdated_env_ids)
             # update the timestamp from last update
