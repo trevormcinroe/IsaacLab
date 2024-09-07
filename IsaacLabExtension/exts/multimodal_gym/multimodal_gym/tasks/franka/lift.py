@@ -407,7 +407,7 @@ class LiftEnv(DirectRLEnv):
         if not self.init:
             print(f'\n\nWITHIN _get_images(): {self.num_envs} // {self.cfg.eye} // {self.scene.env_origins}\n\n')
             # eyes = torch.tensor(self.cfg.eye, dtype=torch.float, device=self.device).repeat((self.num_envs, 1)) + self.scene.env_origins
-            eyes = torch.tensor([0, 1.5, 3.5], dtype=torch.float, device=self.device).repeat(
+            eyes = torch.tensor([10, 22.5, 3.5], dtype=torch.float, device=self.device).repeat(
                 (self.num_envs, 1)) + self.scene.env_origins
 
             targets = torch.tensor(self.cfg.target, dtype=torch.float, device=self.device).repeat((self.num_envs, 1)) + self.scene.env_origins
