@@ -331,6 +331,7 @@ class LiftEnv(DirectRLEnv):
 
         if self.cfg.obs_type == "image" or self.cfg.obs_type == "image_prop":
             self._tiled_camera = TiledCamera(self.cfg.tiled_camera)
+            self._tiled_camera._initialize_impl()
             eyes = torch.tensor(self.cfg.eye, dtype=torch.float, device=self.device).repeat(
                 (self.num_envs, 1)) + self.scene.env_origins
             targets = torch.tensor(self.cfg.target, dtype=torch.float, device=self.device).repeat(
