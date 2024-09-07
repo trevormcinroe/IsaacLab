@@ -128,7 +128,7 @@ class LiftEnvCfg(DirectRLEnvCfg):
     # in-hand object
     object_cfg: RigidObjectCfg = RigidObjectCfg(
             prim_path="/World/envs/env_.*/Object",
-            init_state=RigidObjectCfg.InitialStateCfg(pos=[0.5, 0, 0.055], rot=[0,1,0,0]),
+            init_state=RigidObjectCfg.InitialStateCfg(pos=[0.5, 0, 0.055], rot=[1,0,0,0]),
             spawn=UsdFileCfg(
                 usd_path=f"{ISAAC_NUCLEUS_DIR}/Props/Blocks/DexCube/dex_cube_instanceable.usd",
                 scale=(0.8, 0.8, 0.8),
@@ -193,9 +193,10 @@ class LiftEnvCfg(DirectRLEnvCfg):
     # eye = [0, 1.5, 0.5]
     # target = [0.3, 0, 0.5]
     # perception
+    # object pos=[0.5, 0, 0.055]
     tiled_camera: TiledCameraCfg = TiledCameraCfg(
         prim_path="/World/envs/env_.*/Camera",
-        offset=TiledCameraCfg.OffsetCfg(pos=(0.3, -0.3, 0.0), rot=(1,0,0,0), convention="world"),
+        offset=TiledCameraCfg.OffsetCfg(pos=(0.3, -0.3, 0.3), rot=(1,0,0,0), convention="world"),
         data_types=["rgb"],
         spawn=sim_utils.PinholeCameraCfg(
             focal_length=3.0, focus_distance=1.0, horizontal_aperture=20.955, clipping_range=(0.01, 200.0)
