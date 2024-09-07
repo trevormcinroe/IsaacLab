@@ -178,6 +178,7 @@ class TiledCamera(Camera):
 
     def _update_buffers_impl(self, env_ids: Sequence[int]):
         # Increment frame count
+        print(f'-- -- --IN TILEDCAMERA._update_buffers_impl() -- -- --')
         self._frame[env_ids] += 1
 
         # Extract the flattened image buffer
