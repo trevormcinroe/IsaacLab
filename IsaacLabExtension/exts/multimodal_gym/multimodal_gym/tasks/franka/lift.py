@@ -424,7 +424,7 @@ class LiftEnv(DirectRLEnv):
             print(f'cam: {self._tiled_camera._view}\n')
             # self._tiled_camera.cfg.return_latest_camera_pose = True
             # self._tiled_camera.reset()
-            self._tiled_camera.set_world_poses_from_view(eyes=eyes, targets=targets, convention="ros")
+            self._tiled_camera.set_world_poses_from_view(eyes=eyes, targets=targets, convention="opengl")
             # self.scene.sensors["tiled_camera"].set_world_poses_from_view(eyes=eyes, targets=targets)
             # self._tiled_camera.update(0, True)
 
