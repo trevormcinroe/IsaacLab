@@ -172,8 +172,8 @@ def main(env_cfg, agent_cfg: dict):
 
     # instantiate models using skrl model instantiator utility
     models = {}
-    agent_cfg["models"]["policy"]["img_dim"] = args_cli.hw
-    agent_cfg["models"]["value"]["img_dim"] = args_cli.hw
+    # agent_cfg["models"]["policy"]["img_dim"] = args_cli.hw
+    # agent_cfg["models"]["value"]["img_dim"] = args_cli.hw
     # non-shared models
     if agent_cfg["models"]["separate"]:
         models["policy"] = custom_gaussian_model(
