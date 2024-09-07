@@ -301,7 +301,6 @@ class Camera(SensorBase):
         Raises:
             RuntimeError: If the camera prim is not set. Need to call :meth:`initialize` method first.
         """
-        print(f'############ INSIDE OF set_world_poses() ############')
         # resolve env_ids
         if env_ids is None:
             env_ids = self._ALL_INDICES
