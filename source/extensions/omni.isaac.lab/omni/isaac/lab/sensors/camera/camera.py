@@ -16,6 +16,10 @@ import carb
 import omni.kit.commands
 import omni.usd
 from omni.isaac.core.prims import XFormPrimView
+
+print(omni.isaac.core.prims.__file__)
+qqq
+
 from pxr import UsdGeom
 
 import omni.isaac.lab.sim as sim_utils
