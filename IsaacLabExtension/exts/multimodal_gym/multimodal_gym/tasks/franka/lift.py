@@ -208,8 +208,8 @@ class LiftEnvCfg(DirectRLEnvCfg):
         spawn=sim_utils.PinholeCameraCfg(
             focal_length=24.0, focus_distance=400.0, horizontal_aperture=20.955, clipping_range=(0.01, 200.0)
         ),
-        width=800,
-        height=800,
+        width=512,
+        height=512,
         #debug_vis=True
     )
 
