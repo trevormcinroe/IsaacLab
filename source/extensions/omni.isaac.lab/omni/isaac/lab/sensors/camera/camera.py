@@ -321,8 +321,7 @@ class Camera(SensorBase):
         self._view.set_world_poses(positions, orientations, env_ids)
 
     def set_world_poses_from_view(
-        self, eyes: torch.Tensor, targets: torch.Tensor, env_ids: Sequence[int] | None = None,
-        convention: Literal["opengl", "ros", "world"] = "ros",
+        self, eyes: torch.Tensor, targets: torch.Tensor, env_ids: Sequence[int] | None = None
     ):
         """Set the poses of the camera from the eye position and look-at target position.
 
@@ -344,7 +343,7 @@ class Camera(SensorBase):
         # print(f'targets: {targets}')
         orientations = quat_from_matrix(create_rotation_matrix_from_view(eyes, targets, device=self._device))
         # print(f'orientations: {orientations}\n\n')
-        self._view.set_world_poses(eyes, orientations, env_ids, convention)
+        self._view.set_world_poses(eyes, orientations, env_ids)
 
     """
     Operations
