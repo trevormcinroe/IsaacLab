@@ -206,7 +206,7 @@ class LiftEnvCfg(DirectRLEnvCfg):
 
     write_image_to_file = True
     frame_stack = 1
-    eye = [0, 1.5, 0.5]
+    eye = [0.5, 1.5, 0.5] # orig: [0, 1.5, 0.5]
     target = [0.3, 0, 0.5]
 
 
