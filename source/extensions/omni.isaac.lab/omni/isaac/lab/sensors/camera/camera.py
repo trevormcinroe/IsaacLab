@@ -301,6 +301,7 @@ class Camera(SensorBase):
         Raises:
             RuntimeError: If the camera prim is not set. Need to call :meth:`initialize` method first.
         """
+        print(f'############ INSIDE OF set_world_poses() ############')
         # resolve env_ids
         if env_ids is None:
             env_ids = self._ALL_INDICES
@@ -321,7 +322,8 @@ class Camera(SensorBase):
         self._view.set_world_poses(positions, orientations, env_ids)
 
     def set_world_poses_from_view(
-        self, eyes: torch.Tensor, targets: torch.Tensor, env_ids: Sequence[int] | None = None
+        self, eyes: torch.Tensor, targets: torch.Tensor, env_ids: Sequence[int] | None = None,
+        convention: Literal["opengl", "ros", "world"] = "ros",
     ):
         """Set the poses of the camera from the eye position and look-at target position.
 
@@ -343,7 +345,7 @@ class Camera(SensorBase):
         # print(f'targets: {targets}')
         orientations = quat_from_matrix(create_rotation_matrix_from_view(eyes, targets, device=self._device))
         # print(f'orientations: {orientations}\n\n')
-        self._view.set_world_poses(eyes, orientations, env_ids)
+        self._view.set_world_poses(eyes, orientations, env_ids, convention)
 
     """
     Operations
