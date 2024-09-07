@@ -343,6 +343,7 @@ class Camera(SensorBase):
         # print(f'targets: {targets}')
         orientations = quat_from_matrix(create_rotation_matrix_from_view(eyes, targets, device=self._device))
         # print(f'orientations: {orientations}\n\n')
+        print(f'self._view: {self._view} //')
         self._view.set_world_poses(eyes, orientations, env_ids)
 
     """
