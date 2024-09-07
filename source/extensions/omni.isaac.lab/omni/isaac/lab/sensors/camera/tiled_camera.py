@@ -171,7 +171,6 @@ class TiledCamera(Camera):
         self._render_product_paths = [render_prod_path]
         # Attach the annotator
         self._annotator = rep.AnnotatorRegistry.get_annotator("RtxSensorGpu", device=self.device, do_array_copy=False)
-        print(f'THIS IS THE ANNOTATOR: {self._annotator}')
         self._annotator.attach(self._render_product_paths)
 
         # Create internal buffers
@@ -183,6 +182,7 @@ class TiledCamera(Camera):
         self._frame[env_ids] += 1
 
         # Extract the flattened image buffer
+        print(f'THIS IS THE ANNOTATOR: {self._annotator}')
         tiled_data_buffer = self._annotator.get_data()
         print(f'tiled_data_buffer: {tiled_data_buffer}')
         if isinstance(tiled_data_buffer, np.ndarray):
