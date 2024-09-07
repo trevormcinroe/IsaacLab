@@ -415,10 +415,10 @@ class LiftEnv(DirectRLEnv):
 
             print(f'eyes: {eyes} // {eyes.shape}')
             print(f'targets: {targets} // {targets.shape}')
-            print(f'cam: {self._tiled_camera.cfg}\n')
-            self._tiled_camera.cfg.return_latest_camera_pose = True
+            print(f'cam: {self._tiled_camera._view}\n')
+            # self._tiled_camera.cfg.return_latest_camera_pose = True
             self._tiled_camera.set_world_poses_from_view(eyes=eyes, targets=targets)
-            print(f'cam: {self._tiled_camera.cfg}')
+            print(f'cam: {self._tiled_camera._view}')
             self.init = True
         data_type = "rgb" if "rgb" in self.cfg.tiled_camera.data_types else "depth"
         img_batch = self._tiled_camera.data.output[data_type].clone()
