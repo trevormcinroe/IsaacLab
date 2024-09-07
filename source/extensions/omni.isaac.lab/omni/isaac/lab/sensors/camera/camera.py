@@ -338,11 +338,11 @@ class Camera(SensorBase):
         if env_ids is None:
             env_ids = self._ALL_INDICES
         # set camera poses using the view
-        print(f'\n\ninside of def set_world_poses_from_view()!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-        print(f'eyes: {eyes}')
-        print(f'targets: {targets}')
+        # print(f'\n\ninside of def set_world_poses_from_view()!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+        # print(f'eyes: {eyes}')
+        # print(f'targets: {targets}')
         orientations = quat_from_matrix(create_rotation_matrix_from_view(eyes, targets, device=self._device))
-        print(f'orientations: {orientations}\n\n')
+        # print(f'orientations: {orientations}\n\n')
         self._view.set_world_poses(eyes, orientations, env_ids)
 
     """
