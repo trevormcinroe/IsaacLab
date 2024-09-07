@@ -191,6 +191,7 @@ class TiledCamera(Camera):
 
         # The offset is needed when the buffer contains rgb and depth (the buffer has RGB data first and then depth)
         offset = self._data.output["rgb"].numel() if "rgb" in self.cfg.data_types else 0
+        print(f'offset: {offset}')
         for data_type in self.cfg.data_types:
             wp.launch(
                 kernel=reshape_tiled_image,
