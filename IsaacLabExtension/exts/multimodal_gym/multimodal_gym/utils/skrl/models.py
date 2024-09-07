@@ -179,15 +179,14 @@ def custom_gaussian_model(observation_space: Optional[Union[int, Tuple[int], gym
                    output_scale: float = 1.0,
                    obs_type: str = "prop",
                    latent_dim: int = 512,
-                   img_dim: int = 80,
+                   img_dim: int = 84,
                    frame_stack: int = 1, num_gt_observations: int = 4) -> Model:
     """Instantiate a Gaussian model
 
     :return: Gaussian model instance
     :rtype: Model
     """
-    print(f'IMAGE DIM: {img_dim}')
-    qqq
+
     class GaussianModel(GaussianMixin, Model):
         def __init__(self, observation_space, action_space, device, clip_actions,
                      clip_log_std, min_log_std, max_log_std, frame_stack, num_gt_observations, reduction="sum"):
