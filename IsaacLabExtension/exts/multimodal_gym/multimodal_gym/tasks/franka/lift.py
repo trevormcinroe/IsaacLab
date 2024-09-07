@@ -405,6 +405,7 @@ class LiftEnv(DirectRLEnv):
 
     def _get_images(self):
         if not self.init:
+            print(f'\n\nWITHIN _get_images(): {self.num_envs} // {self.cfg.eye}\n\n')
             eyes = torch.tensor(self.cfg.eye, dtype=torch.float, device=self.device).repeat((self.num_envs, 1)) + self.scene.env_origins
             targets = torch.tensor(self.cfg.target, dtype=torch.float, device=self.device).repeat((self.num_envs, 1)) + self.scene.env_origins
             self._tiled_camera.set_world_poses_from_view(eyes=eyes, targets=targets)
