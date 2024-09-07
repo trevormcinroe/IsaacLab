@@ -201,7 +201,8 @@ class LiftEnvCfg(DirectRLEnvCfg):
             focal_length=24.0, focus_distance=400.0, horizontal_aperture=20.955, clipping_range=(0.1, 20.0)
         ),
         width=80,
-        height=80, debug_vis=True
+        height=80,
+        #debug_vis=True
     )
 
     write_image_to_file = True
