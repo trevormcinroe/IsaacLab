@@ -208,7 +208,7 @@ class LiftEnvCfg(DirectRLEnvCfg):
     write_image_to_file = True
     frame_stack = 1
     eye = [0, 1.5, 0.5] # orig: [0, 1.5, 0.5]
-    target = [0.3, 0, 0.5]  # orig: [0.3, 3.8, 0.5]
+    target = [0.0, 0, 0.0]  # orig: [0.3, 3.8, 0.5]
 
 class LiftEnv(DirectRLEnv):
     # pre-physics step calls
@@ -331,12 +331,12 @@ class LiftEnv(DirectRLEnv):
         if self.cfg.obs_type == "image" or self.cfg.obs_type == "image_prop":
             self._tiled_camera = TiledCamera(self.cfg.tiled_camera)
             self._tiled_camera._initialize_impl()
-            # eyes = torch.tensor(self.cfg.eye, dtype=torch.float, device=self.device).repeat(
-            #     (self.num_envs, 1)) + self.scene.env_origins
-            # targets = torch.tensor(self.cfg.target, dtype=torch.float, device=self.device).repeat(
-            #     (self.num_envs, 1)) + self.scene.env_origins
-            #
-            # self._tiled_camera.set_world_poses_from_view(eyes=eyes, targets=targets)
+            eyes = torch.tensor(self.cfg.eye, dtype=torch.float, device=self.device).repeat(
+                (self.num_envs, 1)) + self.scene.env_origins
+            targets = torch.tensor(self.cfg.target, dtype=torch.float, device=self.device).repeat(
+                (self.num_envs, 1)) + self.scene.env_origins
+
+            self._tiled_camera.set_world_poses_from_view(eyes=eyes, targets=targets)
             self.scene.sensors["tiled_camera"] = self._tiled_camera
 
          
