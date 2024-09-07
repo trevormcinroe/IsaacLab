@@ -184,7 +184,7 @@ class TiledCamera(Camera):
         # Extract the flattened image buffer
         print(f'THIS IS THE ANNOTATOR: {self._annotator}')
         tiled_data_buffer = self._annotator.get_data()
-        print(f'tiled_data_buffer: {tiled_data_buffer}')
+        print(f'tiled_data_buffer: {tiled_data_buffer} // {type(tiled_data_buffer)}')
         if isinstance(tiled_data_buffer, np.ndarray):
             tiled_data_buffer = wp.array(tiled_data_buffer, device=self.device)
         else:
