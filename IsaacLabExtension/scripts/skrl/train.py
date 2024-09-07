@@ -160,7 +160,7 @@ def main(env_cfg, agent_cfg: dict):
     env = SkrlVecEnvWrapper(env, ml_framework=args_cli.ml_framework)#, obs_type=experiment_cfg["models"]["policy"]["obs_type"])  # same as: `wrap_env(env, wrapper="isaaclab")`
 
     print(env, env.observation_space)
-    qqq
+
     out, info = env.reset()
 
     print(f'out: {out.shape} [{out.min(), out.max()}]')
