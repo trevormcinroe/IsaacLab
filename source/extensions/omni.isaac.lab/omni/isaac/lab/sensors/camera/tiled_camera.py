@@ -178,13 +178,13 @@ class TiledCamera(Camera):
 
     def _update_buffers_impl(self, env_ids: Sequence[int]):
         # Increment frame count
-        print(f'-- -- --IN TILEDCAMERA._update_buffers_impl() -- -- --')
+        # print(f'-- -- --IN TILEDCAMERA._update_buffers_impl() -- -- --')
         self._frame[env_ids] += 1
 
         # Extract the flattened image buffer
-        print(f'THIS IS THE ANNOTATOR: {self._annotator}')
+        # print(f'THIS IS THE ANNOTATOR: {self._annotator}')
         tiled_data_buffer = self._annotator.get_data()
-        print(f'tiled_data_buffer: {tiled_data_buffer} // {type(tiled_data_buffer)}')
+        # print(f'tiled_data_buffer: {tiled_data_buffer} // {type(tiled_data_buffer)}')
         if isinstance(tiled_data_buffer, np.ndarray):
             tiled_data_buffer = wp.array(tiled_data_buffer, device=self.device)
         else:
