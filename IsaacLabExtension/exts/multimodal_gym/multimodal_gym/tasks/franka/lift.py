@@ -128,7 +128,7 @@ class LiftEnvCfg(DirectRLEnvCfg):
     # in-hand object
     object_cfg: RigidObjectCfg = RigidObjectCfg(
             prim_path="/World/envs/env_.*/Object",
-            init_state=RigidObjectCfg.InitialStateCfg(pos=[0.5, 0, 0.055], rot=[1, 0, 0, 0]),
+            init_state=RigidObjectCfg.InitialStateCfg(pos=[0.5, 0, 0.055], rot=[1, 1, 0, 0]),
             spawn=UsdFileCfg(
                 usd_path=f"{ISAAC_NUCLEUS_DIR}/Props/Blocks/DexCube/dex_cube_instanceable.usd",
                 scale=(0.8, 0.8, 0.8),
@@ -296,10 +296,6 @@ class LiftEnv(DirectRLEnv):
 
     def _setup_scene(self):
         self.robot = Articulation(self.cfg.robot_cfg)
-
-        print(f'Heres the robot: {dir(self.robot.cfg["InitialStateCfg"])} // data')
-        qqq
-
         self.object = RigidObject(self.cfg.object_cfg)
 
         # Issues with this particular rigid object
