@@ -348,7 +348,7 @@ class Camera(SensorBase):
         # print(f'pos: {self._view.positions}')
         # print(f'tsl: {self._view.translations}')
         # print(f'ori: {self._view.orientations}')
-        self._view.set_world_poses(eyes, orientations, env_ids, usd=False)
+        self._view.set_world_poses(eyes, orientations, env_ids, usd=True)
         print(f'pos: {self._view.positions}')
         print(f'tsl: {self._view.translations}')
         print(f'ori: {self._view.orientations}')
@@ -669,3 +669,42 @@ class Camera(SensorBase):
         super()._invalidate_initialize_callback(event)
         # set all existing views to None to invalidate them
         self._view = None
+
+
+# if not usd:
+#     if not self._view_in_fabric_prepared:
+#         self._prepare_view_in_fabric()
+#     if self._selection is None:
+#         self._get_fabric_selection()
+#     if indices is None:
+#         indices = self._default_view_indices
+#     else:
+#         indices = self._backend2warp(indices, dtype=wp.uint32)
+#     if positions is not None:
+#         current_positions = wp.fabricarray(self._selection, "_worldPosition")
+#         wp.launch(
+#             fabric_utils.set_vec3d_array,
+#             dim=(indices.shape[0]),
+#             inputs=[
+#                 current_positions,
+#                 self._fabric_to_view,
+#                 self._view_to_fabric,
+#                 self._backend2warp(positions),
+#                 indices,
+#             ],
+#             device=self._device,
+#         )
+#     if orientations is not None:
+#         current_orientations = wp.fabricarray(self._selection, "_worldOrientation")
+#         wp.launch(
+#             fabric_utils.set_quatf_array,
+#             dim=(indices.shape[0]),
+#             inputs=[
+#                 current_orientations,
+#                 self._fabric_to_view,
+#                 self._view_to_fabric,
+#                 self._backend2warp(orientations),
+#                 indices,
+#             ],
+#             device=self._device,
+#         )
