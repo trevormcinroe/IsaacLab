@@ -297,7 +297,7 @@ class LiftEnv(DirectRLEnv):
     def _setup_scene(self):
         self.robot = Articulation(self.cfg.robot_cfg)
 
-        print(f'Heres the robot: {dir(self.robot.cfg)} // data')
+        print(f'Heres the robot: {dir(self.robot.cfg["InitialStateCfg"])} // data')
         qqq
 
         self.object = RigidObject(self.cfg.object_cfg)
