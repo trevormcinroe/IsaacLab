@@ -171,6 +171,7 @@ class TiledCamera(Camera):
         self._render_product_paths = [render_prod_path]
         # Attach the annotator
         self._annotator = rep.AnnotatorRegistry.get_annotator("RtxSensorGpu", device=self.device, do_array_copy=False)
+        print(f'THIS IS THE ANNOTATOR: {self._annotator}')
         self._annotator.attach(self._render_product_paths)
 
         # Create internal buffers
@@ -191,7 +192,7 @@ class TiledCamera(Camera):
 
         # The offset is needed when the buffer contains rgb and depth (the buffer has RGB data first and then depth)
         offset = self._data.output["rgb"].numel() if "rgb" in self.cfg.data_types else 0
-        print(f'offset: {offset}')
+
         for data_type in self.cfg.data_types:
             wp.launch(
                 kernel=reshape_tiled_image,
