@@ -330,13 +330,13 @@ class LiftEnv(DirectRLEnv):
 
         if self.cfg.obs_type == "image" or self.cfg.obs_type == "image_prop":
             self._tiled_camera = TiledCamera(self.cfg.tiled_camera)
-            self._tiled_camera._initialize_impl()
-            eyes = torch.tensor(self.cfg.eye, dtype=torch.float, device=self.device).repeat(
-                (self.num_envs, 1)) + self.scene.env_origins
-            targets = torch.tensor(self.cfg.target, dtype=torch.float, device=self.device).repeat(
-                (self.num_envs, 1)) + self.scene.env_origins
-
-            self._tiled_camera.set_world_poses_from_view(eyes=eyes, targets=targets)
+            # self._tiled_camera._initialize_impl()
+            # eyes = torch.tensor(self.cfg.eye, dtype=torch.float, device=self.device).repeat(
+            #     (self.num_envs, 1)) + self.scene.env_origins
+            # targets = torch.tensor(self.cfg.target, dtype=torch.float, device=self.device).repeat(
+            #     (self.num_envs, 1)) + self.scene.env_origins
+            #
+            # self._tiled_camera.set_world_poses_from_view(eyes=eyes, targets=targets)
             self.scene.sensors["tiled_camera"] = self._tiled_camera
 
          
@@ -424,7 +424,7 @@ class LiftEnv(DirectRLEnv):
             print(f'cam: {self._tiled_camera._view}\n')
             # self._tiled_camera.cfg.return_latest_camera_pose = True
             # self._tiled_camera.reset()
-            # self._tiled_camera.set_world_poses_from_view(eyes=eyes, targets=targets)
+            self._tiled_camera.set_world_poses_from_view(eyes=eyes, targets=targets, convention="world")
             # self.scene.sensors["tiled_camera"].set_world_poses_from_view(eyes=eyes, targets=targets)
             # self._tiled_camera.update(0, True)
 
