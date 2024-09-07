@@ -163,9 +163,9 @@ def main(env_cfg, agent_cfg: dict):
 
     out, info = env.reset()
 
-    print(f'out: {out.shape} [{out.min(), out.max()}]')
-    print(f'info: {info}')
-    qqq
+    # print(f'out: {out.shape} [{out.min(), out.max()}]')
+    # print(f'info: {info}')
+    # qqq
 
     # instantiate models using skrl model instantiator utility
     models = {}
@@ -243,6 +243,9 @@ def main(env_cfg, agent_cfg: dict):
     trainer_cfg["disable_progressbar"] = False
     trainer = SequentialTrainer(cfg=trainer_cfg, env=env, agents=agent)
 
+
+    print(f'right at the end.')
+    qqq
     # train the agent
     trainer.train()
 
