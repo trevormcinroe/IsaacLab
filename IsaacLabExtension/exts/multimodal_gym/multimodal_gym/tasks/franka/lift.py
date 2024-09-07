@@ -420,23 +420,23 @@ class LiftEnv(DirectRLEnv):
 
     def _get_images(self):
         if not self.init:
-            print(f'\n\nWITHIN _get_images(): {self.num_envs} // {self.cfg.eye} // {self.scene.env_origins}\n\n')
+            # print(f'\n\nWITHIN _get_images(): {self.num_envs} // {self.cfg.eye} // {self.scene.env_origins}\n\n')
             eyes = torch.tensor(self.cfg.eye, dtype=torch.float, device=self.device).repeat((self.num_envs, 1)) + self.scene.env_origins
             # eyes = torch.tensor([10, 22.5, 3.5], dtype=torch.float, device=self.device).repeat(
             #     (self.num_envs, 1)) + self.scene.env_origins
 
             targets = torch.tensor(self.cfg.target, dtype=torch.float, device=self.device).repeat((self.num_envs, 1)) + self.scene.env_origins
 
-            print(f'eyes: {eyes} // {eyes.shape}')
-            print(f'targets: {targets} // {targets.shape}')
-            print(f'cam: {self._tiled_camera._view}\n')
+            # print(f'eyes: {eyes} // {eyes.shape}')
+            # print(f'targets: {targets} // {targets.shape}')
+            # print(f'cam: {self._tiled_camera._view}\n')
             # self._tiled_camera.cfg.return_latest_camera_pose = True
             # self._tiled_camera.reset()
             self._tiled_camera.set_world_poses_from_view(eyes=eyes, targets=targets)
             # self.scene.sensors["tiled_camera"].set_world_poses_from_view(eyes=eyes, targets=targets)
             # self._tiled_camera.update(0, True)
 
-            print(f'cam: {self._tiled_camera._view}')
+            # print(f'cam: {self._tiled_camera._view}')
             self.init = True
         data_type = "rgb" if "rgb" in self.cfg.tiled_camera.data_types else "depth"
         img_batch = self._tiled_camera.data.output[data_type].clone()
@@ -448,13 +448,13 @@ class LiftEnv(DirectRLEnv):
             name = self.count
             name = "lift"
             # img_dir = "/workspace/isaaclab/IsaacLabExtension/images/franka"
-            print(f'CURRENT FILE: {__file__}')
+            # print(f'CURRENT FILE: {__file__}')
             img_dir = f"{__file__.replace('lift.py','')}"
             file_path = os.path.join(img_dir, f"{name}.png")
             save_images_to_file(img_batch, file_path)
             # self.count += 1
 
-        return flattened_images
+        return img_batch #flattened_images
         
     def _get_rewards(self) -> torch.Tensor:
         # follow a curriculum
