@@ -454,7 +454,7 @@ class LiftEnv(DirectRLEnv):
             save_images_to_file(img_batch, file_path)
             # self.count += 1
 
-        return img_batch.transpose(0, -1, 2, 3)
+        return img_batch.reshape(batch_size, img_batch.shape[-1], img_batch.shape[1], img_batch.shape[2])
         # return flattened_images
 
     def _get_rewards(self) -> torch.Tensor:
