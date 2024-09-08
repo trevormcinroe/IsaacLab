@@ -354,7 +354,7 @@ def main(env_cfg, agent_cfg: dict):
                     for x in obs
                 ]
                 # print(f'obs: {[x.shape for x in obs]}')
-                obs = torch.cat(obs, 0)
+                obs = torch.cat(obs, 1)
                 print(f'obs: {obs.shape}')
                 qqq
             qqq
