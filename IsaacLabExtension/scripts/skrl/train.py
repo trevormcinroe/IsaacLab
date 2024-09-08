@@ -294,11 +294,13 @@ def main(env_cfg, agent_cfg: dict):
     os.environ['WANDB_CONFIG_DIR'] = './wandb'
     os.environ['WANDB_DATA_DIR'] = './wandb'
 
+    config = {'rollout_h': args_cli.rollout_h, 'num_envs': args_cli.num_envs, 'run_notes': args_cli.run_notes}
+
     wandb.init(
         project='franka-lift',
         entity='trevor-mcinroe',
         name=f'{args_cli.run_notes}',
-        # config=config
+        config=config
     )
 
     # Every call to .train() is 10k env steps
