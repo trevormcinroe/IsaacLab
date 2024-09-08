@@ -444,14 +444,14 @@ class LiftEnv(DirectRLEnv):
         batch_size = img_batch.size()[0]
         flattened_images = img_batch.view(batch_size, -1)
 
-        if self.cfg.write_image_to_file:
-            name = self.count
-            name = "lift"
-            # img_dir = "/workspace/isaaclab/IsaacLabExtension/images/franka"
-            # print(f'CURRENT FILE: {__file__}')
-            img_dir = f"{__file__.replace('lift.py','')}"
-            file_path = os.path.join(img_dir, f"{name}.png")
-            save_images_to_file(img_batch, file_path)
+        # if self.cfg.write_image_to_file:
+        #     name = self.count
+        #     name = "lift"
+        #     # img_dir = "/workspace/isaaclab/IsaacLabExtension/images/franka"
+        #     # print(f'CURRENT FILE: {__file__}')
+        #     img_dir = f"{__file__.replace('lift.py','')}"
+        #     file_path = os.path.join(img_dir, f"{name}.png")
+        #     save_images_to_file(img_batch, file_path)
             # self.count += 1
 
         # return img_batch
