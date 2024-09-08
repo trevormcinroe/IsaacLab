@@ -184,7 +184,7 @@ def main(env_cfg, agent_cfg: dict):
     import numpy as np
     from PIL import Image
     # .transpose(2, 0)
-    obs = np.array(out[0, :, :, :3].cpu() * 255).astype(np.uint8)
+    obs = np.array(out[10, :, :, :3].cpu() * 255).astype(np.uint8)
     img = Image.fromarray(obs)
     img.save(file_path)
     # print(f'info: {info}')
