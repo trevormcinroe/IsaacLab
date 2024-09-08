@@ -171,7 +171,7 @@ def main(env_cfg, agent_cfg: dict):
     # qqq
 
     # instantiate models using skrl model instantiator utility
-    print(f'agent_cfg: {agent_cfg}')
+    print(f'agent_cfg: {agent_cfg} //\n{type(agent_cfg)}')
     agent_cfg["models"]["policy"]["img_dim"] = args_cli.hw
     print(f'\nagent_cfg: {agent_cfg}')
     qqq
