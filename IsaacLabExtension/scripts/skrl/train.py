@@ -328,8 +328,8 @@ def main(env_cfg, agent_cfg: dict):
         action = torch.tensor([env.action_space.sample() for _ in range(args_cli.num_envs)])
         # print(f'action: {action}')
         next_obs, reward, term, trunc, info = env.step(action)
-        print(f'next: {next_obs.shape}')
-        qqq
+        # print(f'next: {next_obs.shape}')
+        # qqq
         frames.append(next_obs)
 
     frames = torch.concat([x.unsqueeze(1) for x in frames], 1)[0].cpu()[:, :, :, :3].transpose(1, -1)
