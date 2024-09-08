@@ -318,9 +318,10 @@ def main(env_cfg, agent_cfg: dict):
             # obs.view(batch_size, self.num_channels, self.img_dim, self.img_dim)
             images = torch.concat(
                 [x.cpu().reshape(args_cli.num_envs,
+                                 -1,
                                  args_cli.frame_stack * 3,
                                  args_cli.hw,
-                                 args_cli.hw)[:, :3, :, :] for x in images],
+                                 args_cli.hw)[:, :, :3, :, :] for x in images],
                 0
             )
             print(f'images: {images.shape}')
