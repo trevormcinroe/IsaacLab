@@ -487,7 +487,7 @@ class ImageEncoder(nn.Module):
         self.outputs = dict()
 
     def forward_conv(self, obs):
-        print(f'obs in: {obs.shape} // {obs.dtype}')
+        print(f'obs in: {obs.shape} // {obs.dtype} [{obs.min()}, {obs.max()}]')
         qqq
         obs = obs / 255.
         self.outputs['obs'] = obs
@@ -507,7 +507,7 @@ class ImageEncoder(nn.Module):
 
     def forward(self, obs, detach_encoder_conv=False, detach_encoder_head=False):
         # obs coming in: torch.Size([4, 21168])
-        print(f'obs coming in: {obs.shape}')
+        # print(f'obs coming in: {obs.shape}')
         # input obs is[N, H, W, C], expected to be [N, C, H, W]
         if isinstance(obs, LazyFrames):
             raise ValueError("CNN input is LazyFrame. Convert to tensor")
