@@ -528,8 +528,6 @@ class ImageEncoder(nn.Module):
             h = h.detach()
 
         out = self.head(h)
-        print(f'output_logits: {self.output_logits}')
-        qqq
         if not self.output_logits:
             out = torch.tanh(out)
 
