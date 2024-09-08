@@ -526,7 +526,8 @@ class ImageEncoder(nn.Module):
         # the data that comes out of the replay buffer is corrupted with the following view...
         # obs = obs.view(batch_size, self.num_channels, self.img_dim, self.img_dim)
 
-        obs = obs.view(self.num_channels, batch_size, self.img_dim, self.img_dim)
+        # obs = obs.view(self.num_channels, batch_size, self.img_dim, self.img_dim)
+        obs = obs.reshape(64, 84, 84, 9)
 
         from multimodal_gym.utils.image_utils import save_images_to_file
         #
@@ -534,7 +535,7 @@ class ImageEncoder(nn.Module):
         file_path = '/home/tmci/IsaacLab/IsaacLabExtension/exts/multimodal_gym/multimodal_gym/tasks/franka/lift.png'
         import numpy as np
         from PIL import Image
-        obs = np.array(obs[:3, 0].cpu().transpose(2, 0) * 255).astype(np.uint8)
+        obs = np.array(obs[0, :, :, :3].cpu() * 255).astype(np.uint8)
         img = Image.fromarray(obs)
         img.save(file_path)
         # save_images_to_file(
