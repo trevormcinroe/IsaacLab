@@ -487,9 +487,9 @@ class ImageEncoder(nn.Module):
         self.outputs = dict()
 
     def forward_conv(self, obs):
-        print(f'obs in: {obs.shape} // {obs.dtype} [{obs.min()}, {obs.max()}]')
-        qqq
-        obs = obs / 255.
+        # print(f'obs in: {obs.shape} // {obs.dtype} [{obs.min()}, {obs.max()}]')
+        # qqq
+        # obs = obs / 255.
         self.outputs['obs'] = obs
 
         conv = torch.relu(self.convs[0](obs))
@@ -529,7 +529,10 @@ class ImageEncoder(nn.Module):
         if detach_encoder_conv:
             h = h.detach()
 
+        print(f'h: {h.shape}')
         out = self.head(h)
+        print(f'out: {out.shape}')
+        qqq
 
         if not self.output_logits:
             out = torch.tanh(out)
