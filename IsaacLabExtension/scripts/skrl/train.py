@@ -327,7 +327,7 @@ def main(env_cfg, agent_cfg: dict):
         next_obs, reward, term, trunc, info = env.step(action)
         frames.append(next_obs)
 
-    frames = torch.concat(frames, 1)
+    frames = torch.concat([x.unsqueeze(1) for x in frames], 1)
     print(f'frames: {frames.shape}')
     qqq
 
