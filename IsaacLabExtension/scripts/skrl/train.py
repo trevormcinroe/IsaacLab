@@ -320,6 +320,17 @@ def main(env_cfg, agent_cfg: dict):
         config=config
     )
 
+    frames = [out]
+    for _ in range(50):
+        action = torch.tensor([env.action_space.sample() for _ in range(args_cli.num_envs)])
+        # print(f'action: {action}')
+        next_obs, reward, term, trunc, info = env.step(action)
+        frames.append(next_obs)
+
+    frames = torch.concat(frames, 1)
+    print(f'frames: {frames.shape}')
+    qqq
+
     # Every call to .train() is 10k env steps
     for step in range(10_000_000 // (5_000 * args_cli.num_envs)):
         # Eval routine
