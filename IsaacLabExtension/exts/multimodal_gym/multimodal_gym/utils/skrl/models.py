@@ -192,8 +192,6 @@ def custom_gaussian_model(observation_space: Optional[Union[int, Tuple[int], gym
                      clip_log_std, min_log_std, max_log_std, frame_stack, num_gt_observations, reduction="sum"):
             Model.__init__(self, observation_space, action_space, device)
             GaussianMixin.__init__(self, clip_actions, clip_log_std, min_log_std, max_log_std, reduction)
-            print(f'DEVICE: {device}')
-            qqq
             self.instantiator_output_scale = metadata["output_scale"]
             self.instantiator_input_type = metadata["input_shape"].value
 
@@ -219,7 +217,9 @@ def custom_gaussian_model(observation_space: Optional[Union[int, Tuple[int], gym
                                 nn.Linear(64, num_actions), 
                                 nn.Tanh())
             
-            print(self.cnn, self.net)
+            print(self.cnn, self.cnn.device)
+            print(self.net, self.net.device)
+            qqq
             
             self.log_std_parameter = nn.Parameter(initial_log_std * torch.ones(num_actions))
 
