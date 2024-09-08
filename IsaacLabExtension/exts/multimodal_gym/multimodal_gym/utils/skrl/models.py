@@ -236,7 +236,6 @@ def custom_gaussian_model(observation_space: Optional[Union[int, Tuple[int], gym
                 # pass input first through cnn
                 net_inputs = self.cnn(inputs)
                 print(f'net_inputs: {net_inputs.shape}')
-                qqq
 
             elif self.obs_type == "concat":
                 # pass input first through cnn
@@ -246,6 +245,7 @@ def custom_gaussian_model(observation_space: Optional[Union[int, Tuple[int], gym
                 net_inputs = torch.cat((prop_obs, z), dim=1)
 
             output = self.net(net_inputs)
+            print(f'output: {output.shape}')
 
             return output * self.instantiator_output_scale, self.log_std_parameter, {}
 
