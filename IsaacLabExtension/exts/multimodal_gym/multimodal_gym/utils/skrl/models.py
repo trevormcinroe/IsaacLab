@@ -524,13 +524,18 @@ class ImageEncoder(nn.Module):
         batch_size = obs.size()[0]
         obs = obs.view(batch_size, self.num_channels, self.img_dim, self.img_dim)
 
-        # from multimodal_gym.utils.image_utils import save_images_to_file
+        from multimodal_gym.utils.image_utils import save_images_to_file
         #
-        # file_path = '/home/tmci/IsaacLab/IsaacLabExtension/exts/multimodal_gym/multimodal_gym/tasks/franka/lift.png'
+        print(f'obs: {obs.shape}')
+        file_path = '/home/tmci/IsaacLab/IsaacLabExtension/exts/multimodal_gym/multimodal_gym/tasks/franka/lift.png'
+        import numpy as np
+        from PIL import Image
+        img = Image.fromarray((np.array(obs[0].cpu()) * 255).astype(np.uint8))
+        img.save(file_path)
         # save_images_to_file(
         #     next_obs.reshape(args_cli.num_envs, args_cli.hw, args_cli.hw, 3*args_cli.frame_stack)[:, :, :, :3],
         #     file_path)
-        # qqq
+        qqq
         # qqq
         # print("cnn", obs.size())
 
