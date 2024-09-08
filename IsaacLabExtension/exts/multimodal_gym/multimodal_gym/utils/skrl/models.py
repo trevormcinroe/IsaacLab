@@ -315,16 +315,18 @@ def custom_deterministic_model(observation_space: Optional[Union[int, Tuple[int]
 
 
         def compute(self, inputs, role=""):
-            if self.instantiator_input_type == 0:
-                net_inputs = inputs["states"]
-            elif self.instantiator_input_type == -1:
-                net_inputs = inputs["taken_actions"]
-            elif self.instantiator_input_type == -2:
-                net_inputs = torch.cat((inputs["states"], inputs["taken_actions"]), dim=1)
+            # if self.instantiator_input_type == 0:
+            #     net_inputs = inputs["states"]
+            # elif self.instantiator_input_type == -1:
+            #     net_inputs = inputs["taken_actions"]
+            # elif self.instantiator_input_type == -2:
+            #     net_inputs = torch.cat((inputs["states"], inputs["taken_actions"]), dim=1)
 
             if self.obs_type == "image":
                 # pass input first through cnn
-                net_inputs = self.cnn(net_inputs)
+                net_inputs = self.cnn(inputs)
+                print(f'net_inputs: {net_inputs.shape}')
+                # qqq
 
             elif self.obs_type == "concat":
                 # pass input first through cnn
@@ -334,6 +336,7 @@ def custom_deterministic_model(observation_space: Optional[Union[int, Tuple[int]
                 net_inputs = torch.cat((prop_obs, z), dim=1)
 
             output = self.net(net_inputs)
+            print(f'output: {output.shape}')
 
             return output * self.instantiator_output_scale, {}
 
