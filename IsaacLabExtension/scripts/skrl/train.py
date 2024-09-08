@@ -360,6 +360,8 @@ def main(env_cfg, agent_cfg: dict):
             adj_frames = torch.cat(adj_frames, 0).cpu()
 
             gen = np.array(adj_frames[:, :3].transpose(1, -1) * 255).astype(np.uint8)
+            print(f'gen: {gen.shape}')
+            qqq
             wandb.log({'video': wandb.Video(gen, fps=30)})
             qqq
         else:
