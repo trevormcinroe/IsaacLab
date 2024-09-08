@@ -302,7 +302,7 @@ def custom_deterministic_model(observation_space: Optional[Union[int, Tuple[int]
             print("num inputs, actions, gt:", num_inputs, num_actions, self.num_gt_observations)
             
             num_inputs, self.cnn = process_inputs(obs_type, frame_stack, latent_dim, img_dim, num_inputs, num_gt_observations)
-
+            self.cnn = self.cnn.to(device)
             # shared layers/network
             self.net = nn.Sequential(nn.Linear(num_inputs, 256),
                                 nn.ELU(),
@@ -311,7 +311,7 @@ def custom_deterministic_model(observation_space: Optional[Union[int, Tuple[int]
                                 nn.Linear(128, 64),
                                 nn.ELU(),
                                 nn.Linear(64, 1),
-                                nn.Identity())
+                                nn.Identity()).to(device)
 
 
         def compute(self, inputs, role=""):
