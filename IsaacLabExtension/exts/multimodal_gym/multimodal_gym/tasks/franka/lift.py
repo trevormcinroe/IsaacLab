@@ -442,7 +442,7 @@ class LiftEnv(DirectRLEnv):
         img_batch = self._tiled_camera.data.output[data_type].clone()
         # img_batch = self.scene.sensors["tiled_camera"].data.output[data_type].clone()
         batch_size = img_batch.size()[0]
-        # flattened_images = img_batch.view(batch_size, -1)
+        flattened_images = img_batch.view(batch_size, -1)
 
         if self.cfg.write_image_to_file:
             name = self.count
@@ -454,8 +454,8 @@ class LiftEnv(DirectRLEnv):
             save_images_to_file(img_batch, file_path)
             # self.count += 1
 
-        return img_batch
-        # return flattened_images
+        # return img_batch
+        return flattened_images
 
     def _get_rewards(self) -> torch.Tensor:
         # follow a curriculum
