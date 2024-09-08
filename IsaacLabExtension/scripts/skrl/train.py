@@ -166,13 +166,14 @@ def main(env_cfg, agent_cfg: dict):
 
     out, info = env.reset()
 
-    # print(f'out: {out.shape} [{out.min(), out.max()}]')
+    print(f'out: {out.shape} [{out.min(), out.max()}]')
     # print(f'info: {info}')
     # qqq
 
     # instantiate models using skrl model instantiator utility
     print(f'agent_cfg: {agent_cfg} //\n{type(agent_cfg)}')
     agent_cfg["models"]["policy"]["img_dim"] = args_cli.hw
+    agent_cfg["models"]["value"]["img_dim"] = args_cli.hw
     print(f'\nagent_cfg: {agent_cfg}')
     qqq
     models = {}
