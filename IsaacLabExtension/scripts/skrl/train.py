@@ -316,7 +316,6 @@ def main(env_cfg, agent_cfg: dict):
         if args_cli.record:
             eval_returns, images = trainer.eval(True)
             # obs.view(batch_size, self.num_channels, self.img_dim, self.img_dim)
-
             images = torch.concat(
                 [x.cpu().reshape(args_cli.num_envs,
                                  args_cli.frame_stack * 3,
@@ -324,6 +323,8 @@ def main(env_cfg, agent_cfg: dict):
                                  args_cli.hw)[:, :3, :, :] for x in images],
                 0
             )
+            print(f'images: {images.shape}')
+            qqq
             gen = np.array(images * 255).astype(np.uint8)
             wandb.log({'video': wandb.Video(gen, fps=30)})
             qqq
