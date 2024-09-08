@@ -177,12 +177,12 @@ def main(env_cfg, agent_cfg: dict):
     out, info = env.reset()
 
     print(f'out: {out.shape} [{out.min(), out.max()}]')
-    qqq
-
+    # torch.Size([64, 84, 84, 9])
     file_path = '/home/tmci/IsaacLab/IsaacLabExtension/exts/multimodal_gym/multimodal_gym/tasks/franka/lift.png'
     import numpy as np
     from PIL import Image
-    obs = np.array(obs[:3, 0].cpu().transpose(2, 0) * 255).astype(np.uint8)
+    # .transpose(2, 0)
+    obs = np.array(out[0, :, :, :3].cpu() * 255).astype(np.uint8)
     img = Image.fromarray(obs)
     img.save(file_path)
     # print(f'info: {info}')
