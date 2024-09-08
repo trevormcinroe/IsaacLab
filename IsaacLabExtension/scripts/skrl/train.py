@@ -285,7 +285,7 @@ def main(env_cfg, agent_cfg: dict):
     # train the agent
     import json
     import wandb
-    with open('../../../../wandb.txt', 'r') as f:
+    with open('../../wandb.txt', 'r') as f:
         API_KEY = json.load(f)['api_key']
 
     os.environ['WANDB_API_KEY'] = API_KEY
