@@ -226,16 +226,16 @@ def custom_gaussian_model(observation_space: Optional[Union[int, Tuple[int], gym
 
         def compute(self, inputs, role=""):
             print(f'inputs: {inputs.shape}')
-            if self.instantiator_input_type == 0:
-                net_inputs = inputs["states"]
-            elif self.instantiator_input_type == -1:
-                net_inputs = inputs["taken_actions"]
-            elif self.instantiator_input_type == -2:
-                net_inputs = torch.cat((inputs["states"], inputs["taken_actions"]), dim=1)
+            # if self.instantiator_input_type == 0:
+            #     net_inputs = inputs["states"]
+            # elif self.instantiator_input_type == -1:
+            #     net_inputs = inputs["taken_actions"]
+            # elif self.instantiator_input_type == -2:
+            #     net_inputs = torch.cat((inputs["states"], inputs["taken_actions"]), dim=1)
 
             if self.obs_type == "image":
                 # pass input first through cnn
-                net_inputs = self.cnn(net_inputs)
+                net_inputs = self.cnn(inputs)
                 print(f'net_inputs: {net_inputs.shape}')
                 qqq
 
@@ -487,7 +487,8 @@ class ImageEncoder(nn.Module):
         self.outputs = dict()
 
     def forward_conv(self, obs):
-        print(f'obs in: {obs.shape} // {obs.shape}')
+        print(f'obs in: {obs.shape} // {obs.dtype}')
+        qqq
         obs = obs / 255.
         self.outputs['obs'] = obs
 
