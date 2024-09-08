@@ -462,8 +462,6 @@ class ImageEncoder(nn.Module):
         self.feature_dim = feature_dim
 
         self.num_channels = obs_shape[0]
-        print(f'NUM CHANNES: {self.num_channels}')
-        qqq
         self.img_dim = img_dim
         self.frame_stack = frame_stack
         
@@ -526,14 +524,14 @@ class ImageEncoder(nn.Module):
         batch_size = obs.size()[0]
         obs = obs.view(batch_size, self.num_channels, self.img_dim, self.img_dim)
 
-        from multimodal_gym.utils.image_utils import save_images_to_file
-
-        file_path = '/home/tmci/IsaacLab/IsaacLabExtension/exts/multimodal_gym/multimodal_gym/tasks/franka/lift.png'
-        save_images_to_file(
-            next_obs.reshape(args_cli.num_envs, args_cli.hw, args_cli.hw, 3*args_cli.frame_stack)[:, :, :, :3],
-            file_path)
-        qqq
-        qqq
+        # from multimodal_gym.utils.image_utils import save_images_to_file
+        #
+        # file_path = '/home/tmci/IsaacLab/IsaacLabExtension/exts/multimodal_gym/multimodal_gym/tasks/franka/lift.png'
+        # save_images_to_file(
+        #     next_obs.reshape(args_cli.num_envs, args_cli.hw, args_cli.hw, 3*args_cli.frame_stack)[:, :, :, :3],
+        #     file_path)
+        # qqq
+        # qqq
         # print("cnn", obs.size())
 
         h = self.forward_conv(obs)
