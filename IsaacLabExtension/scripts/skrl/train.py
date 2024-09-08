@@ -315,7 +315,7 @@ def main(env_cfg, agent_cfg: dict):
             # obs.view(batch_size, self.num_channels, self.img_dim, self.img_dim)
 
             images = torch.concat(
-                [x.reshape(1, args_cli.frame_stack * 3, args_cli.hw, args_cli.hw)[6:, :, :] for x in images],
+                [x.reshape(1, args_cli.frame_stack * 3, args_cli.hw, args_cli.hw)[:, 6:, :, :] for x in images],
                 0
             )
             gen = np.array(images * 255).astype(np.uint8)
