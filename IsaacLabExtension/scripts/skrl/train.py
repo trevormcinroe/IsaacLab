@@ -313,14 +313,12 @@ def main(env_cfg, agent_cfg: dict):
         if args_cli.record:
             eval_returns, images = trainer.eval(True)
             # obs.view(batch_size, self.num_channels, self.img_dim, self.img_dim)
-            print(f'first: {images[0].shape}')
+
             images = torch.concat(
-                [x.reshape(args_cli.frame_stack * 3, args_cli.hw, args_cli.hw) for x in images],
+                [x.reshape(1, args_cli.frame_stack * 3, args_cli.hw, args_cli.hw)[6:, :, :] for x in images],
                 0
             )
-            print(f'images: {images.shape}')
-            qqq
-            gen = np.array(images.transpose(0, 3, 1, 2) * 255).astype(np.uint8)
+            gen = np.array(images * 255).astype(np.uint8)
             wandb.log({'video': wandb.Video(gen, fps=30)})
             qqq
         else:
