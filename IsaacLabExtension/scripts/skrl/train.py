@@ -177,6 +177,8 @@ def main(env_cfg, agent_cfg: dict):
     out, info = env.reset()
 
     print(f'out: {out.shape} [{out.min(), out.max()}]')
+    out = out.reshape(out.shape[0], -1)
+    out = out.reshape(64, 84, 84, 9)
     # torch.Size([64, 84, 84, 9])
     file_path = '/home/tmci/IsaacLab/IsaacLabExtension/exts/multimodal_gym/multimodal_gym/tasks/franka/lift.png'
     import numpy as np
