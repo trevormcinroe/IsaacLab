@@ -445,7 +445,7 @@ class LiftEnv(DirectRLEnv):
         # flattened_images = img_batch.view(batch_size, -1)
         flattened_images = img_batch.reshape(batch_size, -1)
 
-        sm = (batch_size - flattened_images.reshape(batch_size.shape)).abs().sum()
+        sm = (batch_size - flattened_images.reshape(img_batch.shape)).abs().sum()
         print(f'======\nRESHAPE: {sm}\n=======')
         qqq
 
