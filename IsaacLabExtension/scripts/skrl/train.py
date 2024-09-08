@@ -358,19 +358,8 @@ def main(env_cfg, agent_cfg: dict):
                 adj_frames.append(obs)
 
             adj_frames = torch.cat(adj_frames, 0)
-            print(f'adj_frames: {adj_frames.shape}')
-            qqq
-            # print(f'reshape: {images[0].reshape(-1, args_cli.frame_stack * 3, args_cli.hw, args_cli.hw).shape}')
-            # obs.view(batch_size, self.num_channels, self.img_dim, self.img_dim)
-            images = torch.concat(
-                [x.cpu().reshape(1,
-                                 args_cli.hw,
-                                 args_cli.hw,
-                                 args_cli.frame_stack * 3)[:, :, :, :3] for x in images],
-                0
-            )
-            print(f'images: {images.shape} // [{images.min()}, {images.max()}]')
-            gen = np.array(images.transpose(3, 1) * 255).astype(np.uint8)
+
+            gen = np.array(adj_frames[:, :3].transpose(0, -1) * 255).astype(np.uint8)
             wandb.log({'video': wandb.Video(gen, fps=30)})
             qqq
         else:
