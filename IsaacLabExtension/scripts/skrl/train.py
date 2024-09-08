@@ -357,7 +357,7 @@ def main(env_cfg, agent_cfg: dict):
                 obs = torch.cat(obs, 1)
                 adj_frames.append(obs)
 
-            adj_frames = torch.cat(adj_frames, 0)
+            adj_frames = torch.cat(adj_frames, 0).cpu()
 
             gen = np.array(adj_frames[:, :3].transpose(0, -1) * 255).astype(np.uint8)
             wandb.log({'video': wandb.Video(gen, fps=30)})
