@@ -548,7 +548,7 @@ class ImageEncoder(nn.Module):
         file_path = '/home/tmci/IsaacLab/IsaacLabExtension/exts/multimodal_gym/multimodal_gym/tasks/franka/lift.png'
         import numpy as np
         from PIL import Image
-        obs = np.array(obs[0, :3].cpu().transpose(0, -1) * 255).astype(np.uint8)
+        obs = np.array(obs[5, :3].cpu().transpose(0, -1) * 255).astype(np.uint8)
         img = Image.fromarray(obs)
         img.save(file_path)
         # save_images_to_file(
