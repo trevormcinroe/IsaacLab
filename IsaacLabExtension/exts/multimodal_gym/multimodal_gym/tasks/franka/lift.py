@@ -442,7 +442,7 @@ class LiftEnv(DirectRLEnv):
 
         # [num_envs, hw, hw, 3 (regardless of framestacking)]
         img_batch = self._tiled_camera.data.output[data_type].clone()
-        print(f'img_batch: {img_batch.shape}')
+        # print(f'img_batch: {img_batch.shape}')
         # img_batch = self.scene.sensors["tiled_camera"].data.output[data_type].clone()
         batch_size = img_batch.size()[0]
         # flattened_images = img_batch.view(batch_size, -1)
@@ -462,8 +462,8 @@ class LiftEnv(DirectRLEnv):
         #     save_images_to_file(img_batch, file_path)
             # self.count += 1
 
-        # return img_batch
-        return flattened_images
+        return img_batch
+        # return flattened_images
 
     def _get_rewards(self) -> torch.Tensor:
         # follow a curriculum
