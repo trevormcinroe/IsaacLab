@@ -172,6 +172,8 @@ def main(env_cfg, agent_cfg: dict):
 
     # instantiate models using skrl model instantiator utility
     print(f'agent_cfg: {agent_cfg}')
+    agent_cfg["models"]["policy"]["img_dim"] = args_cli.hw
+    print(f'\nagent_cfg: {agent_cfg}')
     qqq
     models = {}
     # agent_cfg["models"]["policy"]["img_dim"] = args_cli.hw
@@ -209,8 +211,7 @@ def main(env_cfg, agent_cfg: dict):
                 process_skrl_cfg(agent_cfg["models"]["value"], ml_framework=args_cli.ml_framework),
             ],
             frame_stack=env_cfg.frame_stack,
-            num_gt_observations=env_cfg.num_gt_observations,
-            img_dim=args_cli.hw
+            num_gt_observations=env_cfg.num_gt_observations
         )
         models["value"] = models["policy"]
 
