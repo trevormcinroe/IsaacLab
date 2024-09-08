@@ -537,9 +537,9 @@ class ImageEncoder(nn.Module):
         obs = torch.cat(obs, 1)
         print(f'obs: {obs.shape}')
 
-        qqq
+        # qqq
 
-        obs = obs.view(batch_size, self.img_dim, self.img_dim, self.num_channels).transpose(-1, 1)
+        # obs = obs.view(batch_size, self.img_dim, self.img_dim, self.num_channels).transpose(-1, 1)
         # obs = obs.reshape(64, 9, 84, 84)
 
         # from multimodal_gym.utils.image_utils import save_images_to_file
@@ -548,7 +548,7 @@ class ImageEncoder(nn.Module):
         file_path = '/home/tmci/IsaacLab/IsaacLabExtension/exts/multimodal_gym/multimodal_gym/tasks/franka/lift.png'
         import numpy as np
         from PIL import Image
-        obs = np.array(obs[3, :3].cpu().transpose(0, -1) * 255).astype(np.uint8)
+        obs = np.array(obs[0, :3].cpu() * 255).astype(np.uint8)
         img = Image.fromarray(obs)
         img.save(file_path)
         # save_images_to_file(
