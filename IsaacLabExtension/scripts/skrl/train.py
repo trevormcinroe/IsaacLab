@@ -27,6 +27,7 @@ parser.add_argument("--num_envs", type=int, default=None, help="Number of enviro
 parser.add_argument("--task", type=str, default=None, help="Name of the task.")
 parser.add_argument("--seed", type=int, default=None, help="Seed used for the environment")
 parser.add_argument("--hw", type=int, default=None, help="hw of the env")
+parser.add_argument("--latent_dim", type=int, default=50, help="hw of the env")
 parser.add_argument(
     "--distributed", action="store_true", default=False, help="Run training with multiple GPUs or nodes."
 )
@@ -174,6 +175,8 @@ def main(env_cfg, agent_cfg: dict):
     print(f'agent_cfg: {agent_cfg} //\n{type(agent_cfg)}')
     agent_cfg["models"]["policy"]["img_dim"] = args_cli.hw
     agent_cfg["models"]["value"]["img_dim"] = args_cli.hw
+    agent_cfg["models"]["policy"]["latent_dim"] = args_cli.latent_dim
+    agent_cfg["models"]["value"]["latent_dim"] = args_cli.latent_dim
 
     models = {}
     # agent_cfg["models"]["policy"]["img_dim"] = args_cli.hw
