@@ -217,7 +217,7 @@ def custom_gaussian_model(observation_space: Optional[Union[int, Tuple[int], gym
                                 nn.Linear(64, num_actions), 
                                 nn.Tanh())
             
-            print(self.cnn, self.cnn.device)
+            print(self.cnn, type(self.cnn))
             print(self.net, self.net.device)
             qqq
             
