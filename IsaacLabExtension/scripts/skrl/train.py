@@ -244,9 +244,6 @@ def main(env_cfg, agent_cfg: dict):
     # env_cfg.write_image_to_file = agent_cfg["logging"]["write_image_to_file"]
     # env_cfg.img_dir = agent_cfg["logging"]["img_dir"]
 
-    print(f'default_agent_cfg: {default_agent_cfg}')
-    qqq
-
     agent = PPO(
         models=models,
         memory=memory,
