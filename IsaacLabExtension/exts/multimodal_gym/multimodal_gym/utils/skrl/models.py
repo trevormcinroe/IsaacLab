@@ -525,8 +525,9 @@ class ImageEncoder(nn.Module):
 
         # the data that comes out of the replay buffer is corrupted with the following view...
         # obs = obs.view(batch_size, self.num_channels, self.img_dim, self.img_dim)
+        frame_stack_divisor = self.num_channels // 3
         print(f'obs: {obs.shape}')
-        obs = obs.split(obs.shape[-1] // 3, -1)
+        obs = obs.split(obs.shape[-1] // frame_stack_divisor, -1)
         print(f'obs: {[x.shape for x in obs]}')
         qqq
 
