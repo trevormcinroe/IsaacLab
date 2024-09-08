@@ -487,8 +487,8 @@ class ImageEncoder(nn.Module):
         self.outputs = dict()
 
     def forward_conv(self, obs):
-        # print(f'obs in: {obs.shape} // {obs.dtype} [{obs.min()}, {obs.max()}]')
-        # qqq
+        print(f'obs in: {obs.shape} // {obs.dtype} [{obs.min()}, {obs.max()}] // {obs.device}')
+        qqq
         # obs = obs / 255.
         self.outputs['obs'] = obs
 
