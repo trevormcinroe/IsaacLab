@@ -222,9 +222,9 @@ def main(env_cfg, agent_cfg: dict):
     memory_size = agent_cfg["agent"]["rollouts"]  # memory_size is the agent's number of rollouts
     memory = RandomMemory(memory_size=memory_size, num_envs=env.num_envs, device=env.device)
 
-    action = models['value']({'states': out})
-    print(f'action: {action}')
-    qqq
+    # action = models['value']({'states': out})
+    # print(f'action: {action}')
+    # qqq
 
     # configure and instantiate PPO agent
     # https://skrl.readthedocs.io/en/latest/api/agents/ppo.html
