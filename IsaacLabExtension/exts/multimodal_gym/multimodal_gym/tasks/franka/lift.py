@@ -440,8 +440,6 @@ class LiftEnv(DirectRLEnv):
             self.init = True
         data_type = "rgb" if "rgb" in self.cfg.tiled_camera.data_types else "depth"
         img_batch = self._tiled_camera.data.output[data_type].clone()
-        print(f'img_batch: {img_batch.shape}')
-        qqq
         # img_batch = self.scene.sensors["tiled_camera"].data.output[data_type].clone()
         batch_size = img_batch.size()[0]
         flattened_images = img_batch.view(batch_size, -1)
