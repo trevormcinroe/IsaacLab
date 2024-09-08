@@ -278,10 +278,13 @@ def main(env_cfg, agent_cfg: dict):
     # save_images_to_file(next_obs, file_path)
     # qqq
     # train the agent
-    returns = trainer.eval()
-    print(f'Eval returns: {returns.mean()}')
-    qqq
-    trainer.train()
+
+    # Every call to .train() is 10k env steps
+    for step in range(10_000_000 // 10_000):
+        # Eval routine
+        eval_returns = trainer.eval()
+        print(f'Step {step * 10_000}: {eval_returns.mean()}')
+        trainer.train()
 
     # close the simulator
     env.close()
