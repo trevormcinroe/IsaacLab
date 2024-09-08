@@ -314,7 +314,10 @@ def main(env_cfg, agent_cfg: dict):
             eval_returns, images = trainer.eval(True)
             # obs.view(batch_size, self.num_channels, self.img_dim, self.img_dim)
             print(f'first: {images[0].shape}')
-            images = torch.FloatTensor([x.reshape(args_cli.frame_stack * 3, args_cli.hw, args_cli.hw) for x in images])
+            images = torch.concat(
+                [x.reshape(args_cli.frame_stack * 3, args_cli.hw, args_cli.hw) for x in images],
+                0
+            )
             print(f'images: {images.shape}')
             qqq
             gen = np.array(images.transpose(0, 3, 1, 2) * 255).astype(np.uint8)
