@@ -27,7 +27,10 @@ parser.add_argument("--num_envs", type=int, default=None, help="Number of enviro
 parser.add_argument("--task", type=str, default=None, help="Name of the task.")
 parser.add_argument("--seed", type=int, default=None, help="Seed used for the environment")
 parser.add_argument("--hw", type=int, default=None, help="hw of the env")
-parser.add_argument("--latent_dim", type=int, default=50, help="hw of the env")
+parser.add_argument("--latent_dim", type=int, default=50, help="z-dim")
+parser.add_argument("--rollout_h", type=int, default=50, help="len of PPO rollout")
+
+
 parser.add_argument(
     "--distributed", action="store_true", default=False, help="Run training with multiple GPUs or nodes."
 )
@@ -103,6 +106,8 @@ def main(env_cfg, agent_cfg: dict):
     env_cfg.frame_stack = args_cli.frame_stack
     env_cfg.obs_type = args_cli.obs_type
     print("obs type:", env_cfg.obs_type)
+
+    agent_cfg["agent"]["rollouts"] = args_cli.rollout_h
 
     set_seed(args_cli.seed if args_cli.seed is not None else agent_cfg["seed"])
     # multi-gpu training config
@@ -278,12 +283,30 @@ def main(env_cfg, agent_cfg: dict):
     # save_images_to_file(next_obs, file_path)
     # qqq
     # train the agent
+    import json
+    import wandb
+    with open('../../wandb.txt', 'r') as f:
+        API_KEY = json.load(f)['api_key']
+
+    os.environ['WANDB_API_KEY'] = API_KEY
+    os.environ['WANDB_DIR'] = './wandb'
+    os.environ['WANDB_CACHE_DIR'] = './wandb'
+    os.environ['WANDB_CONFIG_DIR'] = './wandb'
+    os.environ['WANDB_DATA_DIR'] = './wandb'
+
+    wandb.init(
+        project='franka-lift',
+        entity='trevor-mcinroe',
+        name=f'{args_cli.run_notes}',
+        # config=config
+    )
 
     # Every call to .train() is 10k env steps
-    for step in range(10_000_000 // 5_000):
+    for step in range(10_000_000 // (5_000 * args_cli.num_envs)):
         # Eval routine
         eval_returns = trainer.eval()
-        print(f'Step {step * 5_000}: {eval_returns.mean()}')
+        print(f'Step {step * 5_000 * args_cli.num_envs}: {eval_returns.mean()}')
+        wandb.log({'global_steps': step * 5_000 * args_cli.num_envs, 'eval_returns': eval_returns.mean()})
         trainer.train()
 
     # close the simulator
