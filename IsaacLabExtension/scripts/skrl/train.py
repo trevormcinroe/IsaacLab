@@ -278,7 +278,8 @@ def main(env_cfg, agent_cfg: dict):
     # save_images_to_file(next_obs, file_path)
     # qqq
     # train the agent
-    trainer.eval()
+    returns = trainer.eval()
+    print(f'Eval returns: {returns.mean()}')
     qqq
     trainer.train()
 
