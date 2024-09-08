@@ -14,7 +14,7 @@ from skrl.utils.model_instantiators.torch import _generate_sequential, _get_acti
 
 from multimodal_gym.utils.frame_stack import LazyFrames
 
-from IsaacLabExtension.exts.multimodal_gym.multimodal_gym.utils.misc import to_cpu
+# from IsaacLabExtension.exts.multimodal_gym.multimodal_gym.utils.misc import to_cpu
 
 
 class Shape(Enum):
