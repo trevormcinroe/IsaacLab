@@ -280,10 +280,10 @@ def main(env_cfg, agent_cfg: dict):
     # train the agent
 
     # Every call to .train() is 10k env steps
-    for step in range(10_000_000 // 10_000):
+    for step in range(10_000_000 // 5_000):
         # Eval routine
         eval_returns = trainer.eval()
-        print(f'Step {step * 10_000}: {eval_returns.mean()}')
+        print(f'Step {step * 5_000}: {eval_returns.mean()}')
         trainer.train()
 
     # close the simulator
