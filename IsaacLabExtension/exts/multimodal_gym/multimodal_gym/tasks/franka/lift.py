@@ -444,7 +444,7 @@ class LiftEnv(DirectRLEnv):
         # img_batch = self.scene.sensors["tiled_camera"].data.output[data_type].clone()
         batch_size = img_batch.size()[0]
         # flattened_images = img_batch.view(batch_size, -1)
-        flattened_images = img_batch.reshape(batch_size, -1)
+        flattened_images = img_batch.reshape(img_batch.shape[0], -1)
 
         sm = (batch_size - flattened_images.reshape(img_batch.shape)).abs().sum()
         print(f'======\nRESHAPE: {sm}\n=======')
