@@ -463,7 +463,7 @@ class LiftEnv(DirectRLEnv):
             # self.count += 1
 
         # return img_batch
-        return flattened_images.reshape(64, 84, 84, 9)
+        return flattened_images.reshape(64, 84, 84, 3)
 
     def _get_rewards(self) -> torch.Tensor:
         # follow a curriculum
