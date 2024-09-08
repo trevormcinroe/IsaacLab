@@ -313,6 +313,7 @@ def main(env_cfg, agent_cfg: dict):
         if args_cli.record:
             eval_returns, images = trainer.eval(True)
             # obs.view(batch_size, self.num_channels, self.img_dim, self.img_dim)
+            print(f'first: {images[0].shape}')
             images = torch.FloatTensor([x.reshape(args_cli.frame_stack * 3, args_cli.hw, args_cli.hw) for x in images])
             print(f'images: {images.shape}')
             qqq
