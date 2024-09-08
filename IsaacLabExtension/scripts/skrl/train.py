@@ -188,7 +188,7 @@ def main(env_cfg, agent_cfg: dict):
     img = Image.fromarray(obs)
     img.save(file_path)
     # print(f'info: {info}')
-    # qqq
+    qqq
 
     # instantiate models using skrl model instantiator utility
     print(f'agent_cfg: {agent_cfg} //\n{type(agent_cfg)}')
