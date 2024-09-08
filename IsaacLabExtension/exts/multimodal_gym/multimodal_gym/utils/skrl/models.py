@@ -87,14 +87,14 @@ def custom_model(observation_space: Optional[Union[int, Tuple[int], gym.Space, g
             self.net = nn.Sequential(nn.Linear(num_inputs, 32),
                                 nn.ELU(),
                                 nn.Linear(32, 32),
-                                nn.ELU())
+                                nn.ELU()).to(device)
             
             self.mean_net = nn.Sequential(nn.Linear(32, num_actions), 
-                                            nn.Tanh())
-            self.log_std_parameter = nn.Parameter(torch.zeros(num_actions))
+                                            nn.Tanh()).to(device)
+            self.log_std_parameter = nn.Parameter(torch.zeros(num_actions)).to(device)
 
             self.value_net = nn.Sequential(nn.Linear(32, 1),
-                                             nn.Identity())
+                                             nn.Identity()).to(device)
 
         def act(self, inputs, role):
             print(f'WITHIN act()!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
@@ -221,7 +221,7 @@ def custom_gaussian_model(observation_space: Optional[Union[int, Tuple[int], gym
             
             print(self.cnn, self.net)
             
-            self.log_std_parameter = nn.Parameter(initial_log_std * torch.ones(num_actions))
+            self.log_std_parameter = nn.Parameter(initial_log_std * torch.ones(num_actions)).to(device)
 
 
 
