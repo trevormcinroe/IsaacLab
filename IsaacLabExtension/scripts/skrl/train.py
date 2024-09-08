@@ -18,6 +18,7 @@ import sys
 
 from omni.isaac.lab.app import AppLauncher
 import numpy as np
+import torch
 
 # add argparse arguments
 parser = argparse.ArgumentParser(description="Train an RL agent with skrl.")
@@ -311,7 +312,10 @@ def main(env_cfg, agent_cfg: dict):
         # Eval routine
         if args_cli.record:
             eval_returns, images = trainer.eval(True)
+            # obs.view(batch_size, self.num_channels, self.img_dim, self.img_dim)
+            images = torch.FloatTensor([x.reshape(args_cli.frame_stack * 3, args_cli.hw, args_cli.hw) for x in images])
             print(f'images: {images.shape}')
+            qqq
             gen = np.array(images.transpose(0, 3, 1, 2) * 255).astype(np.uint8)
             wandb.log({'video': wandb.Video(gen, fps=30)})
             qqq
