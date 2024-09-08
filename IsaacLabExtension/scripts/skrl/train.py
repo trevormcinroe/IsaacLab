@@ -329,7 +329,7 @@ def main(env_cfg, agent_cfg: dict):
 
     frames = torch.concat([x.unsqueeze(1) for x in frames], 1)[0].cpu()[:, :, :, :3].transpose(1, -1)
     print(f'frames: {frames.shape}')
-    wandb.log({'video': wandb.Video((frames * 255).astype(np.uint8), fps=30)})
+    wandb.log({'video': wandb.Video((frames.numpy() * 255).astype(np.uint8), fps=30)})
     qqq
 
     # Every call to .train() is 10k env steps
