@@ -206,7 +206,7 @@ def custom_gaussian_model(observation_space: Optional[Union[int, Tuple[int], gym
             # qqq
 
             num_inputs, self.cnn = process_inputs(obs_type, frame_stack, latent_dim, img_dim, num_inputs, num_gt_observations)
-            
+            self.cnn = self.cnn.to(device)
             # shared layers/network
             self.net = nn.Sequential(nn.Linear(num_inputs, 256),
                                 nn.ELU(),
@@ -215,7 +215,7 @@ def custom_gaussian_model(observation_space: Optional[Union[int, Tuple[int], gym
                                 nn.Linear(128, 64),
                                 nn.ELU(),
                                 nn.Linear(64, num_actions), 
-                                nn.Tanh())
+                                nn.Tanh()).to(device)
             
             print(self.cnn, type(self.cnn))
             print(self.net, self.net.device)
