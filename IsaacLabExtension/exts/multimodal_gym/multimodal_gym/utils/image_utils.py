@@ -17,11 +17,11 @@ def save_images_to_file(images: torch.Tensor, file_path: str):
 
     # make (N, C, H, W)
     # print(images.dtype)
-    print(f'IMAGES GRID: {images.shape}')
+    # print(f'IMAGES GRID: {images.shape}')
     # if images.dtype == torch.float32:
     #     images = images * 255
     #     images = images.to(torch.uint8)
-    print(f'{images.dtype} // [{images.min()}, {images.max()}]')
+    # print(f'{images.dtype} // [{images.min()}, {images.max()}]')
 
     # images = images[0,:,:,:]
     # images = images.cpu().reshape(images.shape[-1], images.shape[0], images.shape[1])
