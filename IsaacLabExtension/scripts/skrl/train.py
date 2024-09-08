@@ -278,6 +278,8 @@ def main(env_cfg, agent_cfg: dict):
     # save_images_to_file(next_obs, file_path)
     # qqq
     # train the agent
+    trainer.eval()
+    qqq
     trainer.train()
 
     # close the simulator
