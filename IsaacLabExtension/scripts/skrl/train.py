@@ -315,6 +315,8 @@ def main(env_cfg, agent_cfg: dict):
         # Eval routine
         if args_cli.record:
             eval_returns, images = trainer.eval(True)
+            print(f'1st: {images[0].shape}')
+            print(f'reshape: {images[0].reshape(args_cli.num_envs, -1, args_cli.frame_stack * 3, args_cli.hw, args_cli.hw).shape}')
             # obs.view(batch_size, self.num_channels, self.img_dim, self.img_dim)
             images = torch.concat(
                 [x.cpu().reshape(args_cli.num_envs,
