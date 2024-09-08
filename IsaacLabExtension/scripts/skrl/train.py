@@ -222,8 +222,8 @@ def main(env_cfg, agent_cfg: dict):
     memory_size = agent_cfg["agent"]["rollouts"]  # memory_size is the agent's number of rollouts
     memory = RandomMemory(memory_size=memory_size, num_envs=env.num_envs, device=env.device)
 
-    print(f'mem: {memory}')
-    qqq
+    # print(f'mem: {memory}')
+    # qqq
     # action = models['value']({'states': out})
     # print(f'action: {action}')
     # qqq
