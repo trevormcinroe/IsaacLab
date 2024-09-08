@@ -283,10 +283,10 @@ def main(env_cfg, agent_cfg: dict):
     # # print(f'info: {info}')
     # # img_dir = f"{__file__.replace('lift.py', '')}"
     # # file_path = os.path.join(img_dir, f"{name}.png")
-    # make (N, C, H, W)
+    # make (N, H, W, C) for saving images
     file_path = '/home/tmci/IsaacLab/IsaacLabExtension/exts/multimodal_gym/multimodal_gym/tasks/franka/lift.png'
     save_images_to_file(
-        next_obs.reshape(args_cli.num_envs, 3*args_cli.frame_stack, args_cli.hw, args_cli.hw)[:, :3, :, :],
+        next_obs.reshape(args_cli.num_envs, args_cli.hw, args_cli.hw, 3*args_cli.frame_stack)[:, :, :, :3],
         file_path)
     qqq
     # train the agent
