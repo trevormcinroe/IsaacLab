@@ -527,15 +527,15 @@ class ImageEncoder(nn.Module):
         # the data that comes out of the replay buffer is corrupted with the following view...
         # obs = obs.view(batch_size, self.num_channels, self.img_dim, self.img_dim)
         frame_stack_divisor = self.num_channels // 3
-        print(f'obs: {obs.shape}')
+        # print(f'obs: {obs.shape}')
         obs = obs.split(obs.shape[-1] // frame_stack_divisor, -1)
         obs = [
             x.reshape(batch_size, self.img_dim, self.img_dim, 3).transpose(-1, 1)
             for x in obs
         ]
-        print(f'obs: {[x.shape for x in obs]}')
+        # print(f'obs: {[x.shape for x in obs]}')
         obs = torch.cat(obs, 1)
-        print(f'obs: {obs.shape}')
+        # print(f'obs: {obs.shape}')
 
         # qqq
 
@@ -544,17 +544,17 @@ class ImageEncoder(nn.Module):
 
         # from multimodal_gym.utils.image_utils import save_images_to_file
         #
-        print(f'obs: {obs.shape}')
-        file_path = '/home/tmci/IsaacLab/IsaacLabExtension/exts/multimodal_gym/multimodal_gym/tasks/franka/lift.png'
-        import numpy as np
-        from PIL import Image
-        obs = np.array(obs[5, :3].cpu().transpose(0, -1) * 255).astype(np.uint8)
-        img = Image.fromarray(obs)
-        img.save(file_path)
-        # save_images_to_file(
-        #     next_obs.reshape(args_cli.num_envs, args_cli.hw, args_cli.hw, 3*args_cli.frame_stack)[:, :, :, :3],
-        #     file_path)
-        qqq
+        # print(f'obs: {obs.shape}')
+        # file_path = '/home/tmci/IsaacLab/IsaacLabExtension/exts/multimodal_gym/multimodal_gym/tasks/franka/lift.png'
+        # import numpy as np
+        # from PIL import Image
+        # obs = np.array(obs[5, :3].cpu().transpose(0, -1) * 255).astype(np.uint8)
+        # img = Image.fromarray(obs)
+        # img.save(file_path)
+        # # save_images_to_file(
+        # #     next_obs.reshape(args_cli.num_envs, args_cli.hw, args_cli.hw, 3*args_cli.frame_stack)[:, :, :, :3],
+        # #     file_path)
+        # qqq
         # qqq
         # print("cnn", obs.size())
 
