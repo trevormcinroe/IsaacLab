@@ -321,12 +321,12 @@ def main(env_cfg, agent_cfg: dict):
     )
 
     # .reshape(64, 84, 84, 9)
-    frames = [out.reshape(64, 84, 84, 9)]
+    frames = [out.reshape(64, 84, 84, 3)]
     for _ in range(50):
         action = torch.tensor([env.action_space.sample() for _ in range(args_cli.num_envs)])
         # print(f'action: {action}')
         next_obs, reward, term, trunc, info = env.step(action)
-        frames.append(next_obs.reshape(64, 84, 84, 9))
+        frames.append(next_obs.reshape(64, 84, 84, 3))
 
     frames = torch.concat([x.unsqueeze(1) for x in frames], 1)[0].cpu()[:, :, :, :3].transpose(1, -1)
     print(f'frames: {frames.shape}')
