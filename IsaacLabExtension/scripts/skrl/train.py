@@ -355,8 +355,10 @@ def main(env_cfg, agent_cfg: dict):
                 ]
                 # print(f'obs: {[x.shape for x in obs]}')
                 obs = torch.cat(obs, 1)
-                print(f'obs: {obs.shape}')
-                qqq
+                adj_frames.append(obs)
+
+            adj_frames = torch.cat(adj_frames, 0)
+            print(f'adj_frames: {adj_frames.shape}')
             qqq
             # print(f'reshape: {images[0].reshape(-1, args_cli.frame_stack * 3, args_cli.hw, args_cli.hw).shape}')
             # obs.view(batch_size, self.num_channels, self.img_dim, self.img_dim)
