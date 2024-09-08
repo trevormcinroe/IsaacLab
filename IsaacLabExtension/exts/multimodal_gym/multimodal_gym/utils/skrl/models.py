@@ -225,6 +225,7 @@ def custom_gaussian_model(observation_space: Optional[Union[int, Tuple[int], gym
 
 
         def compute(self, inputs, role=""):
+            print(f'inputs: {inputs.shape}')
             if self.instantiator_input_type == 0:
                 net_inputs = inputs["states"]
             elif self.instantiator_input_type == -1:
