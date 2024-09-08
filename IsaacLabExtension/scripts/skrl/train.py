@@ -325,6 +325,7 @@ def main(env_cfg, agent_cfg: dict):
                                  args_cli.hw)[:, :3, :, :] for x in images],
                 0
             )
+            print(f'images: {images.shape} // [{images.min()}, {images.max()}]')
             gen = np.array(images * 255).astype(np.uint8)
             wandb.log({'video': wandb.Video(gen, fps=30)})
             qqq
