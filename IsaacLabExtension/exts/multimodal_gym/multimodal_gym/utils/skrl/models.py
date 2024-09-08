@@ -14,6 +14,9 @@ from skrl.utils.model_instantiators.torch import _generate_sequential, _get_acti
 
 from multimodal_gym.utils.frame_stack import LazyFrames
 
+from IsaacLabExtension.exts.multimodal_gym.multimodal_gym.utils.misc import to_cpu
+
+
 class Shape(Enum):
     """
     Enum to select the shape of the model's inputs and outputs
@@ -528,7 +531,14 @@ class ImageEncoder(nn.Module):
         frame_stack_divisor = self.num_channels // 3
         print(f'obs: {obs.shape}')
         obs = obs.split(obs.shape[-1] // frame_stack_divisor, -1)
+        obs = [
+            x.reshape(batch_size, self.img_dim, self.img_dim, self.num_channels).transpose(-1, 1)
+            for x in obs
+        ]
         print(f'obs: {[x.shape for x in obs]}')
+        obs = torch.cat(obs, 1)
+        print(f'obs: {obs.shape}')
+
         qqq
 
         obs = obs.view(batch_size, self.img_dim, self.img_dim, self.num_channels).transpose(-1, 1)
