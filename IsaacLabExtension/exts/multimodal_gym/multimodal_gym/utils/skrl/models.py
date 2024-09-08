@@ -97,6 +97,8 @@ def custom_model(observation_space: Optional[Union[int, Tuple[int], gym.Space, g
                                              nn.Identity())
 
         def act(self, inputs, role):
+            print(f'WITHIN act()!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+            qqq
             if role == self._roles[0]:
                 return GaussianMixin.act(self, inputs, role)
             elif role == self._roles[1]:
