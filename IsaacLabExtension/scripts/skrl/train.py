@@ -174,8 +174,7 @@ def main(env_cfg, agent_cfg: dict):
     print(f'agent_cfg: {agent_cfg} //\n{type(agent_cfg)}')
     agent_cfg["models"]["policy"]["img_dim"] = args_cli.hw
     agent_cfg["models"]["value"]["img_dim"] = args_cli.hw
-    print(f'\nagent_cfg: {agent_cfg}')
-    qqq
+
     models = {}
     # agent_cfg["models"]["policy"]["img_dim"] = args_cli.hw
     # agent_cfg["models"]["value"]["img_dim"] = args_cli.hw
@@ -219,6 +218,9 @@ def main(env_cfg, agent_cfg: dict):
     # instantiate a RandomMemory as rollout buffer (any memory can be used for this)
     memory_size = agent_cfg["agent"]["rollouts"]  # memory_size is the agent's number of rollouts
     memory = RandomMemory(memory_size=memory_size, num_envs=env.num_envs, device=env.device)
+
+    action = models['policy'](out)
+    qqq
 
     # configure and instantiate PPO agent
     # https://skrl.readthedocs.io/en/latest/api/agents/ppo.html
