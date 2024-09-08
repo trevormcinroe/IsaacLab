@@ -342,7 +342,21 @@ def main(env_cfg, agent_cfg: dict):
         # Eval routine
         if args_cli.record:
             eval_returns, images = trainer.eval(True)
+            # each is [63504]
             print(f'1st: {images[0].shape} // {len(images)}')
+
+            frame_stack_divisor = (3 * args_cli.frame_stack) // 3
+            adj_frames = []
+            for frame in images:
+                obs = frame.split(frame.shape[-1] // frame_stack_divisor, -1)
+                obs = [
+                    x.reshape(1, args_cli.hw, args_cli.hw, 3).transpose(-1, 1)
+                    for x in obs
+                ]
+                # print(f'obs: {[x.shape for x in obs]}')
+                obs = torch.cat(obs, 0)
+                print(f'obs: {obs.shape}')
+                qqq
             qqq
             # print(f'reshape: {images[0].reshape(-1, args_cli.frame_stack * 3, args_cli.hw, args_cli.hw).shape}')
             # obs.view(batch_size, self.num_channels, self.img_dim, self.img_dim)
