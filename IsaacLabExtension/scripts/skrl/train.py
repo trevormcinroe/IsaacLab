@@ -270,12 +270,12 @@ def main(env_cfg, agent_cfg: dict):
     trainer_cfg["disable_progressbar"] = False
     trainer = SequentialTrainer(cfg=trainer_cfg, env=env, agents=agent)
 
-    # import torch
-    # from multimodal_gym.utils.image_utils import save_images_to_file
-    # for _ in range(5):
-    #     action = torch.tensor([env.action_space.sample() for _ in range(args_cli.num_envs)])
-    #     # print(f'action: {action}')
-    #     next_obs, reward, term, trunc, info = env.step(action)
+    import torch
+    from multimodal_gym.utils.image_utils import save_images_to_file
+    for _ in range(5):
+        action = torch.tensor([env.action_space.sample() for _ in range(args_cli.num_envs)])
+        # print(f'action: {action}')
+        next_obs, reward, term, trunc, info = env.step(action)
     # # print(f'right at the end.')
     # # print(f'o: {next_obs.shape}')
     # # print(f'r: {reward}')
@@ -283,9 +283,12 @@ def main(env_cfg, agent_cfg: dict):
     # # print(f'info: {info}')
     # # img_dir = f"{__file__.replace('lift.py', '')}"
     # # file_path = os.path.join(img_dir, f"{name}.png")
-    # file_path = '/home/tmci/IsaacLab/IsaacLabExtension/exts/multimodal_gym/multimodal_gym/tasks/franka/lift.png'
-    # save_images_to_file(next_obs, file_path)
-    # qqq
+    # make (N, C, H, W)
+    file_path = '/home/tmci/IsaacLab/IsaacLabExtension/exts/multimodal_gym/multimodal_gym/tasks/franka/lift.png'
+    save_images_to_file(
+        next_obs.reshape(args_cli.num_envs, 3*args_cli.frame_stack, args_cli.hw, args_cli.hw)[:, :3, :, :],
+        file_path)
+    qqq
     # train the agent
     import json
     import wandb
