@@ -223,6 +223,7 @@ def main(env_cfg, agent_cfg: dict):
     memory = RandomMemory(memory_size=memory_size, num_envs=env.num_envs, device=env.device)
 
     action = models['policy']({'states': out})
+    print(f'action: {action}')
     qqq
 
     # configure and instantiate PPO agent
