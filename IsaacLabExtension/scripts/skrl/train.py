@@ -17,6 +17,7 @@ import argparse
 import sys
 
 from omni.isaac.lab.app import AppLauncher
+import numpy as np
 
 # add argparse arguments
 parser = argparse.ArgumentParser(description="Train an RL agent with skrl.")
@@ -30,6 +31,8 @@ parser.add_argument("--hw", type=int, default=None, help="hw of the env")
 parser.add_argument("--latent_dim", type=int, default=50, help="z-dim")
 parser.add_argument("--rollout_h", type=int, default=50, help="len of PPO rollout")
 parser.add_argument('--run_notes', default=None, type=str, help='notes for the run')
+parser.add_argument("--record", action="store_true", default=False, help="Record videos during eval.")
+
 
 parser.add_argument(
     "--distributed", action="store_true", default=False, help="Run training with multiple GPUs or nodes."
@@ -306,7 +309,14 @@ def main(env_cfg, agent_cfg: dict):
     # Every call to .train() is 10k env steps
     for step in range(10_000_000 // (5_000 * args_cli.num_envs)):
         # Eval routine
-        eval_returns = trainer.eval()
+        if args_cli.record:
+            eval_returns, images = trainer.eval(True)
+            print(f'images: {images.shape}')
+            gen = np.array(images.transpose(0, 3, 1, 2) * 255).astype(np.uint8)
+            wandb.log({'video': wandb.Video(gen, fps=30)})
+            qqq
+        else:
+            eval_returns = trainer.eval()
         print(f'Step {step * 5_000 * args_cli.num_envs}: {eval_returns.mean()}')
         wandb.log({'global_steps': step * 5_000 * args_cli.num_envs, 'eval_returns': eval_returns.mean()})
         trainer.train()
