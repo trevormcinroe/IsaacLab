@@ -29,7 +29,7 @@ parser.add_argument("--seed", type=int, default=None, help="Seed used for the en
 parser.add_argument("--hw", type=int, default=None, help="hw of the env")
 parser.add_argument("--latent_dim", type=int, default=50, help="z-dim")
 parser.add_argument("--rollout_h", type=int, default=50, help="len of PPO rollout")
-
+parser.add_argument('--run_notes', default=None, type=str, help='notes for the run')
 
 parser.add_argument(
     "--distributed", action="store_true", default=False, help="Run training with multiple GPUs or nodes."
