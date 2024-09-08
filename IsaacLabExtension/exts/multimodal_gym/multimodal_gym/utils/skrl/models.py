@@ -203,7 +203,8 @@ def custom_gaussian_model(observation_space: Optional[Union[int, Tuple[int], gym
             self.num_gt_observations = num_gt_observations
             print("Policy: num inputs, actions, gt:", num_inputs, num_actions, self.num_gt_observations)
 
-            print(img_dim)
+            print(f'img_dim: {img_dim} // fstack: {frame_stack}')
+            qqq
 
             num_inputs, self.cnn = process_inputs(obs_type, frame_stack, latent_dim, img_dim, num_inputs, num_gt_observations)
             
@@ -500,6 +501,7 @@ class ImageEncoder(nn.Module):
         return h
 
     def forward(self, obs, detach_encoder_conv=False, detach_encoder_head=False):
+        # obs coming in: torch.Size([4, 21168])
         print(f'obs coming in: {obs.shape}')
         # input obs is[N, H, W, C], expected to be [N, C, H, W]
         if isinstance(obs, LazyFrames):
