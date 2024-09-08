@@ -217,9 +217,7 @@ def custom_gaussian_model(observation_space: Optional[Union[int, Tuple[int], gym
                                 nn.Linear(64, num_actions), 
                                 nn.Tanh()).to(device)
             
-            print(self.cnn, type(self.cnn))
-            print(self.net, self.net.device)
-            qqq
+            print(self.cnn, self.net)
             
             self.log_std_parameter = nn.Parameter(initial_log_std * torch.ones(num_actions))
 
@@ -489,7 +487,6 @@ class ImageEncoder(nn.Module):
 
     def forward_conv(self, obs):
         print(f'obs in: {obs.shape} // {obs.dtype} [{obs.min()}, {obs.max()}] // {obs.device}')
-        qqq
         # obs = obs / 255.
         self.outputs['obs'] = obs
 
