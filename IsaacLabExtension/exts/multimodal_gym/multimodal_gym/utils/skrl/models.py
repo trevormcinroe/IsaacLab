@@ -201,10 +201,10 @@ def custom_gaussian_model(observation_space: Optional[Union[int, Tuple[int], gym
             num_inputs = observation_space.shape[0]
             num_actions = action_space.shape[0]
             self.num_gt_observations = num_gt_observations
-            print("Policy: num inputs, actions, gt:", num_inputs, num_actions, self.num_gt_observations)
-
-            print(f'img_dim: {img_dim} // fstack: {frame_stack}')
-            qqq
+            # print("Policy: num inputs, actions, gt:", num_inputs, num_actions, self.num_gt_observations)
+            #
+            # print(f'img_dim: {img_dim} // fstack: {frame_stack}')
+            # qqq
 
             num_inputs, self.cnn = process_inputs(obs_type, frame_stack, latent_dim, img_dim, num_inputs, num_gt_observations)
             
@@ -235,6 +235,8 @@ def custom_gaussian_model(observation_space: Optional[Union[int, Tuple[int], gym
             if self.obs_type == "image":
                 # pass input first through cnn
                 net_inputs = self.cnn(net_inputs)
+                print(f'net_inputs: {net_inputs.shape}')
+                qqq
 
             elif self.obs_type == "concat":
                 # pass input first through cnn
@@ -484,6 +486,7 @@ class ImageEncoder(nn.Module):
         self.outputs = dict()
 
     def forward_conv(self, obs):
+        print(f'obs in: {obs.shape} // {obs.shape}')
         obs = obs / 255.
         self.outputs['obs'] = obs
 
