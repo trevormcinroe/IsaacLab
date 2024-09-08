@@ -326,7 +326,7 @@ def main(env_cfg, agent_cfg: dict):
                 0
             )
             print(f'images: {images.shape} // [{images.min()}, {images.max()}]')
-            gen = np.array(images.transpose(0, 3, 1, 2) * 255).astype(np.uint8)
+            gen = np.array(images.transpose(3, 1) * 255).astype(np.uint8)
             wandb.log({'video': wandb.Video(gen, fps=30)})
             qqq
         else:
