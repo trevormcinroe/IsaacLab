@@ -222,7 +222,7 @@ def main(env_cfg, agent_cfg: dict):
     memory_size = agent_cfg["agent"]["rollouts"]  # memory_size is the agent's number of rollouts
     memory = RandomMemory(memory_size=memory_size, num_envs=env.num_envs, device=env.device)
 
-    action = models['policy'](out)
+    action = models['policy']({'states': out})
     qqq
 
     # configure and instantiate PPO agent
