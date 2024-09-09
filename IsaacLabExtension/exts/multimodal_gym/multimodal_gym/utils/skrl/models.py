@@ -537,18 +537,18 @@ class ImageEncoder(nn.Module):
         ]
         # # print(f'obs: {[x.shape for x in obs]}')
         obs = torch.cat(obs, 1)
-        print(f'obs: {obs.shape}')
+        # print(f'obs: {obs.shape}')
 
         # qqq
 
         # obs = obs.view(batch_size, self.img_dim, self.img_dim, self.num_channels).transpose(-1, 1)
         # obs = obs.reshape(64, 9, 84, 84)
 
-        from multimodal_gym.utils.image_utils import save_images_to_file, save_image
-
-
-        save_image(obs, img_name='lift.png', nchw=True)
-        qqq
+        # from multimodal_gym.utils.image_utils import save_images_to_file, save_image
+        #
+        #
+        # save_image(obs, img_name='lift.png', nchw=True)
+        # qqq
         #
         # print(f'obs: {obs.shape}')
         # file_path = '/home/tmci/IsaacLab/IsaacLabExtension/exts/multimodal_gym/multimodal_gym/tasks/franka/lift.png'
