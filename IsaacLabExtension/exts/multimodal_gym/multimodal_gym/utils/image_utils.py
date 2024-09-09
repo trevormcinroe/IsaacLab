@@ -2,6 +2,7 @@ import numpy as np
 import torch
 import os
 import torchvision.transforms as transforms
+from PIL import Image
 
 
 def save_image(obs, img_name="lift.png", nchw=True):
