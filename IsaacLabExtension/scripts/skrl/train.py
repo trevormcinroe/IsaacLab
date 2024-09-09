@@ -33,6 +33,8 @@ parser.add_argument("--latent_dim", type=int, default=50, help="z-dim")
 parser.add_argument("--rollout_h", type=int, default=50, help="len of PPO rollout")
 parser.add_argument('--run_notes', default=None, type=str, help='notes for the run')
 parser.add_argument("--record", action="store_true", default=False, help="Record videos during eval.")
+parser.add_argument('--learning_epochs', type=int, default=8)
+parser.add_argument('--mini_batches', type=int, default=8)
 
 
 parser.add_argument(
@@ -112,6 +114,8 @@ def main(env_cfg, agent_cfg: dict):
     print("obs type:", env_cfg.obs_type)
 
     agent_cfg["agent"]["rollouts"] = args_cli.rollout_h
+    agent_cfg["agent"]["learning_epochs"] = args_cli.learning_epochs
+    agent_cfg["agent"]["mini_batches"] = args_cli.mini_batches
 
     set_seed(args_cli.seed if args_cli.seed is not None else agent_cfg["seed"])
     # multi-gpu training config
