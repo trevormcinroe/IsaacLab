@@ -548,7 +548,7 @@ class ImageEncoder(nn.Module):
         from torchvision.utils import save_image
 
         file_path = '/home/tmci/IsaacLab/IsaacLabExtension/exts/multimodal_gym/multimodal_gym/tasks/franka/lift.png'
-        save_image(obs, img_name=file_path, nchw=True)
+        save_image(obs, fp=file_path, nchw=True)
         qqq
         #
         # print(f'obs: {obs.shape}')
