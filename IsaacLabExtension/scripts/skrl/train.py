@@ -366,7 +366,7 @@ def main(env_cfg, agent_cfg: dict):
 
             gen = np.array(adj_frames[:, :3] * 255).astype(np.uint8)
             wandb.log({'video': wandb.Video(gen, fps=30)})
-            qqq
+
         else:
             eval_returns = trainer.eval()
         # print(f'Step {step * 5_000 * args_cli.num_envs}: {eval_returns.mean()}')
