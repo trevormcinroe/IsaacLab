@@ -544,8 +544,7 @@ class ImageEncoder(nn.Module):
         # obs = obs.view(batch_size, self.img_dim, self.img_dim, self.num_channels).transpose(-1, 1)
         # obs = obs.reshape(64, 9, 84, 84)
 
-        from multimodal_gym.utils.image_utils import save_images_to_file
-        from torchvision.utils import save_image
+        from multimodal_gym.utils.image_utils import save_images_to_file, save_image
 
 
         save_image(obs, img_name='lift.png', nchw=True)
