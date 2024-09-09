@@ -1,7 +1,32 @@
 import numpy as np
 import torch
-
+import os
 import torchvision.transforms as transforms
+
+
+def save_image(obs, img_name="lift.png", nchw=True):
+    """
+    Expects image in NCHW format, if in NHWC then set nchw=False
+    """
+    # filesaving
+    img_dir = '/home/tmci/IsaacLab/IsaacLabExtension/exts/multimodal_gym/multimodal_gym/tasks/franka/'
+    file_path = os.path.join(img_dir, img_name)
+
+    print("input obs size:", img_name, obs.size(), obs.dtype)
+
+    # reshape to have channels at last index
+    if nchw:
+        obs = obs.transpose(1, -1)
+        print("transposing")
+
+    print("save obs size:", obs.size(), obs.dtype)
+    print("***********")
+
+    nhwc_obs = obs
+    nhwc_obs = np.array(nhwc_obs[0, :, :, :3].cpu() * 255).astype(np.uint8)
+    # the image needs to be in the shape [height, width, channels]
+    img = Image.fromarray(nhwc_obs)
+    img.save(file_path)
 
 
 def save_images_to_file(images: torch.Tensor, file_path: str):
