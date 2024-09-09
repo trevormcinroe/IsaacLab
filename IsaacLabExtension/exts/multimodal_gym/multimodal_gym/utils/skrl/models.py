@@ -547,8 +547,8 @@ class ImageEncoder(nn.Module):
         # from multimodal_gym.utils.image_utils import save_images_to_file, save_image
         #
         #
-        # save_image(obs, img_name='lift.png', nchw=True)
-        # qqq
+        save_image(obs, img_name='lift.png', nchw=True)
+        qqq
         #
         # print(f'obs: {obs.shape}')
         # file_path = '/home/tmci/IsaacLab/IsaacLabExtension/exts/multimodal_gym/multimodal_gym/tasks/franka/lift.png'
