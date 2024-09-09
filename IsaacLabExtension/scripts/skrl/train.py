@@ -328,19 +328,19 @@ def main(env_cfg, agent_cfg: dict):
     # .reshape(64, 84, 84, 9)
     # torch.Size([64, 84, 84, 9])
     # print(out.shape)
-    frames = [out.reshape(args_cli.num_envs, args_cli.hw, args_cli.hw, 3 * args_cli.frame_stack)]
-    for _ in range(50):
-        action = torch.tensor([env.action_space.sample() for _ in range(args_cli.num_envs)])
-        # print(f'action: {action}')
-        next_obs, reward, term, trunc, info = env.step(action)
-        # print(f'next: {next_obs.shape}')
-        # qqq
-        frames.append(next_obs.reshape(args_cli.num_envs, args_cli.hw, args_cli.hw, 3 * args_cli.frame_stack))
-
-    frames = torch.concat([x.unsqueeze(1) for x in frames], 1)[0].cpu()[:, :, :, :3].transpose(1, -1)
-    print(f'frames: {frames.shape}')
-    wandb.log({'video': wandb.Video((frames.numpy() * 255).astype(np.uint8), fps=30)})
-    qqq
+    # frames = [out.reshape(args_cli.num_envs, args_cli.hw, args_cli.hw, 3 * args_cli.frame_stack)]
+    # for _ in range(50):
+    #     action = torch.tensor([env.action_space.sample() for _ in range(args_cli.num_envs)])
+    #     # print(f'action: {action}')
+    #     next_obs, reward, term, trunc, info = env.step(action)
+    #     # print(f'next: {next_obs.shape}')
+    #     # qqq
+    #     frames.append(next_obs.reshape(args_cli.num_envs, args_cli.hw, args_cli.hw, 3 * args_cli.frame_stack))
+    #
+    # frames = torch.concat([x.unsqueeze(1) for x in frames], 1)[0].cpu()[:, :, :, :3].transpose(1, -1)
+    # print(f'frames: {frames.shape}')
+    # wandb.log({'video': wandb.Video((frames.numpy() * 255).astype(np.uint8), fps=30)})
+    # qqq
 
     # Every call to .train() is 10k env steps
     for step in range(10_000_000 // (5_000 * args_cli.num_envs)):
@@ -366,7 +366,7 @@ def main(env_cfg, agent_cfg: dict):
 
             gen = np.array(adj_frames[:, :3] * 255).astype(np.uint8)
             wandb.log({'video': wandb.Video(gen, fps=30)})
-            # qqq
+            qqq
         else:
             eval_returns = trainer.eval()
         # print(f'Step {step * 5_000 * args_cli.num_envs}: {eval_returns.mean()}')
