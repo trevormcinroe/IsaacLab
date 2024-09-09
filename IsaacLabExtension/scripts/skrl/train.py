@@ -182,9 +182,6 @@ def main(env_cfg, agent_cfg: dict):
 
     print(f'out: {out.shape} [{out.min(), out.max()}]')
 
-    pixels_maybe = env.render()
-    print(f'pixels_maybe: {pixels_maybe.shape}')
-    qqq
     # out = out.reshape(out.shape[0], -1)
     # out = out.reshape(64, 84, 84, 9)
     # # torch.Size([64, 84, 84, 9])
