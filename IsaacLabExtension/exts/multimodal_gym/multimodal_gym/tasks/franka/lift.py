@@ -106,7 +106,7 @@ class LiftEnvCfg(DirectRLEnvCfg):
 
     # simulation
     sim: SimulationCfg = SimulationCfg(dt=physics_dt, render_interval=decimation)
-    scene: InteractiveSceneCfg = InteractiveSceneCfg(num_envs=4096, env_spacing=2, replicate_physics=True)
+    scene: InteractiveSceneCfg = InteractiveSceneCfg(num_envs=4096, env_spacing=1, replicate_physics=True)
     # lookat: tuple[float, float, float] = (0.0, 0.0, 0.0)
     viewer: ViewerCfg = ViewerCfg(eye=(0.0, 0.0, 2.5), lookat=(1.0, 1.0, 1.5))
 
