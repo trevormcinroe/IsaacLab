@@ -108,6 +108,8 @@ class LiftEnvCfg(DirectRLEnvCfg):
     sim: SimulationCfg = SimulationCfg(dt=physics_dt, render_interval=decimation)
     scene: InteractiveSceneCfg = InteractiveSceneCfg(num_envs=4096, env_spacing=20, replicate_physics=True)
     viewer: ViewerCfg = ViewerCfg(eye=(-1.0, 1.0, 1.5))
+    print(f'viewer:  {viewer.target}')
+    qqq
 
     # robot
     robot_cfg: ArticulationCfg = FRANKA_PANDA_CFG.replace(prim_path="/World/envs/env_.*/Robot")
