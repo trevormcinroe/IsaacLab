@@ -232,9 +232,8 @@ class LiftEnv(DirectRLEnv):
     cfg: LiftEnvCfg
 
     def __init__(self, cfg: LiftEnvCfg, render_mode: str | None = None, **kwargs):
-        print(f'cfg: {cfg.tiled_camera}')
-        qqq
-
+        cfg.tiled_camera.height = cfg.hw
+        cfg.tiled_camera.width = cfg.hw
         super().__init__(cfg, render_mode, **kwargs)
 
         # # The `tiled_camera` attribute is set in the parent class with the call to `.super()` above
