@@ -202,22 +202,34 @@ class LiftEnvCfg(DirectRLEnvCfg):
     # behind-left of arm pos=(-0.13, 0.20, 0.7) rot=(1,0,0,0) focal_length=3
     # side-right TiledCameraCfg.OffsetCfg(pos=(0.65, -0.60, 0.9), rot=(1,0,1,1), convention="world"), 15, y[more neg down-right]
     #  x [more pos up right]
+    # tiled_camera: TiledCameraCfg = TiledCameraCfg(
+    #     prim_path="/World/envs/env_.*/Camera",
+    #     offset=TiledCameraCfg.OffsetCfg(pos=(0.85, -1.10, 1.6), rot=(1,0,1,1), convention="world"),
+    #     data_types=["rgb"],
+    #     spawn=sim_utils.PinholeCameraCfg(
+    #         focal_length=24.0, focus_distance=400.0, horizontal_aperture=20.955, clipping_range=(0.01, 3.2)
+    #     ),
+    #     width=84,
+    #     height=84,
+    #     #debug_vis=True
+    # )
+
     tiled_camera: TiledCameraCfg = TiledCameraCfg(
         prim_path="/World/envs/env_.*/Camera",
-        offset=TiledCameraCfg.OffsetCfg(pos=(0.85, -1.10, 1.6), rot=(1,0,1,1), convention="world"),
+        offset=TiledCameraCfg.OffsetCfg(pos=(0.85, -1.10, 1.6), rot=(1, 0, 1, 1), convention="world"),
         data_types=["rgb"],
         spawn=sim_utils.PinholeCameraCfg(
             focal_length=24.0, focus_distance=400.0, horizontal_aperture=20.955, clipping_range=(0.01, 3.2)
         ),
         width=84,
         height=84,
-        #debug_vis=True
+        # debug_vis=True
     )
 
     write_image_to_file = True
     frame_stack = 1
-    eye = [0, 1.5, 0.5] # orig: [0, 1.5, 0.5]
-    target = [0.3, 0.0, 1.0]  # orig: [0.3, 0.0, 0.5]
+    eye = [0.0, 0.0, 1.0] # orig: [0, 1.5, 0.5]
+    target = [0.0, 0.0, 0.5]  # orig: [0.3, 0.0, 0.5]
 
 class LiftEnv(DirectRLEnv):
     # pre-physics step calls
@@ -344,12 +356,13 @@ class LiftEnv(DirectRLEnv):
         if self.cfg.obs_type == "image" or self.cfg.obs_type == "image_prop":
             self._tiled_camera = TiledCamera(self.cfg.tiled_camera)
             # self._tiled_camera._initialize_impl()
-            # eyes = torch.tensor(self.cfg.eye, dtype=torch.float, device=self.device).repeat(
-            #     (self.num_envs, 1)) + self.scene.env_origins
-            # targets = torch.tensor(self.cfg.target, dtype=torch.float, device=self.device).repeat(
-            #     (self.num_envs, 1)) + self.scene.env_origins
-            #
-            # self._tiled_camera.set_world_poses_from_view(eyes=eyes, targets=targets)
+
+            eyes = torch.tensor(self.cfg.eye, dtype=torch.float, device=self.device).repeat(
+                (self.num_envs, 1)) + self.scene.env_origins
+            targets = torch.tensor(self.cfg.target, dtype=torch.float, device=self.device).repeat(
+                (self.num_envs, 1)) + self.scene.env_origins
+
+            self._tiled_camera.set_world_poses_from_view(eyes=eyes, targets=targets)
             self.scene.sensors["tiled_camera"] = self._tiled_camera
 
          
