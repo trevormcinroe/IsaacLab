@@ -153,6 +153,8 @@ def main(env_cfg, agent_cfg: dict):
 
     # create isaac environment
     env = gym.make(args_cli.task, cfg=env_cfg, render_mode="rgb_array" if args_cli.video else None)
+    env.cfg.tiled_camera.height = args_cli.hw
+    env.cfg.tiled_camera.width = args_cli.hw
 
     # wrap for video recording
     if args_cli.video:
