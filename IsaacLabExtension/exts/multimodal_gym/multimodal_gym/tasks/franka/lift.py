@@ -576,6 +576,9 @@ class LiftEnv(DirectRLEnv):
         self.object_rot[env_ids] = self.object.data.root_quat_w[env_ids]
 
         # relative distances
+        print(f'object_pos: {self.object_pos[env_ids]}')
+        print(f'ee_pos: {self.ee_pos[env_ids]}')
+        qqq
         self.object_ee_distance[env_ids] = torch.norm(self.object_pos[env_ids] - self.ee_pos[env_ids], dim=1)
         self.object_goal_distance[env_ids] = torch.norm(self.object_pos[env_ids] - self.goal_pos[env_ids], dim=1)
 
@@ -620,7 +623,7 @@ def compute_rewards(
     # reaching objects
     std = 0.1
     reaching_object = (1 - torch.tanh(object_ee_distance / std)) * reaching_object_scale
-        
+
     # reward for lifting object
     object_height = object_pos[:, 2]
     is_lifted = torch.where(object_height > minimal_height, 1.0, 0.0) * lift_object_scale
