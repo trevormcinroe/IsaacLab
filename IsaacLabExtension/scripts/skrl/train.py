@@ -152,9 +152,12 @@ def main(env_cfg, agent_cfg: dict):
     dump_pickle(os.path.join(log_dir, "params", "agent.pkl"), agent_cfg)
 
     # create isaac environment
+    env_cfg.hw = args_cli.hw
     env = gym.make(args_cli.task, cfg=env_cfg, render_mode="rgb_array" if args_cli.video else None)
-    env.cfg.tiled_camera.height = args_cli.hw
-    env.cfg.tiled_camera.width = args_cli.hw
+
+    # Accessing the config this way may result in "CUDA error: an illegal memory access was encountered"
+    # env.cfg.tiled_camera.height = args_cli.hw
+    # env.cfg.tiled_camera.width = args_cli.hw
 
     # wrap for video recording
     if args_cli.video:
