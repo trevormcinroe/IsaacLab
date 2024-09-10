@@ -186,17 +186,17 @@ class SequentialTrainer(Trainer):
                     self.env.render()
 
                 # write data to TensorBoard
-                for agent, scope in zip(self.agents, self.agents_scope):
-                    agent.record_transition(states=states[scope[0]:scope[1]],
-                                            actions=actions[scope[0]:scope[1]],
-                                            rewards=rewards[scope[0]:scope[1]],
-                                            next_states=next_states[scope[0]:scope[1]],
-                                            terminated=terminated[scope[0]:scope[1]],
-                                            truncated=truncated[scope[0]:scope[1]],
-                                            infos=infos,
-                                            timestep=timestep,
-                                            timesteps=self.timesteps)
-                    super(type(agent), agent).post_interaction(timestep=timestep, timesteps=self.timesteps)
+                # for agent, scope in zip(self.agents, self.agents_scope):
+                #     agent.record_transition(states=states[scope[0]:scope[1]],
+                #                             actions=actions[scope[0]:scope[1]],
+                #                             rewards=rewards[scope[0]:scope[1]],
+                #                             next_states=next_states[scope[0]:scope[1]],
+                #                             terminated=terminated[scope[0]:scope[1]],
+                #                             truncated=truncated[scope[0]:scope[1]],
+                #                             infos=infos,
+                #                             timestep=timestep,
+                #                             timesteps=self.timesteps)
+                #     super(type(agent), agent).post_interaction(timestep=timestep, timesteps=self.timesteps)
 
                 # reset environments
                 if terminated.any() or truncated.any():
