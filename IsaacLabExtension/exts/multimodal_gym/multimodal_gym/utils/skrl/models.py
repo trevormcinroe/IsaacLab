@@ -468,7 +468,10 @@ class ImageEncoder(nn.Module):
         
         kernel_size = 3
 
-        self.convs = nn.ModuleList([nn.Conv2d(self.num_channels, self.num_filters, kernel_size=kernel_size, stride=2)])
+        self.convs = nn.ModuleList(
+            [nn.Conv2d(self.num_channels, self.num_filters, kernel_size=5, stride=2),
+             nn.Conv2d(self.num_channels, self.num_filters, kernel_size=5, stride=2)]
+        )
         for i in range(1, self.num_layers):
             self.convs.extend([nn.Conv2d(self.num_filters, self.num_filters, kernel_size=kernel_size, stride=1)])
 
