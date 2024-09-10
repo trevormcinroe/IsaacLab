@@ -531,7 +531,7 @@ class ImageEncoder(nn.Module):
         frame_stack_divisor = self.num_channels // 3
         print(f'obs: {obs.shape}')
         obs = obs.split(obs.shape[-1] // frame_stack_divisor, -1)
-        print(f'split obs: {obs.shape}')
+        print(f'split obs: {[x.shape for x in obs]}')
         obs = [
             x.reshape(batch_size, self.img_dim, self.img_dim, 3).transpose(-1, 1)
             for x in obs
