@@ -181,6 +181,9 @@ class SequentialTrainer(Trainer):
                     if k in returns:
                         returns[k] += v * mask
 
+                if record:
+                    images.append(next_states[0])
+
                 # render scene
                 if not self.headless:
                     self.env.render()
