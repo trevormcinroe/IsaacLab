@@ -232,13 +232,11 @@ class LiftEnv(DirectRLEnv):
     cfg: LiftEnvCfg
 
     def __init__(self, cfg: LiftEnvCfg, render_mode: str | None = None, **kwargs):
+        # The **only** way to edit the hw of the camera is to do it **before** the parent class is init'ed.
         cfg.tiled_camera.height = cfg.hw
         cfg.tiled_camera.width = cfg.hw
-        super().__init__(cfg, render_mode, **kwargs)
 
-        # # The `tiled_camera` attribute is set in the parent class with the call to `.super()` above
-        # self.cfg.tiled_camera.height = cfg.hw
-        # self.cfg.tiled_camera.width = cfg.hw
+        super().__init__(cfg, render_mode, **kwargs)
 
         # create auxiliary variables for computing applied action, observations and rewards
         self.robot_dof_lower_limits = self.robot.data.soft_joint_pos_limits[0, :, 0].to(device=self.device)
