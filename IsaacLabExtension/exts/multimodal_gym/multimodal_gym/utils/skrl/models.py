@@ -529,18 +529,18 @@ class ImageEncoder(nn.Module):
 
         # my code:
         frame_stack_divisor = self.num_channels // 3
-        print(f'obs: {obs.shape}')
+        # print(f'obs: {obs.shape}')
         obs = obs.split(obs.shape[-1] // frame_stack_divisor, -1)
-        print(f'split obs: {[x.shape for x in obs]}')
+        # print(f'split obs: {[x.shape for x in obs]}')
         obs = [
             x.reshape(batch_size, self.img_dim, self.img_dim, 3).transpose(-1, 1)
             for x in obs
         ]
         # # print(f'obs: {[x.shape for x in obs]}')
         obs = torch.cat(obs, 1)
-        print(f'obs: {obs.shape}')
-
-        qqq
+        # print(f'obs: {obs.shape}')
+        #
+        # qqq
 
         # obs = obs.view(batch_size, self.img_dim, self.img_dim, self.num_channels).transpose(-1, 1)
         # obs = obs.reshape(64, 9, 84, 84)
