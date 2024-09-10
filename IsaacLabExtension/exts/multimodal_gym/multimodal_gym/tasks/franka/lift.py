@@ -234,6 +234,9 @@ class LiftEnv(DirectRLEnv):
     def __init__(self, cfg: LiftEnvCfg, render_mode: str | None = None, **kwargs):
         super().__init__(cfg, render_mode, **kwargs)
 
+        print(f'MY CONFIG: {cfg.hw}')
+        qqq
+
         # create auxiliary variables for computing applied action, observations and rewards
         self.robot_dof_lower_limits = self.robot.data.soft_joint_pos_limits[0, :, 0].to(device=self.device)
         self.robot_dof_upper_limits = self.robot.data.soft_joint_pos_limits[0, :, 1].to(device=self.device)
