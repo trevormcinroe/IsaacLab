@@ -107,6 +107,7 @@ class LiftEnvCfg(DirectRLEnvCfg):
     # simulation
     sim: SimulationCfg = SimulationCfg(dt=physics_dt, render_interval=decimation)
     scene: InteractiveSceneCfg = InteractiveSceneCfg(num_envs=4096, env_spacing=2.5, replicate_physics=True)
+    # scene: InteractiveSceneCfg = InteractiveSceneCfg(num_envs=4096, env_spacing=20, replicate_physics=True)
     # lookat: tuple[float, float, float] = (0.0, 0.0, 0.0)
     viewer: ViewerCfg = ViewerCfg(eye=(1.75, 1.75, 3.0), lookat=(0.0, 0.0, 1.5))
 
@@ -355,14 +356,14 @@ class LiftEnv(DirectRLEnv):
 
         if self.cfg.obs_type == "image" or self.cfg.obs_type == "image_prop":
             self._tiled_camera = TiledCamera(self.cfg.tiled_camera)
-            self._tiled_camera._initialize_impl()
+            # self._tiled_camera._initialize_impl()
 
-            eyes = torch.tensor(self.cfg.eye, dtype=torch.float, device=self.device).repeat(
-                (self.num_envs, 1)) + self.scene.env_origins
-            targets = torch.tensor(self.cfg.target, dtype=torch.float, device=self.device).repeat(
-                (self.num_envs, 1)) + self.scene.env_origins
-
-            self._tiled_camera.set_world_poses_from_view(eyes=eyes, targets=targets)
+            # eyes = torch.tensor(self.cfg.eye, dtype=torch.float, device=self.device).repeat(
+            #     (self.num_envs, 1)) + self.scene.env_origins
+            # targets = torch.tensor(self.cfg.target, dtype=torch.float, device=self.device).repeat(
+            #     (self.num_envs, 1)) + self.scene.env_origins
+            #
+            # self._tiled_camera.set_world_poses_from_view(eyes=eyes, targets=targets)
             self.scene.sensors["tiled_camera"] = self._tiled_camera
 
          
