@@ -163,7 +163,7 @@ class SequentialTrainer(Trainer):
         mask = torch.Tensor([[1] for _ in range(states.shape[0])]).to(states.device)
         images = []
 
-        for timestep in tqdm.tqdm(range(self.initial_timestep, self.timesteps), disable=self.disable_progressbar, file=sys.stdout):
+        for timestep in tqdm.tqdm(range(self.initial_timestep, self.env.env.max_episode_length - 1), disable=self.disable_progressbar, file=sys.stdout):
 
             # compute actions
             with torch.no_grad():
