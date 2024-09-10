@@ -284,6 +284,8 @@ def main(env_cfg, agent_cfg: dict):
         device=env.device,
     )
 
+    qqq
+
     # configure and instantiate a custom RL trainer for logging episode events
     trainer_cfg = agent_cfg["trainer"]
     trainer_cfg["close_environment_at_exit"] = False
