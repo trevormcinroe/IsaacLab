@@ -234,7 +234,10 @@ class LiftEnv(DirectRLEnv):
     def __init__(self, cfg: LiftEnvCfg, render_mode: str | None = None, **kwargs):
         super().__init__(cfg, render_mode, **kwargs)
 
-        print(f'MY CONFIG: {cfg.tiled_camera}')
+        self.cfg.tiled_camera.height = cfg.hw
+        self.cfg.tiled_camera.width = cfg.hw
+
+        print(f'MY CONFIG: {self.cfg.tiled_camera}')
         qqq
 
         # create auxiliary variables for computing applied action, observations and rewards
