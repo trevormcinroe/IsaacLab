@@ -79,7 +79,8 @@ from skrl.utils import set_seed
 if args_cli.ml_framework.startswith("torch"):
     
     from skrl.memories.torch import RandomMemory
-    from skrl.trainers.torch import SequentialTrainer
+    # from skrl.trainers.torch import SequentialTrainer
+    from multimodal_gym.utils.skrl.trainer import SequentialTrainer
     from skrl.utils.model_instantiators.torch import deterministic_model, gaussian_model, shared_model
     # from skrl.utils.model_instantiators.torch.custom_models import custom_model
     from multimodal_gym.utils.skrl.models import custom_model, custom_deterministic_model, custom_gaussian_model
