@@ -411,6 +411,13 @@ class Memory:
                     if name == 'states':
                         raw = self.tensors_view[name][batch]
                         print(f'raw: {raw.shape}')
+                        obs = raw.split(raw.shape[-1] // self.image_info['frame_stack'], -1)
+                        obs = [
+                          x.reshape(raw.shape[0], self.image_info['hw'], self.image_info['hw'], 3).transpose(-1, 1)
+                          for x in obs
+                        ]
+                        obs = torch.cat(obs, 1)
+                        print(f'obs: {obs.shape}')
                         qqq
                     else:
                         inner.append(self.tensors_view[name][batch])
