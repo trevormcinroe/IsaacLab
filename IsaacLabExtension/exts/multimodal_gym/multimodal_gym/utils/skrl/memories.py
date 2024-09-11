@@ -14,6 +14,7 @@ from torch.utils.data.sampler import BatchSampler
 
 import kornia
 import torch.nn.functional as F
+from torch import nn
 
 
 class Memory:
@@ -72,6 +73,14 @@ class Memory:
 
         # augmentations
         self.random_crop = random_crop
+
+        if self.random_crop:
+          self.aug = nn.Sequential(
+            nn.ReplicationPad2d(4),
+            kornia.augmentation.RandomCrop((obs_shape[-1], obs_shape[-1]))
+          )
+        else:
+          self.aug = nn.Sequential(nn.Identity())
 
         if not self.export_format in ["pt", "np", "csv"]:
             raise ValueError(f"Export format not supported ({self.export_format})")
@@ -386,10 +395,12 @@ class Memory:
 
         # default order
         if mini_batches > 1:
-            print(f'mb > 1')
-            qqq
             indexes = np.arange(self.memory_size * self.num_envs)
             batches = BatchSampler(indexes, batch_size=len(indexes) // mini_batches, drop_last=True)
+            for batch in batches:
+                for name in names:
+                  print(f'name: {name}')
+                qqq
             return [[self.tensors_view[name][batch] for name in names] for batch in batches]
         print(f'else')
         qqq
