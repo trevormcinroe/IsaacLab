@@ -35,6 +35,7 @@ parser.add_argument('--run_notes', default=None, type=str, help='notes for the r
 parser.add_argument("--record", action="store_true", default=False, help="Record videos during eval.")
 parser.add_argument('--learning_epochs', type=int, default=8)
 parser.add_argument('--mini_batches', type=int, default=8)
+parser.add_argument("--random_crop", action="store_true", default=False, help="Whether to use random crop augmentation ala DrQ.")
 
 
 parser.add_argument(
@@ -250,8 +251,10 @@ def main(env_cfg, agent_cfg: dict):
         models["value"] = models["policy"]
 
     # instantiate a RandomMemory as rollout buffer (any memory can be used for this)
+    image_info = {'frame_stack': args_cli.frame_stack, 'hw': args_cli.hw}
     memory_size = agent_cfg["agent"]["rollouts"]  # memory_size is the agent's number of rollouts
-    memory = RandomMemory(memory_size=memory_size, num_envs=env.num_envs, device=env.device)
+    memory = RandomMemory(memory_size=memory_size, num_envs=env.num_envs, device=env.device, random_crop=args_cli.random_crop,
+                          image_info=image_info)
 
     # print(f'mem: {memory}')
     # qqq

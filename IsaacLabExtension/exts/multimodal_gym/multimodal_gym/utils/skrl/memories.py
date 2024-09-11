@@ -25,7 +25,8 @@ class Memory:
                  export: bool = False,
                  export_format: str = "pt",
                  export_directory: str = "",
-                 random_crop: bool = False) -> None:
+                 random_crop: bool = False,
+                 image_info: dict = {}) -> None:
         """Base class representing a memory with circular buffers
 
         Buffers are torch tensors with shape (memory size, number of environments, data size).
@@ -77,10 +78,12 @@ class Memory:
         if self.random_crop:
           self.aug = nn.Sequential(
             nn.ReplicationPad2d(4),
-            kornia.augmentation.RandomCrop((obs_shape[-1], obs_shape[-1]))
+            kornia.augmentation.RandomCrop((image_info['hw'], image_info['hw']))
           )
         else:
           self.aug = nn.Sequential(nn.Identity())
+
+        self.image_info = image_info
 
         if not self.export_format in ["pt", "np", "csv"]:
             raise ValueError(f"Export format not supported ({self.export_format})")
@@ -397,9 +400,20 @@ class Memory:
         if mini_batches > 1:
             indexes = np.arange(self.memory_size * self.num_envs)
             batches = BatchSampler(indexes, batch_size=len(indexes) // mini_batches, drop_last=True)
+            print(f'image_info: {self.image_info}')
+            print(f'aug_pipeline: {self.aug}')
+
+            outer = []
             for batch in batches:
+                inner = []
                 for name in names:
-                  print(f'name: {name}')
+                    print(f'name: {name}')
+                    if name == 'states':
+                        raw = self.tensors_view[name][batch]
+                        print(f'raw: {raw.shape}')
+                        qqq
+                    else:
+                        inner.append(self.tensors_view[name][batch])
                 qqq
             return [[self.tensors_view[name][batch] for name in names] for batch in batches]
         print(f'else')
@@ -503,7 +517,8 @@ class RandomMemory(Memory):
                export_format: str = "pt",
                export_directory: str = "",
                replacement=True,
-               random_crop: bool = False) -> None:
+               random_crop: bool = False,
+               image_info: dict = {}) -> None:
     """Random sampling memory
 
     Sample a batch from memory randomly
@@ -531,7 +546,7 @@ class RandomMemory(Memory):
 
     :raises ValueError: The export format is not supported
     """
-    super().__init__(memory_size, num_envs, device, export, export_format, export_directory, random_crop)
+    super().__init__(memory_size, num_envs, device, export, export_format, export_directory, random_crop, image_info)
 
     self._replacement = replacement
 
