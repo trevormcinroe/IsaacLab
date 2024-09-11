@@ -400,8 +400,6 @@ class Memory:
         if mini_batches > 1:
             indexes = np.arange(self.memory_size * self.num_envs)
             batches = BatchSampler(indexes, batch_size=len(indexes) // mini_batches, drop_last=True)
-            print(f'image_info: {self.image_info}')
-            print(f'aug_pipeline: {self.aug}')
 
             outer = []
             for batch in batches:
@@ -421,19 +419,19 @@ class Memory:
                         inner.append(self.tensors_view[name][batch])
 
                 outer.append(inner)
-
-            print(f'Mine!')
-            for batch in outer:
-              for item in batch:
-                print(f'\t{item.shape}')
-
-            print(f'Orig...')
-            outer = [[self.tensors_view[name][batch] for name in names] for batch in batches]
-            for batch in outer:
-              for item in batch:
-                print(f'\t{item.shape}')
-            qqq
-            return [[self.tensors_view[name][batch] for name in names] for batch in batches]
+            # Leaving this here for future dev reference (totally not laziness, I promise)
+            # print(f'Mine!')
+            # for batch in outer:
+            #   for item in batch:
+            #     print(f'\t{item.shape}')
+            #
+            # print(f'Orig...')
+            # outer = [[self.tensors_view[name][batch] for name in names] for batch in batches]
+            # for batch in outer:
+            #   for item in batch:
+            #     print(f'\t{item.shape}')
+            # qqq
+            return outer
         print(f'else')
         qqq
         return [[self.tensors_view[name] for name in names]]
