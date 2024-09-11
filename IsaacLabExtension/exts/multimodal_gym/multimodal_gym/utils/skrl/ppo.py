@@ -193,7 +193,7 @@ class PPO(Agent):
         self._current_log_prob = None
         self._current_next_states = None
 
-    def act(self, states: torch.Tensor, timestep: int, timesteps: int) -> torch.Tensor:
+    def act(self, states: torch.Tensor, timestep: int, timesteps: int, eval: bool = False) -> torch.Tensor:
         """Process the environment's states to make a decision (actions) using the main policy
 
         :param states: Environment's states
@@ -213,8 +213,8 @@ class PPO(Agent):
 
         # sample stochastic actions
         actions, log_prob, outputs = self.policy.act({"states": self._state_preprocessor(states)}, role="policy")
-        print(f'POLICY: {self.policy} // {self.policy.act}')
-        print(f'{self.policy.__file__}')
+        if eval:
+            print(f'Successfully in eval mode!')
         qqq
         self._current_log_prob = log_prob
 

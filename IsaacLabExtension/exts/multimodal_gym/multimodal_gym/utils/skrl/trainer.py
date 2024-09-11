@@ -170,7 +170,7 @@ class SequentialTrainer(Trainer):
                 # actions = torch.vstack([agent.act(states[scope[0]:scope[1]], timestep=timestep, timesteps=self.timesteps)[0] \
                 #                         for agent, scope in zip(self.agents, self.agents_scope)])
 
-                actions = self.agents.act(states, timestep=timestep, timesteps=self.timesteps)[0]
+                actions = self.agents.act(states, timestep=timestep, timesteps=self.timesteps, eval=True)[0]
 
                 # step the environments
                 next_states, rewards, terminated, truncated, infos = self.env.step(actions)
