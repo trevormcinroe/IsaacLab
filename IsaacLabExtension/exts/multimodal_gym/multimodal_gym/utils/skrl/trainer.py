@@ -60,6 +60,9 @@ class Trainer:
         # *without* a DONE flag. This can cause learning instabilities. Therefore, ONLY CALL .reset() ONCE!
         self.started_already = False
 
+        # unfortunately, we also need to add a carry-over state
+        self.carryover_state = None
+
         # setup agents
         self.num_simultaneous_agents = 0
         self._setup_agents()
@@ -167,6 +170,8 @@ class Trainer:
         if not self.started_already:
             states, infos = self.env.reset()
             self.started_already = True
+        else:
+            states = self.carryover_state
 
         for timestep in tqdm.tqdm(range(self.initial_timestep, self.timesteps), disable=self.disable_progressbar, file=sys.stdout):
 
@@ -213,6 +218,8 @@ class Trainer:
                         states, infos = self.env.reset()
                 else:
                     states = next_states
+
+            self.carryover_state = states
 
     def single_agent_eval(self) -> None:
         """Evaluate agent
