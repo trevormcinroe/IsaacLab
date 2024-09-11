@@ -213,6 +213,9 @@ class PPO(Agent):
 
         # sample stochastic actions
         actions, log_prob, outputs = self.policy.act({"states": self._state_preprocessor(states)}, role="policy")
+        print(f'POLICY: {self.policy} // {self.policy.act}')
+        print(f'{self.policy.__file__}')
+        qqq
         self._current_log_prob = log_prob
 
         return actions, log_prob, outputs
