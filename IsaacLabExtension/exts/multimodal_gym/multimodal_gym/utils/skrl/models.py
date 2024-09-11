@@ -544,9 +544,6 @@ class ImageEncoder(nn.Module):
             ]
             # # print(f'obs: {[x.shape for x in obs]}')
             obs = torch.cat(obs, 1)
-        else:
-            print(f'Training!')
-            qqq
 
         # print(f'obs: {obs.shape}')
         #
