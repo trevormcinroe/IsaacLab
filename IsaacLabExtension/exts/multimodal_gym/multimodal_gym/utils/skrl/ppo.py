@@ -214,8 +214,7 @@ class PPO(Agent):
         # sample stochastic actions
         actions, log_prob, outputs = self.policy.act({"states": self._state_preprocessor(states)}, role="policy")
         if eval:
-            print(f'Successfully in eval mode!')
-        qqq
+            actions = outputs['mean_actions']
         self._current_log_prob = log_prob
 
         return actions, log_prob, outputs
