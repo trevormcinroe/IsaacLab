@@ -357,7 +357,7 @@ def main(env_cfg, agent_cfg: dict):
     # qqq
 
     # Every call to .train() is 10k env steps
-    for step in range(10_000_000 // (5_000 * args_cli.num_envs)):
+    for step in range(10_000_000 // (args_cli.timesteps * args_cli.num_envs)):
         # Eval routine
         if args_cli.record:
             eval_returns, images = trainer.eval(True)
