@@ -35,6 +35,7 @@ parser.add_argument('--run_notes', default=None, type=str, help='notes for the r
 parser.add_argument("--record", action="store_true", default=False, help="Record videos during eval.")
 parser.add_argument('--learning_epochs', type=int, default=8)
 parser.add_argument('--mini_batches', type=int, default=8)
+parser.add_argument('--timesteps', type=int, default=5_000, help='iters per .train() call')
 parser.add_argument("--random_crop", action="store_true", default=False, help="Whether to use random crop augmentation ala DrQ.")
 
 
@@ -130,6 +131,8 @@ def main(env_cfg, agent_cfg: dict):
     # max iterations for training
     if args_cli.max_iterations:
         agent_cfg["trainer"]["timesteps"] = args_cli.max_iterations * agent_cfg["agent"]["rollouts"]
+    else:
+        agent_cfg["trainer"]["timesteps"] = args_cli.timesteps
     # configure the ML framework into the global skrl variable
     if args_cli.ml_framework.startswith("jax"):
         skrl.config.jax.backend = "jax" if args_cli.ml_framework == "jax" else "numpy"
