@@ -385,7 +385,7 @@ def main(env_cfg, agent_cfg: dict):
             eval_returns = trainer.eval()
         # print(f'Step {step * 5_000 * args_cli.num_envs}: {eval_returns.mean()}')
         logged_items = {k: v.mean().cpu() for k, v in eval_returns.items()}
-        wandb.log({'global_steps': step * 5_000 * args_cli.num_envs, **logged_items})
+        wandb.log({'global_steps': step * args_cli.timesteps * args_cli.num_envs, **logged_items})
         trainer.train()
 
     # close the simulator
