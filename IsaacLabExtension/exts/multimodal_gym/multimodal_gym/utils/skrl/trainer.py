@@ -574,7 +574,7 @@ class SequentialTrainer(Trainer):
 
                 mask_update = 1 - torch.logical_or(terminated, truncated).float()
                 mask *= mask_update
-                print(f'mask: {mask}\n=====')
+                print(f'mask: {mask.reshape(-1)}\n=====')
                 for k, v in infos['log'].items():
                     if k in returns:
                         returns[k] += v * mask
