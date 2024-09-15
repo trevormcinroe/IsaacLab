@@ -250,6 +250,8 @@ class PPO(Agent):
         :param timesteps: Number of timesteps
         :type timesteps: int
         """
+        # This just records info into self.tracking_data:
+        # https://github.com/Toni-SM/skrl/blob/main/skrl/agents/torch/base.py
         super().record_transition(states, actions, rewards, next_states, terminated, truncated, infos, timestep, timesteps)
 
         if self.memory is not None:

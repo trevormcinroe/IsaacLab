@@ -167,11 +167,20 @@ class Trainer:
         assert self.env.num_agents == 1, "This method is not allowed for multi-agents"
 
         # reset env
-        if not self.started_already:
-            states, infos = self.env.reset()
-            self.started_already = True
-        else:
-            states = self.carryover_state
+        # if not self.started_already:
+        states, infos = self.env.reset()
+        # self.started_already = True
+        # Resetting here helps with .train()->.eval()->.train() The first .train() rollout could be interrupted by
+        # the call to .eval(). This interruption is likely not recorded in the memory, so the training stage
+        # may compute information across trajectories, which is not ideal.
+        # We also need to reset the agent's "_rollout" attribute, as this determines when the agent is actually
+        # updated. Resetting it here ensures that each agent update happens with the hyperparam-specified
+        # frequency.
+        self.agents.memory.reset()
+        self.agents._rollout = 0
+        # else:
+        #     # We are only ever here in the case of calling .train()->.eval()->.train()
+        #     states = self.carryover_state
 
         for timestep in tqdm.tqdm(range(self.initial_timestep, self.timesteps), disable=self.disable_progressbar, file=sys.stdout):
 
