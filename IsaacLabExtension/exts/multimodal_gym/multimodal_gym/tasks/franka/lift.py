@@ -96,6 +96,9 @@ class LiftEnvCfg(DirectRLEnvCfg):
     curriculum = False
     fall_dist = 1.0
 
+    # reach stuff
+    min_reach_dist = 0.05
+
     # target
     target_x_max = 0.6
     target_x_min = 0.4
@@ -490,14 +493,16 @@ class LiftEnv(DirectRLEnv):
             self.action_penalty_scale = -0.1
             self.joint_vel_penalty_scale = -0.1
         
-        rewards, reaching_object, is_lifted, object_goal_tracking, object_goal_tracking_finegrained, action_rate_penalty, joint_vel_penalty = compute_rewards(
+        (rewards, reaching_object, is_lifted, object_goal_tracking, object_goal_tracking_finegrained,
+         action_rate_penalty, joint_vel_penalty, reach_success) = compute_rewards(
             self.reaching_object_scale,
             self.lift_object_scale, 
             self.object_goal_tracking_scale,
             self.object_goal_tracking_finegrained_scale,
             self.action_penalty_scale,
             self.joint_vel_penalty_scale,
-            self.object_pos, self.joint_vel, self.actions, self.last_action, self.object_ee_distance, self.object_goal_distance, self.cfg.minimal_height)
+            self.object_pos, self.joint_vel, self.actions, self.last_action, self.object_ee_distance,
+            self.object_goal_distance, self.cfg.minimal_height, self.cfg.min_reach_dist)
         
         self.extras["log"] = {
         "reach_reward": (reaching_object).mean(),
@@ -505,7 +510,8 @@ class LiftEnv(DirectRLEnv):
         "object_goal_tracking": (object_goal_tracking).mean(),
         "object_goal_tracking_finegrained": (object_goal_tracking_finegrained).mean(),
         "action_rate": (action_rate_penalty).mean(),
-        "joint_vel_penalty": (joint_vel_penalty).mean()
+        "joint_vel_penalty": (joint_vel_penalty).mean(),
+        "reach_success": reach_success
         }
         return rewards
 
@@ -614,7 +620,7 @@ def rotation_distance(object_rot, target_rot):
     quat_diff = quat_mul(object_rot, quat_conjugate(target_rot))
     return 2.0 * torch.asin(torch.clamp(torch.norm(quat_diff[:, 1:4], p=2, dim=-1), max=1.0))  # changed quat convention
 
-# @torch.jit.script
+@torch.jit.script
 def compute_rewards(
     reaching_object_scale: float,
     lift_object_scale: float, 
@@ -629,6 +635,7 @@ def compute_rewards(
     object_ee_distance: torch.Tensor,
     object_goal_distance: torch.Tensor,
     minimal_height: float,
+    min_reach_dist: float
 ):
 
     # reaching objects
@@ -636,8 +643,7 @@ def compute_rewards(
     reaching_object = (1 - torch.tanh(object_ee_distance / std)) * reaching_object_scale
     # reaching_object = -object_ee_distance * reaching_object_scale
 
-    print(f'object_ee_distance: {object_ee_distance} // {object_ee_distance.shape}')
-    qqq
+    reach_success = object_ee_distance <= min_reach_dist
 
     # reward for lifting object
     object_height = object_pos[:, 2]
@@ -666,7 +672,7 @@ def compute_rewards(
         + joint_vel_penalty_scale
     )
 
-    return rewards, reaching_object, is_lifted, object_goal_tracking, object_goal_tracking_finegrained, action_rate_penalty, joint_vel_penalty
+    return rewards, reaching_object, is_lifted, object_goal_tracking, object_goal_tracking_finegrained, action_rate_penalty, joint_vel_penalty, reach_success
 
 
 
