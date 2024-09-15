@@ -160,6 +160,10 @@ def main(env_cfg, agent_cfg: dict):
     # create isaac environment
     env_cfg.hw = args_cli.hw
     env = gym.make(args_cli.task, cfg=env_cfg, render_mode="rgb_array" if args_cli.video else None)
+    env_eval = gym.make(args_cli.task, cfg=env_cfg, render_mode="rgb_array" if args_cli.video else None)
+
+    print(f'max steps: {dir(env)}')
+    qqq
 
     # Accessing the config this way may result in "CUDA error: an illegal memory access was encountered"
     # env.cfg.tiled_camera.height = args_cli.hw
@@ -175,7 +179,10 @@ def main(env_cfg, agent_cfg: dict):
         }
         print("[INFO] Recording videos during training.")
         print_dict(video_kwargs, nesting=4)
-        env = gym.wrappers.RecordVideo(env, **video_kwargs)
+
+        # Should we only record during eval? Probably...
+        # env = gym.wrappers.RecordVideo(env, **video_kwargs)
+        env_eval = gym.wrappers.RecordVideo(env_eval, **video_kwargs)
 
     # frame stack
     if args_cli.frame_stack != 1:
