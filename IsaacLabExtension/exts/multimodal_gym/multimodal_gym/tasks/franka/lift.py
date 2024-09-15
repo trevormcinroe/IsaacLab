@@ -614,7 +614,7 @@ def rotation_distance(object_rot, target_rot):
     quat_diff = quat_mul(object_rot, quat_conjugate(target_rot))
     return 2.0 * torch.asin(torch.clamp(torch.norm(quat_diff[:, 1:4], p=2, dim=-1), max=1.0))  # changed quat convention
 
-@torch.jit.script
+# @torch.jit.script
 def compute_rewards(
     reaching_object_scale: float,
     lift_object_scale: float, 
