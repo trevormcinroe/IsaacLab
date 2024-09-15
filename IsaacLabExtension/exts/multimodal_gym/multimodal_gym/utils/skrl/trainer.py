@@ -576,7 +576,7 @@ class SequentialTrainer(Trainer):
                 mask *= mask_update
                 for k, v in infos['log'].items():
                     if k in returns:
-                        print(f'{k}: {v.shape}')
+                        print(f'{k}: {v.shape} // {mask.shape}')
                         returns[k] += v * mask
                 qqq
 
