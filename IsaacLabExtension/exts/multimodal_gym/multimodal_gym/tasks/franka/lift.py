@@ -643,7 +643,7 @@ def compute_rewards(
     reaching_object = (1 - torch.tanh(object_ee_distance / std)) * reaching_object_scale
     # reaching_object = -object_ee_distance * reaching_object_scale
 
-    reach_success = (object_ee_distance <= min_reach_dist).T
+    reach_success = (object_ee_distance <= min_reach_dist).reshape(-1, 1)
 
     # reward for lifting object
     object_height = object_pos[:, 2]
