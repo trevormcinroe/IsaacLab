@@ -387,7 +387,7 @@ def main(env_cfg, agent_cfg: dict):
             eval_returns = trainer.eval()
         # print(f'Step {step * 5_000 * args_cli.num_envs}: {eval_returns.mean()}')
 
-        eval_returns['reach_success'] = eval_returns['reach_success'] > 1.0
+        eval_returns['reach_success'] = (eval_returns['reach_success'] > 1.0).float()
 
         logged_items = {k: v.mean().cpu() for k, v in eval_returns.items()}
         if logged_items['reach_success'] > 0:
