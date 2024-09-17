@@ -572,6 +572,8 @@ class SequentialTrainer(Trainer):
                 # step the environments
                 next_states, rewards, terminated, truncated, infos = self.env.step(actions)
 
+                self.env.common_step_counter -= 1
+
                 mask_update = 1 - torch.logical_or(terminated, truncated).float()
                 mask *= mask_update
                 for k, v in infos['log'].items():
