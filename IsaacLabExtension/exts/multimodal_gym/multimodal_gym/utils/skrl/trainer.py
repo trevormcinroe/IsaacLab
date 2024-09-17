@@ -574,10 +574,9 @@ class SequentialTrainer(Trainer):
 
                 # The below counter is used to trigger curriculum learning. We do not want eval steps
                 # to count towards this trigger point.
-                print(f'CNTR: {self.env.env.env.env.common_step_counter}')
-                print(f'unwrapped: {self.env.unwrapped}')
-                qqq
-                self.env.env.common_step_counter -= 1
+                # print(f'CNTR: {self.env.env.env.env.common_step_counter}')
+
+                self.env.unwrapped.common_step_counter -= 1
 
                 mask_update = 1 - torch.logical_or(terminated, truncated).float()
                 mask *= mask_update
