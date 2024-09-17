@@ -572,6 +572,8 @@ class SequentialTrainer(Trainer):
                 # step the environments
                 next_states, rewards, terminated, truncated, infos = self.env.step(actions)
 
+                # The below counter is used to trigger curriculum learning. We do not want eval steps
+                # to count towards this trigger point.
                 self.env.common_step_counter -= 1
 
                 mask_update = 1 - torch.logical_or(terminated, truncated).float()
