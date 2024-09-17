@@ -120,6 +120,7 @@ def main(env_cfg, agent_cfg: dict):
 
     # environment reward-function curriculum
     env_cfg.curriculum = args_cli.curriculum
+    env_cfg.curriculum_timesteps = args_cli.curriculum_timesteps // args_cli.num_envs
     print("obs type:", env_cfg.obs_type)
 
     agent_cfg["agent"]["rollouts"] = args_cli.rollout_h

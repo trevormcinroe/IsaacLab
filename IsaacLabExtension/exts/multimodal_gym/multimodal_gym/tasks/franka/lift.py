@@ -253,6 +253,7 @@ class LiftEnv(DirectRLEnv):
         cfg.tiled_camera.width = cfg.hw
 
         print(f'Config: {cfg.curriculum}')
+        print(f'Config: {cfg.curriculum_timesteps}')
         qqq
 
         super().__init__(cfg, render_mode, **kwargs)
