@@ -252,7 +252,7 @@ class LiftEnv(DirectRLEnv):
         cfg.tiled_camera.height = cfg.hw
         cfg.tiled_camera.width = cfg.hw
 
-        print(f'Config: {cfg}')
+        print(f'Config: {cfg.curriculum}')
         qqq
 
         super().__init__(cfg, render_mode, **kwargs)
