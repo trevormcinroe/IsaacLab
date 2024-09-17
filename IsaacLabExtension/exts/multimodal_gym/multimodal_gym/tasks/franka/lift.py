@@ -252,6 +252,9 @@ class LiftEnv(DirectRLEnv):
         cfg.tiled_camera.height = cfg.hw
         cfg.tiled_camera.width = cfg.hw
 
+        print(f'Config: {cfg}')
+        qqq
+
         super().__init__(cfg, render_mode, **kwargs)
 
         # create auxiliary variables for computing applied action, observations and rewards
@@ -489,6 +492,8 @@ class LiftEnv(DirectRLEnv):
 
     def _get_rewards(self) -> torch.Tensor:
         # follow a curriculum
+        # The attr `common_step_counter` is controlled by the parent class DirectRLEnv(). AFAIK, this counter does not
+        # take into account the number of parallel envs.
         if self.cfg.curriculum and self.common_step_counter > 10000:
             self.action_penalty_scale = -0.1
             self.joint_vel_penalty_scale = -0.1
