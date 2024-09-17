@@ -88,9 +88,9 @@ class LiftEnvCfg(DirectRLEnvCfg):
     # lift stuff
     minimal_height = 0.04
     reaching_object_scale = 1
-    lift_object_scale = 15.0
-    object_goal_tracking_scale = 16.0
-    object_goal_tracking_finegrained_scale = 5.0
+    lift_object_scale = 0  # Changed for curriculum: 15.0
+    object_goal_tracking_scale = 0  # Changed for curriculum: 16.0
+    object_goal_tracking_finegrained_scale = 0  # Changed for curriculum: 5.0
     action_penalty_scale = -0.01
     joint_vel_penalty_scale = -0.1  # -0.01
     curriculum = False
@@ -494,9 +494,11 @@ class LiftEnv(DirectRLEnv):
         # print(f'self.common_step_counter: {self.common_step_counter}')
         if self.cfg.curriculum and self.common_step_counter > self.cfg.curriculum_timesteps:
             print(f'============ CURRICULUM ACTIVATES ================')
-            qqq
-            self.action_penalty_scale = -0.1
-            self.joint_vel_penalty_scale = -0.1
+            self.lift_object_scale = 15.0
+            self.object_goal_tracking_scale = 16.0
+            self.object_goal_tracking_finegrained_scale = 5.0
+            # self.action_penalty_scale = -0.1
+            # self.joint_vel_penalty_scale = -0.1
         
         (rewards, reaching_object, is_lifted, object_goal_tracking, object_goal_tracking_finegrained,
          action_rate_penalty, joint_vel_penalty, reach_success) = compute_rewards(
@@ -670,8 +672,8 @@ def compute_rewards(
     
     rewards = (
         reaching_object
-        + is_lifted * 0
-        + object_goal_tracking * 0
+        + is_lifted
+        + object_goal_tracking
         + object_goal_tracking_finegrained * 0
         + action_rate_penalty
         + joint_vel_penalty_scale
