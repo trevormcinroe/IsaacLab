@@ -491,7 +491,7 @@ class LiftEnv(DirectRLEnv):
         # follow a curriculum
         # The attr `common_step_counter` is controlled by the parent class DirectRLEnv(). AFAIK, this counter does not
         # take into account the number of parallel envs.
-        print(f'self.common_step_counter: {self.common_step_counter}')
+        # print(f'self.common_step_counter: {self.common_step_counter}')
         if self.cfg.curriculum and self.common_step_counter > self.cfg.curriculum_timesteps:
             print(f'============ CURRICULUM ACTIVATES ================')
             qqq
