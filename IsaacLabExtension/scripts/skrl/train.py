@@ -37,6 +37,8 @@ parser.add_argument('--learning_epochs', type=int, default=8)
 parser.add_argument('--mini_batches', type=int, default=8)
 parser.add_argument('--timesteps', type=int, default=5_000, help='iters per .train() call')
 parser.add_argument("--random_crop", action="store_true", default=False, help="Whether to use random crop augmentation ala DrQ.")
+parser.add_argument('--curriculum', action="store_true", default=False)
+parser.add_argument('--curriculum_timesteps', type=int, default=10_000_000, help='iters per .train() call')
 
 
 parser.add_argument(
@@ -115,6 +117,9 @@ def main(env_cfg, agent_cfg: dict):
     env_cfg.scene.num_envs = args_cli.num_envs if args_cli.num_envs is not None else env_cfg.scene.num_envs
     env_cfg.frame_stack = args_cli.frame_stack
     env_cfg.obs_type = args_cli.obs_type
+
+    # environment reward-function curriculum
+    env_cfg.curriculum = args_cli.curriculum
     print("obs type:", env_cfg.obs_type)
 
     agent_cfg["agent"]["rollouts"] = args_cli.rollout_h
