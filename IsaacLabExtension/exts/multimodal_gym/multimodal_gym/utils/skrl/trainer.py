@@ -554,8 +554,9 @@ class SequentialTrainer(Trainer):
         states, infos = self.env.reset()
 
         # holders for tracking
+        # TODO: integrate the actual total returns from the env
         infos = {'reach_reward': None, 'lift_reward': None, 'object_goal_tracking': None, 'action_rate': None,
-                 'reach_success': None}
+                 'reach_success': None, 'returns': None}
         returns = {k: torch.zeros(size=(states.shape[0], 1), device=states.device) for k in infos.keys()}
         mask = torch.Tensor([[1] for _ in range(states.shape[0])]).to(states.device)
         images = []
@@ -583,6 +584,10 @@ class SequentialTrainer(Trainer):
                 for k, v in infos['log'].items():
                     if k in returns:
                         returns[k] += v * mask
+                print(f'rewards: {rewards} // {rewards.shape}')
+                qqq
+                returns['returns'] += rewards * mask
+
 
                 if record:
                     images.append(next_states[0])
