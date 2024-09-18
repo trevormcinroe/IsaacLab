@@ -287,9 +287,6 @@ class LiftEnv(DirectRLEnv):
         self.action_penalty_scale = cfg.action_penalty_scale
         self.joint_vel_penalty_scale = cfg.joint_vel_penalty_scale
 
-        print(f'{self.lift_object_scale} // {self.object_goal_tracking_scale} // {self.object_goal_tracking_finegrained_scale}')
-        qqq
-
         # default goal positions
         self.goal_pos = torch.zeros((self.num_envs, 3), dtype=torch.float, device=self.device)
         self.goal_pos[:, :] = torch.tensor([0.4, 0.2, 0.3], device=self.device)
