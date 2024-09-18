@@ -580,12 +580,11 @@ class SequentialTrainer(Trainer):
                 self.env.unwrapped.common_step_counter -= 1
 
                 mask_update = 1 - torch.logical_or(terminated, truncated).float()
-                mask *= mask_update
                 for k, v in infos['log'].items():
                     if k in returns:
                         returns[k] += v * mask
                 returns['returns'] += rewards * mask
-
+                mask *= mask_update
 
                 if record:
                     images.append(next_states[0])

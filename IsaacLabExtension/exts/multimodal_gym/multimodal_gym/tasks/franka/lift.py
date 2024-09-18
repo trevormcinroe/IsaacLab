@@ -92,7 +92,7 @@ class LiftEnvCfg(DirectRLEnvCfg):
     object_goal_tracking_scale = 0  # Changed for curriculum: 16.0
     object_goal_tracking_finegrained_scale = 0  # Changed for curriculum: 5.0
     action_penalty_scale = -0.01
-    joint_vel_penalty_scale = -0.1  # -0.01
+    joint_vel_penalty_scale = -0.01  # -0.01
     curriculum = False
     fall_dist = 1.0
 
