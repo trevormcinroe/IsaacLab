@@ -683,7 +683,7 @@ def compute_rewards(
         reaching_object
         + is_lifted
         + object_goal_tracking
-        + object_goal_tracking_finegrained * 0
+        + object_goal_tracking_finegrained
         + action_rate_penalty
         + joint_vel_penalty_scale
     )
