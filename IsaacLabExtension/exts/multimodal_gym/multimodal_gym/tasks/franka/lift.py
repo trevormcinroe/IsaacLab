@@ -254,8 +254,8 @@ class LiftEnv(DirectRLEnv):
 
         if not cfg.curriculum:
             cfg.lift_object_scale = 15.0
-            cfg.object_goal_tracking_scale = 16.0
-            cfg.object_goal_tracking_finegrained_scale = 5.0
+            cfg.object_goal_tracking_scale = 0.0 # 16.0
+            cfg.object_goal_tracking_finegrained_scale = 0.0 # 5.0
 
         super().__init__(cfg, render_mode, **kwargs)
 
