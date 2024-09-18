@@ -252,6 +252,11 @@ class LiftEnv(DirectRLEnv):
         cfg.tiled_camera.height = cfg.hw
         cfg.tiled_camera.width = cfg.hw
 
+        if not cfg.curriculum:
+            cfg.lift_object_scale = 15.0
+            cfg.object_goal_tracking_scale = 16.0
+            cfg.object_goal_tracking_finegrained_scale = 5.0
+
         super().__init__(cfg, render_mode, **kwargs)
 
         # create auxiliary variables for computing applied action, observations and rewards
@@ -281,6 +286,9 @@ class LiftEnv(DirectRLEnv):
         self.object_goal_tracking_finegrained_scale = cfg.object_goal_tracking_finegrained_scale
         self.action_penalty_scale = cfg.action_penalty_scale
         self.joint_vel_penalty_scale = cfg.joint_vel_penalty_scale
+
+        print(f'{self.lift_object_scale} // {self.object_goal_tracking_scale} // {self.object_goal_tracking_finegrained_scale}')
+        qqq
 
         # default goal positions
         self.goal_pos = torch.zeros((self.num_envs, 3), dtype=torch.float, device=self.device)
@@ -495,6 +503,10 @@ class LiftEnv(DirectRLEnv):
         if self.cfg.curriculum and self.common_step_counter > self.cfg.curriculum_timesteps:
             print(f'============ CURRICULUM ACTIVATES ================')
             self.lift_object_scale = 15.0
+
+            # TODO: can we only activate the following reward weights once the object itself has been lifted?
+            #  (a) only when the object is a certain number of cm above the floor?
+
             self.object_goal_tracking_scale = 16.0
             self.object_goal_tracking_finegrained_scale = 5.0
             # self.action_penalty_scale = -0.1

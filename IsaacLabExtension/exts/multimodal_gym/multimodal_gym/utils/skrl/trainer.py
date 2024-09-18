@@ -584,8 +584,6 @@ class SequentialTrainer(Trainer):
                 for k, v in infos['log'].items():
                     if k in returns:
                         returns[k] += v * mask
-                print(f'rewards: {rewards} // {rewards.shape}')
-                qqq
                 returns['returns'] += rewards * mask
 
 
