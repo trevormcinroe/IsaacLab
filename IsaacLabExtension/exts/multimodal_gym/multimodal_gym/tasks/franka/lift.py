@@ -595,7 +595,7 @@ class LiftEnv(DirectRLEnv):
 
         # Also going to reset the block_hack_counter attribute
         # self._block_hack_counter = 0
-
+        env_ids = torch.Tensor([0, 10, 22])
         self._block_hack_counter[env_ids] += 10
         print(self._block_hack_counter)
         # print(f'env_ids: {env_ids}')
