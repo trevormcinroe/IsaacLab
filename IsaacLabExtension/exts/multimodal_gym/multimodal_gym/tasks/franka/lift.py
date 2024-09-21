@@ -646,7 +646,7 @@ def randomize_rotation(rand0, rand1, x_unit_tensor, y_unit_tensor):
         quat_from_angle_axis(rand0 * np.pi, x_unit_tensor), quat_from_angle_axis(rand1 * np.pi, y_unit_tensor)
     )
 
-@torch.jit.script
+# @torch.jit.script
 def rotation_distance(object_rot, target_rot):
     # Orientation alignment for the cube in hand and goal cube
     quat_diff = quat_mul(object_rot, quat_conjugate(target_rot))
