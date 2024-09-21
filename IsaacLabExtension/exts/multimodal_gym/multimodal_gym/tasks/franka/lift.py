@@ -300,7 +300,15 @@ class LiftEnv(DirectRLEnv):
 
         # camera stuff
         self.count = 0
-        self.init = False      
+        self.init = False
+
+        # Sometimes the block object will fall from some height at the beginning of the episode, triggering the
+        # "is_lifted" condition component of the reward function. To stop this, we maintain a counter of times
+        # the _get_rewards() method of this class is called. After some number of calls (e.g., 10), an if condition is
+        # satisfied, and the `is_lifted` component of the reward function becomes non-zeroed. This attribute is reset
+        # to 0 with every call of `_reset_idx()` on a **per-env basis** (i.e., we maintain a separate counter for each
+        # of the parallel environments).
+        self._block_hack_counter = torch.zeros((self.num_envs,), dtype=torch.int8, device=self.device)
 
     def get_num_observations(self):
         self.num_img_observations = self.cfg.frame_stack * 3 * self.cfg.tiled_camera.height * self.cfg.tiled_camera.width
@@ -508,11 +516,15 @@ class LiftEnv(DirectRLEnv):
             self.object_goal_tracking_finegrained_scale = 5.0
             # self.action_penalty_scale = -0.1
             # self.joint_vel_penalty_scale = -0.1
-        
+
+        # We will call this method once per environment step, regardless if training or eval'ing
+        self._block_hack_counter += 1
+
         (rewards, reaching_object, is_lifted, object_goal_tracking, object_goal_tracking_finegrained,
          action_rate_penalty, joint_vel_penalty, reach_success) = compute_rewards(
             self.reaching_object_scale,
-            self.lift_object_scale, 
+            self.lift_object_scale,
+            self._block_hack_counter,
             self.object_goal_tracking_scale,
             self.object_goal_tracking_finegrained_scale,
             self.action_penalty_scale,
@@ -554,7 +566,6 @@ class LiftEnv(DirectRLEnv):
         # table_state = self.table.data.default_root_state.clone()[env_ids]
         # self.table.write_root_state_to_sim(table_state, env_ids)
 
-
         # reset object
         object_default_state = self.object.data.default_root_state.clone()[env_ids]
         pos_noise = sample_uniform(-1.0, 1.0, (len(env_ids), 3), device=self.device)
@@ -581,6 +592,9 @@ class LiftEnv(DirectRLEnv):
         joint_vel = torch.zeros_like(joint_pos)
         self.robot.set_joint_position_target(joint_pos, env_ids=env_ids)
         self.robot.write_joint_state_to_sim(joint_pos, joint_vel, env_ids=env_ids)
+
+        # Also going to reset the block_hack_counter attribute
+        self._block_hack_counter = 0
 
         # refresh intermediate values for _get_observations()
         self._compute_intermediate_values(env_ids)
@@ -639,7 +653,8 @@ def rotation_distance(object_rot, target_rot):
 @torch.jit.script
 def compute_rewards(
     reaching_object_scale: float,
-    lift_object_scale: float, 
+    lift_object_scale: float,
+    block_hack_counter: torch.Tensor,
     object_goal_tracking_scale: float,
     object_goal_tracking_finegrained_scale: float,
     action_penalty_scale: float,
@@ -664,6 +679,11 @@ def compute_rewards(
     # reward for lifting object
     object_height = object_pos[:, 2]
     is_lifted = torch.where(object_height > minimal_height, 1.0, 0.0) * lift_object_scale
+
+    print(f'is_lifted: {is_lifted.shape}')
+    print(f'block_hack_counter: {block_hack_counter}')
+
+    qqq
 
     # tracking
     std = 0.3
