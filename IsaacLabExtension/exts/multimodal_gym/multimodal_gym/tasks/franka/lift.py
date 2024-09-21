@@ -595,8 +595,11 @@ class LiftEnv(DirectRLEnv):
 
         # Also going to reset the block_hack_counter attribute
         # self._block_hack_counter = 0
+
+        self._block_hack_counter[env_ids] += 10
+        print(self._block_hack_counter)
         # print(f'env_ids: {env_ids}')
-        # qqq
+        qqq
 
         # refresh intermediate values for _get_observations()
         self._compute_intermediate_values(env_ids)
@@ -652,7 +655,7 @@ def rotation_distance(object_rot, target_rot):
     quat_diff = quat_mul(object_rot, quat_conjugate(target_rot))
     return 2.0 * torch.asin(torch.clamp(torch.norm(quat_diff[:, 1:4], p=2, dim=-1), max=1.0))  # changed quat convention
 
-# @torch.jit.script
+@torch.jit.script
 def compute_rewards(
     reaching_object_scale: float,
     lift_object_scale: float,
@@ -682,10 +685,6 @@ def compute_rewards(
     object_height = object_pos[:, 2]
     is_lifted = torch.where(object_height > minimal_height, 1.0, 0.0) * lift_object_scale
     is_lifted *= (block_hack_counter > 10).float()
-    print(f'is_lifted: {is_lifted.shape}')
-    print(f'block_hack_counter: {block_hack_counter}')
-
-    qqq
 
     # tracking
     std = 0.3
