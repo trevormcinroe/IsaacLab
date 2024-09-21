@@ -595,6 +595,8 @@ class LiftEnv(DirectRLEnv):
 
         # Also going to reset the block_hack_counter attribute
         self._block_hack_counter = 0
+        print(f'env_ids: {env_ids}')
+        qqq
 
         # refresh intermediate values for _get_observations()
         self._compute_intermediate_values(env_ids)
