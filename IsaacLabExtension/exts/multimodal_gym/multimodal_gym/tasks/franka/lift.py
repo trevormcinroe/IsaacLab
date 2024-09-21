@@ -594,9 +594,9 @@ class LiftEnv(DirectRLEnv):
         self.robot.write_joint_state_to_sim(joint_pos, joint_vel, env_ids=env_ids)
 
         # Also going to reset the block_hack_counter attribute
-        self._block_hack_counter = 0
-        print(f'env_ids: {env_ids}')
-        qqq
+        # self._block_hack_counter = 0
+        # print(f'env_ids: {env_ids}')
+        # qqq
 
         # refresh intermediate values for _get_observations()
         self._compute_intermediate_values(env_ids)
@@ -681,7 +681,7 @@ def compute_rewards(
     # reward for lifting object
     object_height = object_pos[:, 2]
     is_lifted = torch.where(object_height > minimal_height, 1.0, 0.0) * lift_object_scale
-
+    is_lifted *= (block_hack_counter > 10).float()
     print(f'is_lifted: {is_lifted.shape}')
     print(f'block_hack_counter: {block_hack_counter}')
 
