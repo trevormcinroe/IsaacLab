@@ -585,7 +585,7 @@ class SequentialTrainer(Trainer):
                 for k, v in infos['log'].items():
                     if k in returns:
                         returns[k] += v * mask
-                returns['returns'] += rewards * mask
+                returns['returns'] += rewards #* mask
                 returns['steps_to_end'] += torch.ones_like(mask, device=mask.device) * mask
                 mask *= mask_update
 
