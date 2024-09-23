@@ -559,6 +559,8 @@ class SequentialTrainer(Trainer):
                  'reach_success': None, 'returns': None}
         returns = {k: torch.zeros(size=(states.shape[0], 1), device=states.device) for k in infos.keys()}
         mask = torch.Tensor([[1] for _ in range(states.shape[0])]).to(states.device)
+        steps_to_end = torch.Tensor([[0] for _ in range(states.shape[0])]).to(states.device)
+        returns['steps_to_end'] = steps_to_end
         images = []
 
         for timestep in tqdm.tqdm(range(self.initial_timestep, self.env.env.max_episode_length - 1), disable=self.disable_progressbar, file=sys.stdout):
@@ -584,6 +586,7 @@ class SequentialTrainer(Trainer):
                     if k in returns:
                         returns[k] += v * mask
                 returns['returns'] += rewards * mask
+                returns['steps_to_end'] += torch.ones_like(mask, device=mask.device) * mask
                 mask *= mask_update
 
                 if record:
