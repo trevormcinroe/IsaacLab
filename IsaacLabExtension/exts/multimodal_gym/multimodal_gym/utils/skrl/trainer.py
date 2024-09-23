@@ -587,7 +587,7 @@ class SequentialTrainer(Trainer):
                         returns[k] += v * mask
                 returns['returns'] += rewards #* mask
                 returns['returns_masked'] += rewards  * mask
-                returns['steps_to_term'] += torch.ones_like(mask, device=mask.device) * (1 - terminated)
+                returns['steps_to_term'] += torch.ones_like(mask, device=mask.device) * (1 - terminated.float())
                 mask *= mask_update
 
                 if record:
