@@ -10,7 +10,7 @@ import numpy as np
 from skrl.models.torch import Model  # noqa
 from skrl.models.torch import CategoricalMixin, DeterministicMixin, GaussianMixin, MultivariateGaussianMixin  # noqa
 
-from skrl.utils.model_instantiators.torch import _generate_sequential, _get_activation_function, _get_num_units_by_shape
+# from skrl.utils.model_instantiators.torch import _generate_sequential, _get_activation_function, _get_num_units_by_shape
 
 from multimodal_gym.utils.frame_stack import LazyFrames
 
